@@ -6,7 +6,7 @@
 #    By: amak <amak@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/20 19:20:14 by amak              #+#    #+#              #
-#    Updated: 2024/02/20 19:25:15 by amak             ###   ########.fr        #
+#    Updated: 2024/02/24 22:53:52 by amak             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC_PATH = src/
 
 OBJ_PATH = obj/
 
-SRC_FILES = main.c 
+SRC_FILES = main.c \
+			parsing.c
 			
 SRC = $(addprefix $(SRC_PATH), $(SRC_FILES))
 
