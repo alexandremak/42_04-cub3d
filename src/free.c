@@ -1,20 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/24 22:30:11 by amak              #+#    #+#             */
-/*   Updated: 2024/02/27 22:10:58 by amak             ###   ########.fr       */
+/*   Created: 2024/02/27 21:46:48 by amak              #+#    #+#             */
+/*   Updated: 2024/02/27 21:57:34 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-int main(int argc, char **argv)
+static void	free_map(char **map)
 {
-    static t_file cub_file;
-    
-    parsing(argc, argv, &cub_file);
+	int	i;
+
+	i = 0;
+	if (map)
+	{
+		while (map[i])
+		{
+			free(map[i]);
+			i++;
+		}
+		free(map);
+	}
+}
+
+static void	free_file(t_file *file)
+{
+	if (file->no)
+		free(file->no);
+	if (file->so)
+		free(file->so);
+	if (file->we)
+		free(file->we);
+	if (file->ea)
+		free(file->ea);
+	if (file->map)
+		free_map(file->map);
+}
+void	free_all(t_file *file)
+{
+	free_file(file);
 }

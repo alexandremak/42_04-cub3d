@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/24 22:30:11 by amak              #+#    #+#             */
-/*   Updated: 2024/02/27 22:10:58 by amak             ###   ########.fr       */
+/*   Created: 2024/02/27 20:27:04 by amak              #+#    #+#             */
+/*   Updated: 2024/02/27 20:27:15 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3D.h"
+#include "utils.h"
 
-int main(int argc, char **argv)
+size_t	ft_strlen(const char *str)
 {
-    static t_file cub_file;
-    
-    parsing(argc, argv, &cub_file);
+	int	pos;
+
+	pos = 0;
+	while (str[pos] != '\0')
+		pos++;
+	return (pos);
 }
