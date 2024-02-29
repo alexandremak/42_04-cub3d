@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 21:46:48 by amak              #+#    #+#             */
-/*   Updated: 2024/02/27 21:57:34 by amak             ###   ########.fr       */
+/*   Updated: 2024/02/29 00:29:49 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static void	free_map(char **map)
 
 static void	free_file(t_file *file)
 {
+	if (file->filepath)
+		free(file->filepath);
 	if (file->no)
 		free(file->no);
 	if (file->so)

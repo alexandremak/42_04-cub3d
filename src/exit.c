@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 20:41:46 by amak              #+#    #+#             */
-/*   Updated: 2024/02/27 23:45:29 by amak             ###   ########.fr       */
+/*   Updated: 2024/02/28 21:59:22 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	exit_game(t_exit_code exit_code, t_file *cub_file)
 		exit(0);
 	printf("Error\n");
 	if (exit_code == ARGC_ERROR)
-		printf("Number of arguments invalid!\n");
+		printf("Invalid number of arguments!\n");
 	if (exit_code == EXT_ERROR)
-		printf("Incorrect scene description file extension!\n");
+		printf("Scene description file with incorrect extension!\n");
 	if (exit_code == NO_FILE)
 		printf("Scene description file doesn't exist!\n");	
 	if (exit_code == NOALL_TEXTURES)
