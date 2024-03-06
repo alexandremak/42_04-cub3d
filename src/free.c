@@ -6,25 +6,25 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 21:46:48 by amak              #+#    #+#             */
-/*   Updated: 2024/02/29 00:29:49 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/05 23:01:22 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void	free_map(char **map)
+void	free_mtrx(char **mtrx)
 {
 	int	i;
 
 	i = 0;
-	if (map)
+	if (mtrx)
 	{
-		while (map[i])
+		while (mtrx[i])
 		{
-			free(map[i]);
+			free(mtrx[i]);
 			i++;
 		}
-		free(map);
+		free(mtrx);
 	}
 }
 
@@ -41,7 +41,7 @@ static void	free_file(t_file *file)
 	if (file->ea)
 		free(file->ea);
 	if (file->map)
-		free_map(file->map);
+		free_mtrx(file->map);
 }
 void	free_all(t_file *file)
 {

@@ -6,7 +6,7 @@
 #    By: amak <amak@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/27 22:18:14 by amak              #+#    #+#              #
-#    Updated: 2024/02/28 21:57:02 by amak             ###   ########.fr        #
+#    Updated: 2024/03/05 23:20:43 by amak             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,13 @@ CC = @cc -g
 
 CFLAGS = -Wall -Wextra -Werror
 
-SOURCES = 	ft_isspace.c \
+SOURCES = 	ft_calloc.c \
+			ft_isspace.c \
+			ft_putspace.c \
+			ft_split.c \
+			ft_strcmp.c \
 			ft_strdup.c \
+			ft_strlcpy.c \
 			ft_strlen.c \
 			ft_trimstr.c \
 			get_next_line.c

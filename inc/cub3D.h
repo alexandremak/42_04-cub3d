@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/02/28 23:09:00 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/06 00:28:12 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef enum e_exit_code
 {
 	NORMAL,
 	ARGC_ERROR,
+	BLANK_FPATH,
 	EXT_ERROR,
 	NO_FILE,
 	NOALL_TEXTURES,
@@ -59,6 +60,7 @@ typedef struct s_rgb {
 
 typedef struct s_file {
 	char	*filepath;
+	int		fd;
 	char	*no;
 	char	*so;
 	char 	*we;
@@ -75,6 +77,7 @@ typedef struct s_player {
 
 void	exit_game(t_exit_code exit_code, t_file *cub_file);
 
+void	free_mtrx(char **mtrx);
 void	free_all(t_file *file);
 
 /* PARSING FUNTIONS */
