@@ -6,19 +6,19 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 21:30:51 by amak              #+#    #+#             */
-/*   Updated: 2024/03/06 00:27:14 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/06 23:54:49 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-char	*ft_trimstr(char * str)
+char	*ft_trimstr(char *str)
 {
 	int		end;
-	int 	begin;
+	int		begin;
 	int		i;
 	char	*output;
-	
+
 	begin = 0;
 	end = (int)ft_strlen(str) - 1;
 	i = 0;

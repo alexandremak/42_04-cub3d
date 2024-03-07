@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/03/06 00:28:12 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/06 23:46:53 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "../utils/utils.h"
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -40,6 +39,7 @@ typedef enum e_exit_code
 	BLANK_FPATH,
 	EXT_ERROR,
 	NO_FILE,
+	W_CONTENT,
 	NOALL_TEXTURES,
 	RGB_IRANGE,
 	MAP_NCLOSED,
@@ -63,7 +63,7 @@ typedef struct s_file {
 	int		fd;
 	char	*no;
 	char	*so;
-	char 	*we;
+	char	*we;
 	char	*ea;
 	t_rgb	floor_rgb;
 	t_rgb	ceiling_rgb;
@@ -80,7 +80,8 @@ void	exit_game(t_exit_code exit_code, t_file *cub_file);
 void	free_mtrx(char **mtrx);
 void	free_all(t_file *file);
 
-/* PARSING FUNTIONS */
+/* PARSING AND READ FUNCTIONS */
 void	parsing(int argc, char **argv, t_file *file);
+void	read_content(t_file *file);
 
 #endif

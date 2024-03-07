@@ -6,17 +6,17 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 20:41:46 by amak              #+#    #+#             */
-/*   Updated: 2024/03/06 00:28:43 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/06 20:05:31 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-void	exit_game(t_exit_code exit_code, t_file *cub_file)
+void	exit_game(t_exit_code exit_code, t_file *file)
 {
-	free_all(cub_file);
-	if (cub_file->fd > -1)
-		close(cub_file->fd);
+	free_all(file);
+	if (file->fd > -1)
+		close(file->fd);
 	if (exit_code == NORMAL)
 		exit(0);
 	printf("Error\n");
@@ -27,7 +27,9 @@ void	exit_game(t_exit_code exit_code, t_file *cub_file)
 	if (exit_code == EXT_ERROR)
 		printf("Scene description file with incorrect extension!\n");
 	if (exit_code == NO_FILE)
-		printf("Scene description file doesn't exist!\n");	
+		printf("Scene description file doesn't exist!\n");
+	if (exit_code == W_CONTENT)
+		printf("File with wrong content!\n");
 	if (exit_code == NOALL_TEXTURES)
 		printf("File content missing one or more texture path!\n");
 	if (exit_code == RGB_IRANGE)

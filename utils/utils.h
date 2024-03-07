@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 20:25:24 by amak              #+#    #+#             */
-/*   Updated: 2024/03/06 00:13:51 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/06 23:55:32 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@
 # endif
 
 void	*ft_calloc(size_t nmemb, size_t size);
-int     ft_isspace(char c);
-void 	ft_putspace(char *str);
+int		ft_isspace(char c);
+void	ft_putspace(char *str);
 char	**ft_split(char const *s, char c);
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strdup(const char *s);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlen(const char *str);
-char	*ft_trimstr(char * str);
+char	*ft_trimstr(char *str);
 char	*get_next_line(int fd);
 
 #endif
