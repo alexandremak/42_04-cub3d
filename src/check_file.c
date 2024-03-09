@@ -1,25 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:53:37 by amak              #+#    #+#             */
-/*   Updated: 2024/03/08 23:51:10 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/09 16:09:54 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
-
-// parsing input:
-//	- validate file extension
-//	- file exists
-//  - validate input
-//  - creating matrix
-//  - validate map:
-//      - only "1,0,N,SE,W"
-//      - closed/surrounded
 
 static int	file_ext_ok(char *filepath)
 {
@@ -52,11 +43,11 @@ static int	file_exists(char *filepath, t_file *file)
 	return (res);
 }
 
-void	parsing(int argc, char **argv, t_file *file)
+void	check_file(int argc, char **argv, t_file *file)
 {
 	if (argc != 2)
 		exit_game(ARGC_ERROR, file);
-	file->filepath = ft_trimstr(argv[1]);
+	file->filepath = ft_strtrim(argv[1], " \t\n\v\f\r");
 	if (file->filepath == NULL)
 		exit_game(BLANK_FPATH, file);
 	if (!file_ext_ok(file->filepath))

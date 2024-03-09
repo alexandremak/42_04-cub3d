@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 20:25:24 by amak              #+#    #+#             */
-/*   Updated: 2024/03/09 00:12:05 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/09 16:05:23 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		ft_strcmp(char *s1, char *s2);
 char	*ft_strdup(const char *s);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlen(const char *str);
-char	*ft_trimstr(char *str);
+char	*ft_strtrim(char const *s1, char const *set);
 char	*get_next_line(int fd);
 
 #endif

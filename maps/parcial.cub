@@ -1,0 +1,7 @@
+C 0,-122,+122
+F 1,2,0
+
+WE ./path_to_the_west_texture
+
+
+EA ./path_to_the_east_texture

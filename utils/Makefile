@@ -6,7 +6,7 @@
 #    By: amak <amak@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/27 22:18:14 by amak              #+#    #+#              #
-#    Updated: 2024/03/09 00:12:16 by amak             ###   ########.fr        #
+#    Updated: 2024/03/09 17:30:09 by amak             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SOURCES = 	ft_atoi.c \
 			ft_strdup.c \
 			ft_strlcpy.c \
 			ft_strlen.c \
-			ft_trimstr.c \
+			ft_strtrim.c \
 			get_next_line.c
 			
 OBJECTS = $(SOURCES:.c=.o)

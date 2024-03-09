@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_content.c                                     :+:      :+:    :+:   */
+/*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:43:54 by amak              #+#    #+#             */
-/*   Updated: 2024/03/09 00:28:36 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/09 17:21:50 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,32 +24,39 @@ static void	load_file(t_file *file, int count_line)
 	if (file->map)
 		file->map[count_line] = line;
 }
-static void extract_nbr(t_file *file, char** split)
+
+static void	extract_nbr(t_file *file, char **split)
 {
-	char **numbers;
-	int i;
+	char	**numbers;
+	int		i;
 
 	i = -1;
 	numbers = ft_split(split[1], ',');
 	while (*numbers && numbers[++i])
-		if (ft_strlen(numbers[i]) > 3)
-			{
-				free(numbers);
-				exit_game(W_CONTENT, file);
-			}
+	{
+		if (ft_strlen(numbers[i]) > 4)
+		{
+			free_mtrx(numbers);
+			exit_game(W_CONTENT, file);
+		}
+	}
+	if (i < 3)
+	{
+		free_mtrx(numbers);
+		exit_game(W_CONTENT, file);
+	}
 	if (ft_strcmp(split[0], "C") == 0)
 	{
-		file->ceiling.red = ft_atoi(numbers[0]);
-		file->ceiling.green = ft_atoi(numbers[1]);
-		file->ceiling.blue = ft_atoi(numbers[2]);
+		file->ceiling_rgb[0] = ft_atoi(numbers[0]);
+		file->ceiling_rgb[1] = ft_atoi(numbers[1]);
+		file->ceiling_rgb[2] = ft_atoi(numbers[2]);
+		free_mtrx(numbers);
+		return;
 	}
-	else
-	{
-		file->floor.red = ft_atoi(numbers[0]);
-		file->floor.green = ft_atoi(numbers[1]);
-		file->floor.blue = ft_atoi(numbers[2]);
-	}
-	free(numbers);
+	file->floor_rgb[0]= ft_atoi(numbers[0]);
+	file->floor_rgb[1] = ft_atoi(numbers[1]);
+	file->floor_rgb[2] = ft_atoi(numbers[2]);
+	free_mtrx(numbers);
 }
 
 static void	load_data(t_file *file, char **split)
@@ -74,15 +81,13 @@ static void	load_values(t_file *file, char **map)
 	while (map && *map)
 	{
 		ft_putspace(*map);
-		line = ft_trimstr(*map);
-		if (line)
+		line = ft_strtrim(*map," \t\v\f\r\n");
+		if (line && *line) 
 		{
-			split_line = ft_split(*map, ' ');
+			split_line = ft_split(line, ' ');
 			if (split_line && split_line[0])
-			{
 				load_data(file, split_line);
-				free_mtrx(split_line);
-			}
+			free_mtrx(split_line);
 			free (line);
 		}
 		map++;

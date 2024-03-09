@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/03/09 00:20:31 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/09 16:24:31 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,6 @@ typedef struct s_vector {
 	int		y;
 }	t_vector;
 
-typedef struct s_rgb {
-	int		red;
-	int		green;
-	int		blue;
-}	t_rgb;
-
 typedef struct s_file {
 	char	*filepath;
 	int		fd;
@@ -65,8 +59,8 @@ typedef struct s_file {
 	char	*so;
 	char	*we;
 	char	*ea;
-	t_rgb	floor;
-	t_rgb	ceiling;
+	int		floor_rgb[3];
+	int		ceiling_rgb[3];
 	char	**map;
 }	t_file;
 
@@ -81,7 +75,7 @@ void	free_mtrx(char **mtrx);
 void	free_all(t_file *file);
 
 /* PARSING AND READ FUNCTIONS */
-void	parsing(int argc, char **argv, t_file *file);
+void	check_file(int argc, char **argv, t_file *file);
 void	read_content(t_file *file);
 
 #endif
