@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/03/06 23:46:53 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/09 00:20:31 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ typedef struct s_file {
 	char	*so;
 	char	*we;
 	char	*ea;
-	t_rgb	floor_rgb;
-	t_rgb	ceiling_rgb;
+	t_rgb	floor;
+	t_rgb	ceiling;
 	char	**map;
 }	t_file;
 
@@ -75,7 +75,7 @@ typedef struct s_player {
 	t_vector	direction;
 }	t_player;
 
-void	exit_game(t_exit_code exit_code, t_file *cub_file);
+void	exit_game(t_exit_code exit_code, t_file *file);
 
 void	free_mtrx(char **mtrx);
 void	free_all(t_file *file);

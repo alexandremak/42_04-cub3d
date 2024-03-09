@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 20:25:24 by amak              #+#    #+#             */
-/*   Updated: 2024/03/06 23:55:32 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/09 00:12:05 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #  define BUFFER_SIZE 42
 # endif
 
+int		ft_atoi(const char *nptr);
 void	*ft_calloc(size_t nmemb, size_t size);
 int		ft_isspace(char c);
 void	ft_putspace(char *str);
