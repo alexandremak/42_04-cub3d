@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/03/09 16:24:31 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/09 18:19:59 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 //	# include "minilibx-linux/mlx.h"
-# include "../utils/utils.h"
+# include "../utils/inc/utils.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>

@@ -6,11 +6,11 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 22:22:43 by amak              #+#    #+#             */
-/*   Updated: 2024/03/06 23:50:41 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/09 17:43:44 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h" 
+#include "../inc/utils.h"
 
 static	int	nr_words(char const *s, char c)
 {

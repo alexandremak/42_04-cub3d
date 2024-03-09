@@ -6,11 +6,11 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 21:30:51 by amak              #+#    #+#             */
-/*   Updated: 2024/03/09 17:29:54 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/09 17:43:55 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "../inc/utils.h"
 
 static	int	begin_pos(char const *s1, char const *set)
 {

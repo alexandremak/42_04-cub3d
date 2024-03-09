@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.h                                        :+:      :+:    :+:   */
+/*   ft_mtrxdup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/27 20:32:54 by amak              #+#    #+#             */
-/*   Updated: 2024/02/27 20:33:16 by amak             ###   ########.fr       */
+/*   Created: 2024/03/09 18:02:24 by amak              #+#    #+#             */
+/*   Updated: 2024/03/09 18:05:25 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "../inc/utils.h"
 
-char	*ft_strdup(const char *s)
+char	**ft_mtrxdup(char **mtrx)
 {
-	int		lenth;
-	int		pos;
-	char	*pnt;
+	int		i;
+	int		size;
+	char	**res;
 
-	lenth = ft_strlen((char *)s);
-	pnt = (char *)malloc(lenth + 1);
-	if (pnt == NULL)
+	i = 0;
+	size = 0;
+	if (!mtrx && *mtrx[0])
 		return (NULL);
-	pos = 0;
-	while (s[pos] != '\0')
+	while (mtrx[size])
+		size++;
+	res = ft_calloc((size + 1), sizeof(char *));
+	while (res[i])
 	{
-		pnt[pos] = s[pos];
-		pos++;
+		res[i] = ft_strdup(mtrx[i]);
+		i++;
 	}
-	pnt[pos] = '\0';
-	return (pnt);
+	return (res);
 }

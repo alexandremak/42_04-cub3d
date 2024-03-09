@@ -6,11 +6,11 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 22:24:59 by amak              #+#    #+#             */
-/*   Updated: 2024/03/05 22:25:11 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/09 17:43:39 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "../inc/utils.h"
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {

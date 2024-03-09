@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 20:41:46 by amak              #+#    #+#             */
-/*   Updated: 2024/03/06 20:05:31 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/09 18:29:48 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	exit_game(t_exit_code exit_code, t_file *file)
 	if (exit_code == NO_FILE)
 		printf("Scene description file doesn't exist!\n");
 	if (exit_code == W_CONTENT)
-		printf("File with wrong content!\n");
+		printf("File with wrong or no content!\n");
 	if (exit_code == NOALL_TEXTURES)
 		printf("File content missing one or more texture path!\n");
 	if (exit_code == RGB_IRANGE)
