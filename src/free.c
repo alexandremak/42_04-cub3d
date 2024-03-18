@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 21:46:48 by amak              #+#    #+#             */
-/*   Updated: 2024/03/09 16:28:13 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/10 01:10:39 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static void	free_file(t_file *file)
 		free(file->we);
 	if (file->ea)
 		free(file->ea);
+	if (file->content)
+		free_mtrx(file->content);
 	if (file->map)
 		free_mtrx(file->map);
 }
