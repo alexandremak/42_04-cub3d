@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/27 20:27:04 by amak              #+#    #+#             */
-/*   Updated: 2024/03/06 23:49:51 by amak             ###   ########.fr       */
+/*   Created: 2024/03/05 22:55:17 by amak              #+#    #+#             */
+/*   Updated: 2024/03/09 17:43:47 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "../inc/utils.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_strcmp(char *s1, char *s2)
 {
-	int	pos;
+	int	i;
 
-	pos = 0;
-	while (str[pos] != '\0')
-		pos++;
-	return (pos);
+	i = 0;
+	while ((s1[i] == s2[i]) && s1[i] && s2[i])
+		i++;
+	return (s1[i] - s2[i]);
 }

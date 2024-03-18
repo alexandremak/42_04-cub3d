@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putspace.c                                      :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 22:34:47 by amak              #+#    #+#             */
-/*   Updated: 2024/03/06 23:50:18 by amak             ###   ########.fr       */
+/*   Created: 2024/02/27 20:27:04 by amak              #+#    #+#             */
+/*   Updated: 2024/03/09 17:43:53 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "../inc/utils.h"
 
-void	ft_putspace(char *str)
+size_t	ft_strlen(const char *str)
 {
-	while (*str)
-	{
-		if (ft_isspace(*str))
-			*str = ' ';
-		str++;
-	}
+	int	pos;
+
+	pos = 0;
+	while (str[pos] != '\0')
+		pos++;
+	return (pos);
 }

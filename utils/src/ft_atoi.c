@@ -1,21 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 19:24:25 by amak              #+#    #+#             */
-/*   Updated: 2024/02/28 19:24:47 by amak             ###   ########.fr       */
+/*   Created: 2024/03/09 00:11:19 by amak              #+#    #+#             */
+/*   Updated: 2024/03/09 17:53:42 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "../inc/utils.h"
 
-int	ft_isspace(char c)
+int	ft_atoi(const char *nptr)
 {
-	if (((c >= 9) && (c <= 13)) || c == 32)
-		return (1);
-	else
-		return (0);
+	int	pos;
+	int	sign;
+	int	res;
+
+	pos = 0;
+	sign = 1;
+	res = 0;
+	while (ft_isspace(nptr[pos]))
+		pos++;
+	if (nptr[pos] == '-' || nptr[pos] == '+')
+	{
+		if (nptr[pos] == '-' )
+			sign = -1;
+		pos++;
+	}
+	while (nptr[pos] >= '0' && nptr[pos] <= '9')
+	{
+		res = (res * 10) + (nptr[pos] - 48);
+		pos++;
+	}
+	res = res * sign;
+	return (res);
 }

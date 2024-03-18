@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:53:37 by amak              #+#    #+#             */
-/*   Updated: 2024/03/09 16:09:54 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/13 22:50:45 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ static int	file_exists(char *filepath, t_file *file)
 void	check_file(int argc, char **argv, t_file *file)
 {
 	if (argc != 2)
-		exit_game(ARGC_ERROR, file);
+		exit_game(ERROR, "Invalid number of arguments!", file);
 	file->filepath = ft_strtrim(argv[1], " \t\n\v\f\r");
 	if (file->filepath == NULL)
-		exit_game(BLANK_FPATH, file);
+		exit_game(ERROR, "Inserted blank filepath or filename!", file);
 	if (!file_ext_ok(file->filepath))
-		exit_game(EXT_ERROR, file);
+		exit_game(ERROR, "Scene description file with incorrect extension!", file);
 	if (!file_exists(file->filepath, file))
-		exit_game(NO_FILE, file);
+		exit_game(ERROR, "Scene description file doesn't exist!", file);
 }

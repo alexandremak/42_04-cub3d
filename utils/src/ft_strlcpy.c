@@ -6,11 +6,11 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 22:26:49 by amak              #+#    #+#             */
-/*   Updated: 2024/03/05 22:27:14 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/09 17:43:51 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "../inc/utils.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {

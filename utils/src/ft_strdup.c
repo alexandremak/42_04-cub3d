@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/27 20:41:46 by amak              #+#    #+#             */
-/*   Updated: 2024/03/13 21:22:34 by amak             ###   ########.fr       */
+/*   Created: 2024/02/27 20:32:54 by amak              #+#    #+#             */
+/*   Updated: 2024/03/09 17:43:48 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3D.h"
+#include "../inc/utils.h"
 
-void	exit_game(t_exit_code exit_code, char *message, t_file *file)
+char	*ft_strdup(const char *s)
 {
-	free_all(file);
-	if (file->fd > -1)
-		close(file->fd);
-	if (exit_code == NORMAL)
-		exit(0);
-	printf("Error\n");
-	printf("%s\n", message);
-	exit(1);
+	int		lenth;
+	int		pos;
+	char	*pnt;
+
+	lenth = ft_strlen((char *)s);
+	pnt = (char *)malloc(lenth + 1);
+	if (pnt == NULL)
+		return (NULL);
+	pos = 0;
+	while (s[pos] != '\0')
+	{
+		pnt[pos] = s[pos];
+		pos++;
+	}
+	pnt[pos] = '\0';
+	return (pnt);
 }

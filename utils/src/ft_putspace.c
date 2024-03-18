@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_putspace.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 22:55:17 by amak              #+#    #+#             */
-/*   Updated: 2024/03/06 23:53:49 by amak             ###   ########.fr       */
+/*   Created: 2024/03/05 22:34:47 by amak              #+#    #+#             */
+/*   Updated: 2024/03/09 17:43:43 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "../inc/utils.h"
 
-int	ft_strcmp(char *s1, char *s2)
+void	ft_putspace(char *str)
 {
-	int	i;
-
-	i = 0;
-	while ((s1[i] == s2[i]) && s1[i] && s2[i])
-		i++;
-	return (s1[i] - s2[i]);
+	while (*str)
+	{
+		if (ft_isspace(*str))
+			*str = ' ';
+		str++;
+	}
 }
