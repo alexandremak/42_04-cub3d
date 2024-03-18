@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/03/13 23:34:33 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/18 21:40:03 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,8 @@ void	read_content(t_file *file);
 
 /* EXTRACT DATA FUNCTIONS */
 void	extract_data(t_file *file, char **splited);
+
+/* EXTRACT MAP FUNCTIONS */
+void	load_map(t_file *file, char **mtrx);
 
 #endif
