@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:43:54 by amak              #+#    #+#             */
-/*   Updated: 2024/03/18 22:40:22 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/19 00:43:45 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	load_values(t_file *file, char **content)
 
 	while (content && *content && !text_rgb_ok(file))
 	{
-		printf("content: %s",*content);
+		printf("content: %s", *content);
 		ft_putspace(*content);
 		line = ft_strtrim(*content, " \t\v\f\r\n");
 		if (line && *line) 
@@ -56,19 +56,16 @@ static void	load_values(t_file *file, char **content)
 		}
 		content++;
 	}
+	while (content && *content && !ft_strtrim(*content, " \t\n\v\f\r"))
+		content++;
 	if (content && *content)
-	{
-		while (!ft_strtrim(*content, " \t\n\v\f\r"))
-			content++;
-		//printf("last content: %s",*content);
-	}
-	load_map(file, content);
+		load_map(file, content);
 }
 
 void	read_content(t_file *file)
-{
+{	
 	load_file(file, file->fd, 0);
 	if (!file->content)
-		exit_game(ERROR, "Scene description file without content!", file);
+		exit_game(ERROR, "Scene description file without content!", file);	
 	load_values(file, file->content);
 }

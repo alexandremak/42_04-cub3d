@@ -6,7 +6,7 @@
 #    By: amak <amak@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/27 22:18:14 by amak              #+#    #+#              #
-#    Updated: 2024/03/09 18:07:21 by amak             ###   ########.fr        #
+#    Updated: 2024/03/20 22:22:40 by amak             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,12 +28,13 @@ SRC_FILES =	ft_atoi.c \
 			ft_mtrxdup.c \
 			ft_putspace.c \
 			ft_split.c \
+			ft_strchr.c \
 			ft_strcmp.c \
 			ft_strdup.c \
 			ft_strlcpy.c \
 			ft_strlen.c \
 			ft_strtrim.c \
-			get_next_line.c
+			get_next_line.c 
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_FILES))		
 

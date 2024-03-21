@@ -6,13 +6,13 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 21:25:49 by amak              #+#    #+#             */
-/*   Updated: 2024/03/18 23:23:09 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/20 22:08:14 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static int	max_row(char **mtrx)
+static int	max_collums(char **mtrx)
 {
 	int	res;
 
@@ -28,7 +28,7 @@ static int	max_row(char **mtrx)
 	return (res);
 }
 
-static int	max_lines(char **mtrx)
+static int	max_rows(char **mtrx)
 {
 		int	res;
 
@@ -43,13 +43,13 @@ static int	max_lines(char **mtrx)
 	return (res);
 }
 
-void alocate_map(t_file *file, char **mtrx, int y, int x)
+static void extract_map(t_file *file, char **mtrx, int y, int x)
 {
 	int	i;
 	int	j;
 	
 	i = 0;
-	file->map = (char **)malloc((y + 1) * sizeof(char *));
+	file->map = ft_calloc(y + 1, sizeof(char *));
 	while(i < y)
 	{
 		file->map[i] = ft_calloc(x, sizeof(char));
@@ -57,26 +57,17 @@ void alocate_map(t_file *file, char **mtrx, int y, int x)
 		while (mtrx[i][j])
 		{
 			file->map[i][j] = mtrx[i][j];
-			printf("%c", file->map[i][j]);
 			j++;
 		}
 		i++;
-	}
-	printf("\n>>>>>See map: \n");
-	while(file->map && *file->map)
-	{
-		printf("%s", *file->map);
-		file->map++;
 	}
 }
 
 void	load_map(t_file *file, char **mtrx)
 {
-	alocate_map(file, mtrx, max_lines(mtrx), max_row(mtrx));
-	printf("\n>>>>>See map: \n");
-	while(file->map && *file->map)
-	{
-		printf("%s", *file->map);
-		file->map++;
-	}
+	file->rows = max_rows(mtrx);
+	file->collums = max_collums(mtrx);
+	printf("rows: %d\n", max_rows(mtrx));
+	printf("collums: %d\n", max_collums(mtrx));
+	extract_map(file, mtrx, max_rows(mtrx), max_collums(mtrx));
 }
