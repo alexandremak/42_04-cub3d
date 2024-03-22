@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   ft_noprintchar.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/27 20:41:46 by amak              #+#    #+#             */
-/*   Updated: 2024/03/22 01:00:16 by amak             ###   ########.fr       */
+/*   Created: 2024/03/21 23:24:54 by amak              #+#    #+#             */
+/*   Updated: 2024/03/21 23:29:17 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3D.h"
+#include "../inc/utils.h"
 
-void	exit_game(t_exit_code exit_code, char *message, t_file *file)
+int	ft_noprintchar(char *str)
 {
-	free_all(file);
-	if (file->fd > -1)
-		close(file->fd);
-	if (exit_code == NORMAL)
-		exit(0);
-	printf("Error\n");
-	printf("%s\n\n", message);
-	exit(1);
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (1);
+	while (str[i])
+	{
+		if (ft_strchr(" \t\v\f\r\n", str[i]))
+			i++;
+		else
+			return (0);
+	}
+	return (1);
 }

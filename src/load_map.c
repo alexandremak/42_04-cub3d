@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 21:25:49 by amak              #+#    #+#             */
-/*   Updated: 2024/03/20 22:08:14 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/22 00:55:20 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	max_collums(char **mtrx)
 
 static int	max_rows(char **mtrx)
 {
-		int	res;
+	int	res;
 
 	res = 0;
 	if (!mtrx)
@@ -43,16 +43,16 @@ static int	max_rows(char **mtrx)
 	return (res);
 }
 
-static void extract_map(t_file *file, char **mtrx, int y, int x)
+static void	extract_map(t_file *file, char **mtrx, int y, int x)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	file->map = ft_calloc(y + 1, sizeof(char *));
-	while(i < y)
+	while (i < y)
 	{
-		file->map[i] = ft_calloc(x, sizeof(char));
+		file->map[i] = ft_calloc(x + 1, sizeof(char));
 		j = 0;
 		while (mtrx[i][j])
 		{
@@ -67,7 +67,5 @@ void	load_map(t_file *file, char **mtrx)
 {
 	file->rows = max_rows(mtrx);
 	file->collums = max_collums(mtrx);
-	printf("rows: %d\n", max_rows(mtrx));
-	printf("collums: %d\n", max_collums(mtrx));
 	extract_map(file, mtrx, max_rows(mtrx), max_collums(mtrx));
 }

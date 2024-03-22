@@ -6,7 +6,7 @@
 #    By: amak <amak@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/27 22:18:14 by amak              #+#    #+#              #
-#    Updated: 2024/03/20 22:22:40 by amak             ###   ########.fr        #
+#    Updated: 2024/03/21 23:33:57 by amak             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC_FILES =	ft_atoi.c \
 			ft_calloc.c \
 			ft_isspace.c \
 			ft_mtrxdup.c \
+			ft_noprintchar.c \
 			ft_putspace.c \
 			ft_split.c \
 			ft_strchr.c \
