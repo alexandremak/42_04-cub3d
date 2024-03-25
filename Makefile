@@ -6,7 +6,7 @@
 #    By: amak <amak@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/20 19:20:14 by amak              #+#    #+#              #
-#    Updated: 2024/03/13 22:57:30 by amak             ###   ########.fr        #
+#    Updated: 2024/03/21 23:40:49 by amak             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,10 @@ SRC_FILES = main.c \
 			exit.c \
 			check_file.c \
 			load_file.c \
-			extract_data.c
+			extract_data.c \
+			load_map.c \
+			check_content.c \
+			check_map.c
 						
 SRC = $(addprefix $(SRC_PATH), $(SRC_FILES))
 

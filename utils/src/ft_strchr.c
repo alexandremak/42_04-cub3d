@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/27 20:41:46 by amak              #+#    #+#             */
-/*   Updated: 2024/03/22 01:00:16 by amak             ###   ########.fr       */
+/*   Created: 2024/03/20 22:21:57 by amak              #+#    #+#             */
+/*   Updated: 2024/03/20 22:52:31 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3D.h"
+#include "../inc/utils.h"
 
-void	exit_game(t_exit_code exit_code, char *message, t_file *file)
+char	*ft_strchr(const char *s, int c)
 {
-	free_all(file);
-	if (file->fd > -1)
-		close(file->fd);
-	if (exit_code == NORMAL)
-		exit(0);
-	printf("Error\n");
-	printf("%s\n\n", message);
-	exit(1);
+	int		pos;
+	char	*str;
+
+	pos = 0;
+	str = (char *)s;
+	while (str[pos])
+	{
+		if (str[pos] == (unsigned char)c)
+			return (&str[pos]);
+		pos++;
+	}
+	if (str[pos] == (char)c)
+		return (&str[pos]);
+	return (NULL);
 }

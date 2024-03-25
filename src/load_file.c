@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:43:54 by amak              #+#    #+#             */
-/*   Updated: 2024/03/18 21:16:43 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/22 01:04:25 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static void	load_values(t_file *file, char **content)
 
 	while (content && *content && !text_rgb_ok(file))
 	{
-		printf("content: %s",*content);
 		ft_putspace(*content);
 		line = ft_strtrim(*content, " \t\v\f\r\n");
 		if (line && *line) 
@@ -56,12 +55,10 @@ static void	load_values(t_file *file, char **content)
 		}
 		content++;
 	}
+	while (content && *content && ft_noprintchar(*content))
+		content++;
 	if (content && *content)
-	{
-		while (!ft_strtrim(*content, " \t\n\v\f\r"))
-			content++;
-		printf("last content: %s",*content);
-	}
+		load_map(file, content);
 }
 
 void	read_content(t_file *file)
