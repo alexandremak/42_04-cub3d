@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:43:54 by amak              #+#    #+#             */
-/*   Updated: 2024/03/22 01:04:25 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/25 22:27:30 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ void	read_content(t_file *file)
 {
 	load_file(file, file->fd, 0);
 	if (!file->content)
-		exit_game(ERROR, "Scene description file without content!", file);
+		exit_error("Scene description file without content!", file);
 	load_values(file, file->content);
 }

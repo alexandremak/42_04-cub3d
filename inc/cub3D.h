@@ -6,14 +6,14 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/03/22 00:01:33 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/25 22:37:28 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-//	# include "minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include "../utils/inc/utils.h"
 # include <unistd.h>
 # include <stdlib.h>
@@ -29,14 +29,7 @@
 # define D 100
 
 /* SIZE OF WINDOW AND EACH TILE */
-# define PX 64
-
-/* EXIT ERROR CODES */
-typedef enum e_exit_code
-{
-	NORMAL,
-	ERROR
-}	t_exit_code;
+# define PX 32
 
 /* STRUCTURES */
 typedef struct s_vector {
@@ -48,6 +41,11 @@ typedef struct s_player {
 	t_vector	position;
 	t_vector	direction;
 }	t_player;
+
+typedef struct s_windows {
+	void	*mlx;
+	void	*win;
+}	t_windows;
 
 typedef struct s_file {
 	char		*filepath;
@@ -63,9 +61,11 @@ typedef struct s_file {
 	int			rows;
 	int			collums;
 	t_player	player;
+	t_windows	graphic;
 }	t_file;
 
-void	exit_game(t_exit_code exit_code, char *message, t_file *file);
+void	exit_error(char *message, t_file *file);
+void	exit_game(t_file *file);
 
 void	free_mtrx(char **mtrx);
 void	free_all(t_file *file);
@@ -85,5 +85,9 @@ void	check_content(t_file *file);
 
 /* CHECK MAP */
 void	check_map(t_file *file, char **map);
+
+/* MLX FUNCTIONS*/
+void	init_mlx(t_file *file);
+int		key_press(int keycode, t_file *file);
 
 #endif

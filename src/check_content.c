@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:38:34 by amak              #+#    #+#             */
-/*   Updated: 2024/03/22 00:20:00 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/25 22:22:39 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,11 @@ static void	check_rgb(t_file *file, int *rgb_values)
 
 	i = 0;
 	if (rgb_values[3] == 0)
-		exit_game(ERROR, 
-			"Scene description file with incomplete rgb values!", file);
+		exit_error("Scene description file with incomplete rgb values!", file);
 	while (i < 3)
 	{
 		if (rgb_values[i] < 0 || rgb_values[i] > 255)
-			exit_game(ERROR, 
-				"Scene description file with wrong rgb values!", file);
+			exit_error("Scene description file with wrong rgb values!", file);
 		i++;
 	}
 }
@@ -32,8 +30,7 @@ static void	check_rgb(t_file *file, int *rgb_values)
 void	check_content(t_file *file)
 {
 	if (!file->no || !file->so || !file->we || !file->ea)
-		exit_game(ERROR, 
-			"Scene description file with incomplete textures!", file);
+		exit_error("Scene description file with incomplete textures!", file);
 	check_rgb(file, file->floor_rgb);
 	check_rgb(file, file->ceiling_rgb);
 	check_map(file, file->map);

@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/27 20:41:46 by amak              #+#    #+#             */
-/*   Updated: 2024/03/25 22:32:44 by amak             ###   ########.fr       */
+/*   Created: 2024/03/25 22:05:31 by amak              #+#    #+#             */
+/*   Updated: 2024/03/25 22:40:19 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-void	exit_error(char *message, t_file *file)
+void	init_mlx(t_file *file)
 {
-	free_all(file);
-	if (file->fd > -1)
-		close(file->fd);
-	printf("Error\n");
-	printf("%s\n\n", message);
-	exit(1);
+    file->graphic.mlx = mlx_init();
+    file->graphic.win = mlx_new_window(file->graphic.mlx, file->collums * PX, \
+        file->rows * PX, "Cub3d - 2D Map");
 }
-
-void	exit_game(t_file *file)
+int	key_press(int keycode, t_file *file)
 {
-	free_all(file);
-	if (file->fd > -1)
-		close(file->fd);
-	if (file->graphic.win)
-		mlx_destroy_window(file->graphic.mlx, file->graphic.win);
-	if (file->graphic.mlx)
-	{
-		mlx_destroy_display(file->graphic.mlx);
-		free(file->graphic.mlx);
-	}
-	exit(0);
+	if (keycode == ESC)
+		exit_game(file);
+	// if (keycode == W)
+	// {
+	// }
+	// if (keycode == S)
+	// {
+	// }
+	// if (keycode == A)
+	// {
+	// }
+	// if (keycode == D)
+	// {
+	// }
+	return (0);
 }

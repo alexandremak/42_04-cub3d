@@ -6,7 +6,7 @@
 #    By: amak <amak@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/20 19:20:14 by amak              #+#    #+#              #
-#    Updated: 2024/03/21 23:40:49 by amak             ###   ########.fr        #
+#    Updated: 2024/03/25 22:59:40 by amak             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,13 @@ CC = cc -g
 
 UTILS_DIR = ./utils/
 
+MINILIBX_DIR = ./minilibx-linux/
+
 CFLAGS = -Wall -Wextra -Werror -O3
 
 LFLAGS = -Lminilibx-linux -I/minilibx-linux/mlx.h -L/usr/lib -lmlx -lXext -lX11 -lm -lz
 
-LDFLAGS = $(UTILS_DIR)utils.a
+UTILS = $(UTILS_DIR)utils.a
 
 INC = -I ./inc/
 
@@ -36,7 +38,8 @@ SRC_FILES = main.c \
 			extract_data.c \
 			load_map.c \
 			check_content.c \
-			check_map.c
+			check_map.c \
+			init_mlx.c
 						
 SRC = $(addprefix $(SRC_PATH), $(SRC_FILES))
 
@@ -50,13 +53,15 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 
 $(NAME): $(OBJ)
 	@make -C $(UTILS_DIR)
-	@$(CC) $(OBJ) $(CFLAGS) $(LDFLAGS) $(INC) -o $(NAME)
+	@make -C $(MINILIBX_DIR)
+	@$(CC) $(CFLAGS) $(OBJ) $(UTILS) $(LFLAGS) -o $(NAME)
 	@echo [CUB3D] :: Object files created!
 	@echo [CUB3D] :: Executable file created!
 
 clean:
 	@rm -rf $(OBJ_PATH)
 	@make -C $(UTILS_DIR) clean
+	@make -C $(MINILIBX_DIR) clean
 	@echo [CUB3D] :: Deleted objected files!
 
 fclean: clean
