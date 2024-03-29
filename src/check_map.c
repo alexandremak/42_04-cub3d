@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 23:40:17 by amak              #+#    #+#             */
-/*   Updated: 2024/03/25 22:25:11 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/26 22:08:23 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static void	check_player(t_file *file, char **map)
 				if (flag_player == 1)
 					exit_error("Map with more than a player position!", file);
 				flag_player = 1;
+				extract_player(file, i, j, map[i][j]);
 			}
 			j++;
 		}

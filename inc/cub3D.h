@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/03/25 22:37:28 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/28 21:38:43 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,16 @@
 
 /* SIZE OF WINDOW AND EACH TILE */
 # define PX 32
+# define PACE 3
 
 /* STRUCTURES */
 typedef struct s_vector {
-	int		x;
-	int		y;
+	float		x;
+	float		y;
 }	t_vector;
 
 typedef struct s_player {
+	void		*img;
 	t_vector	position;
 	t_vector	direction;
 }	t_player;
@@ -76,6 +78,7 @@ void	read_content(t_file *file);
 
 /* EXTRACT DATA FUNCTIONS */
 void	extract_data(t_file *file, char **splited);
+void	extract_player(t_file *file, int y, int x, char c);
 
 /* EXTRACT MAP FUNCTIONS */
 void	load_map(t_file *file, char **mtrx);
@@ -89,5 +92,11 @@ void	check_map(t_file *file, char **map);
 /* MLX FUNCTIONS*/
 void	init_mlx(t_file *file);
 int		key_press(int keycode, t_file *file);
+
+/* BUILD PLAYER FUNCTIONS*/
+void	draw_player(t_file *file, t_windows *graphic);
+
+/* MOVEMENT FUNCTIONS */
+int		check_wall(int posy, int posx, char **map);
 
 #endif

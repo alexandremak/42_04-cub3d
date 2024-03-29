@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:00:21 by amak              #+#    #+#             */
-/*   Updated: 2024/03/25 22:27:16 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/26 23:23:49 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,31 @@ void	extract_data(t_file *file, char **splited)
 		extract_rgb(file, file->ceiling_rgb, splited[1]);
 	else if (ft_strcmp(splited[0], "F") == 0)
 		extract_rgb(file, file->floor_rgb, splited[1]);
+}
+
+void	extract_player(t_file *file, int y, int x, char c)
+{
+	file->player.position.y = y  * PX + 12;
+	file->player.position.x = x * PX + 12;
+	if (c == 'N')
+	{
+		file->player.direction.y = -1;
+		file->player.direction.x = 0;
+	}
+	else if (c == 'S')
+	{
+		file->player.direction.y = 1;
+		file->player.direction.x = 0;
+	}
+	else if (c == 'E')
+	{
+		file->player.direction.y = 0;
+		file->player.direction.x = 1;
+	}
+	else if (c == 'W')
+	{
+		file->player.direction.y = 0;
+		file->player.direction.x = -1;
+	}
+	printf("Extract player OK!\n");
 }
