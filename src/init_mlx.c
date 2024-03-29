@@ -6,54 +6,56 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 22:05:31 by amak              #+#    #+#             */
-/*   Updated: 2024/03/28 22:48:09 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/29 17:43:01 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
 void	init_mlx(t_file *file)
-{	
-	int s;
-
-    file->graphic.mlx = mlx_init();
-    file->graphic.win = mlx_new_window(file->graphic.mlx, (file->collums - 2) * PX,
-        file->rows * PX, "Cub3d - 2D Map");
-	file->player.img = mlx_xpm_file_to_image(file->graphic.mlx, 
-		"./imgs/player.xpm", &s, &s);
-	draw_player(file, &file->graphic);
+{
+	file->graphic.mlx = mlx_init();
+	file->graphic.win = mlx_new_window(file->graphic.mlx, 
+			(file->collums - 1) * PX, file->rows * PX, "Cub3d - 2D Map");
+	draw_map(file, &file->graphic);
 }
+
 int	key_press(int keycode, t_file *file)
 {
 	if (keycode == ESC)
 		exit_game(file);
 	else
 	{
+		printf("Angle = %f \n", file->player.angle);
+		printf("dy = %f | dx = %f \n", file->player.direction.y, 
+			file->player.direction.y);
 		if (keycode == W)
 		{
-			if(!check_wall(file->player.position.y - PACE, file->player.position.x,
-				file->map))
-				file->player.position.y -= PACE;
+			move(&file->player, 'W', file->map);
+			printf("W\n");
 		}
 		else if (keycode == S)
 		{
-			if(!check_wall(file->player.position.y + PACE, file->player.position.x,
-				file->map))
-				file->player.position.y += PACE;
+			move(&file->player, 'S', file->map);
+			printf("S\n");
 		}
 		else if (keycode == A)
 		{
-			if(!check_wall(file->player.position.y, file->player.position.x - PACE,
-				file->map))
-				file->player.position.x -= PACE;
+			file->player.angle -= (PI / 10);
+			if (file->player.angle < 0)
+				file->player.angle += (2 * PI);
+			file->player.direction.x = cos(file->player.angle);
+			file->player.direction.y = sin(file->player.angle);
 		}
 		else if (keycode == D)
 		{
-			if(!check_wall(file->player.position.y, file->player.position.x + PACE,
-				file->map))
-				file->player.position.x += PACE;
+			file->player.angle += (PI / 10);
+			if (file->player.angle > (2 * PI))
+				file->player.angle -= (2 * PI);
+			file->player.direction.x = cos(file->player.angle);
+			file->player.direction.y = sin(file->player.angle);
 		}
-		draw_player(file, &file->graphic);
+		draw_map(file, &file->graphic);
 	}
 	return (0);
 }

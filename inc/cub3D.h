@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/03/28 21:38:43 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/29 19:23:31 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <math.h>
+
+/* MATH CONST */
+# define PI 3.1415926535
 
 /* KEYBOARD CODES */
 # define ESC 65307
@@ -29,7 +33,7 @@
 # define D 100
 
 /* SIZE OF WINDOW AND EACH TILE */
-# define PX 32
+# define PX 27
 # define PACE 3
 
 /* STRUCTURES */
@@ -39,9 +43,9 @@ typedef struct s_vector {
 }	t_vector;
 
 typedef struct s_player {
-	void		*img;
 	t_vector	position;
 	t_vector	direction;
+	float		angle;
 }	t_player;
 
 typedef struct s_windows {
@@ -93,10 +97,10 @@ void	check_map(t_file *file, char **map);
 void	init_mlx(t_file *file);
 int		key_press(int keycode, t_file *file);
 
-/* BUILD PLAYER FUNCTIONS*/
-void	draw_player(t_file *file, t_windows *graphic);
+/* BUILD MAP FUNCTIONS*/
+void	draw_map(t_file *file, t_windows *graphic);
 
 /* MOVEMENT FUNCTIONS */
-int		check_wall(int posy, int posx, char **map);
+void	move(t_player *player, char c, char **map);
 
 #endif

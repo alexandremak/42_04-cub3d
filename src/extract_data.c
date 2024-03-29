@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:00:21 by amak              #+#    #+#             */
-/*   Updated: 2024/03/26 23:23:49 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/29 17:40:52 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,22 @@ void	extract_data(t_file *file, char **splited)
 		extract_rgb(file, file->floor_rgb, splited[1]);
 }
 
+static void	calc_angle(t_player *player, int c)
+{
+	if (c == 'N')
+		player->angle = (3 * PI) / 2;
+	else if (c == 'S')
+		player->angle = PI / 2;
+	else if (c == 'E')
+		player->angle = 0;
+	else if (c == 'W')
+		player->angle = PI;
+}
+
 void	extract_player(t_file *file, int y, int x, char c)
 {
-	file->player.position.y = y  * PX + 12;
-	file->player.position.x = x * PX + 12;
+	file->player.position.y = y * PX + 14;
+	file->player.position.x = x * PX + 14;
 	if (c == 'N')
 	{
 		file->player.direction.y = -1;
@@ -96,5 +108,5 @@ void	extract_player(t_file *file, int y, int x, char c)
 		file->player.direction.y = 0;
 		file->player.direction.x = -1;
 	}
-	printf("Extract player OK!\n");
+	calc_angle(&file->player, c);
 }
