@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/03/29 19:23:31 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/29 21:32:08 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 
 /* SIZE OF WINDOW AND EACH TILE */
 # define PX 27
-# define PACE 3
+# define PACE 10
 
 /* STRUCTURES */
 typedef struct s_vector {
@@ -48,9 +48,18 @@ typedef struct s_player {
 	float		angle;
 }	t_player;
 
+typedef struct	s_image {
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+}				t_image;
+
 typedef struct s_windows {
 	void	*mlx;
 	void	*win;
+	t_image	image;
 }	t_windows;
 
 typedef struct s_file {

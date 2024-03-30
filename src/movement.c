@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 21:13:17 by amak              #+#    #+#             */
-/*   Updated: 2024/03/29 17:45:21 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/29 21:30:35 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,29 @@ static int	check_move_nok(int posy, int posx, char **map)
 
 void	move(t_player *player, char c, char **map)
 {
-	if (c == 'W')
+	int	i;
+	
+	i = 1;
+	while (i <= PACE)
 	{
-		if (!check_move_nok(player->position.y + (PACE * player->direction.y), 
-				player->position.x + (PACE * player->direction.x), map))
+		if (c == 'W')
 		{
-			player->position.y += (PACE * player->direction.y);
-			player->position.x += (PACE * player->direction.x);
+			if (!check_move_nok(player->position.y + player->direction.y, 
+					player->position.x + player->direction.x, map))
+			{
+				player->position.y += player->direction.y;
+				player->position.x += player->direction.x;
+			}
 		}
-	}
-	else if (c == 'S')
-	{
-		if (!check_move_nok(player->position.y - (PACE * player->direction.y), 
-				player->position.x - (PACE * player->direction.x), map))
+		else if (c == 'S')
 		{
-			player->position.y -= (PACE * player->direction.y);
-			player->position.x -= (PACE * player->direction.x);
+			if (!check_move_nok(player->position.y - player->direction.y, 
+					player->position.x - player->direction.x, map))
+			{
+				player->position.y -= player->direction.y;
+				player->position.x -= player->direction.x;
+			}
 		}
+		i++;
 	}
 }

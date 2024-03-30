@@ -6,31 +6,39 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 22:31:24 by amak              #+#    #+#             */
-/*   Updated: 2024/03/29 17:46:38 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/29 21:25:37 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void	put_wall(void *mlx, void *win, int x, int y)
+void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
+
+static void	put_square(t_image *image, int x, int y, int color)
 {
 	int	i;
 	int	j;
 
-	i = 1;
-	while (i < (PX - 1))
+	i = 0;
+	while (i < (PX))
 	{
-		j = 1;
-		while (j < (PX - 1))
+		j = 0;
+		while (j < (PX))
 		{
-			mlx_pixel_put(mlx, win, x + i, y + j, 0xdfdfdf);
+			my_mlx_pixel_put(image, x + i, y + j, color);
 			j++;
 		}
 		i++;
 	}
 }
 
-static void	put_grid(void *mlx, void *win, t_file *file)
+static void	put_grid(t_image *image, t_file *file)
 {
 	int	y;
 	int	x;
@@ -40,17 +48,19 @@ static void	put_grid(void *mlx, void *win, t_file *file)
 	while (y < file->rows)
 	{
 		x = 0;
-		while (x < file->collums)
+		while (x < file->collums - 1)
 		{
 			if (file->map[y][x] == '1')
-				put_wall(mlx, win, x * PX, y * PX);
+				put_square(image, x * PX, y * PX, 0x00dfdfdf);
+			else if (file->map[y][x] == '0'|| ft_strchr("NSEW",file->map[y][x]))
+				put_square(image, x * PX, y * PX, 0x00000000);
 			x++;
 		}
 		y++;
 	}
 }
 
-static void	put_player(void *mlx, void *win, t_player *player)
+static void	put_player(t_image *image, t_player *player)
 {
 	int	y;
 	int	x;
@@ -61,8 +71,8 @@ static void	put_player(void *mlx, void *win, t_player *player)
 		x = 0;
 		while (x < 9)
 		{
-			mlx_pixel_put(mlx, win, player->position.x - 4 + x, 
-				player->position.y - 4 + y, 0xffff00);
+			my_mlx_pixel_put(image, player->position.x - 4 + x, 
+				player->position.y - 4 + y, 0x00ffff00);
 			x++;
 		}
 		y++;
@@ -70,8 +80,9 @@ static void	put_player(void *mlx, void *win, t_player *player)
 	y = 1;
 	while (y <= 10)
 	{
-		mlx_pixel_put(mlx, win, player->position.x + (y * player->direction.x), 
-			player->position.y + (y * player->direction.y), 0xff0000);
+		my_mlx_pixel_put(image, 
+			player->position.x + (y * player->direction.x), 
+			player->position.y + (y * player->direction.y), 0x00ff0000);
 		y++;
 	}
 }
@@ -79,6 +90,8 @@ static void	put_player(void *mlx, void *win, t_player *player)
 void	draw_map(t_file *file, t_windows *graphic)
 {
 	mlx_clear_window(graphic->mlx, graphic->win);
-	put_grid(graphic->mlx, graphic->win, file);
-	put_player(graphic->mlx, graphic->win, &file->player);
+	put_grid(&graphic->image, file);
+	put_player(&graphic->image, &file->player);
+	mlx_put_image_to_window(graphic->mlx, graphic->win, graphic->image.img, 
+							0 , 0);
 }

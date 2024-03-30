@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 22:05:31 by amak              #+#    #+#             */
-/*   Updated: 2024/03/29 17:43:01 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/29 21:16:35 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void	init_mlx(t_file *file)
 	file->graphic.mlx = mlx_init();
 	file->graphic.win = mlx_new_window(file->graphic.mlx, 
 			(file->collums - 1) * PX, file->rows * PX, "Cub3d - 2D Map");
+	file->graphic.image.img = mlx_new_image(file->graphic.mlx, 
+			(file->collums - 1) * PX, file->rows * PX);
+	file->graphic.image.addr = mlx_get_data_addr(file->graphic.image.img,
+		 &(file->graphic.image.bits_per_pixel), &file->graphic.image.line_length,	
+		 &file->graphic.image.endian);
 	draw_map(file, &file->graphic);
 }
 
