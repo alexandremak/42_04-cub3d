@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:00:21 by amak              #+#    #+#             */
-/*   Updated: 2024/03/29 17:40:52 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/30 18:13:12 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ static void	calc_angle(t_player *player, int c)
 
 void	extract_player(t_file *file, int y, int x, char c)
 {
-	file->player.position.y = y * PX + 14;
-	file->player.position.x = x * PX + 14;
+	file->player.position.y = y * PX + ((PX + 1) / 2);
+	file->player.position.x = x * PX + ((PX + 1) / 2);
 	if (c == 'N')
 	{
 		file->player.direction.y = -1;

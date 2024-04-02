@@ -6,13 +6,13 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 21:13:17 by amak              #+#    #+#             */
-/*   Updated: 2024/03/29 21:30:35 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/02 21:08:08 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static int	check_wall(int posy, int posx, char **map)
+int	check_wall(int posy, int posx, char **map)
 {
 	int	y;
 	int	x;

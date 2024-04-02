@@ -6,7 +6,7 @@
 #    By: amak <amak@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/20 19:20:14 by amak              #+#    #+#              #
-#    Updated: 2024/03/29 21:08:04 by amak             ###   ########.fr        #
+#    Updated: 2024/04/02 20:31:16 by amak             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ SRC_FILES = main.c \
 			check_map.c \
 			init_mlx.c \
 			build_map.c \
-			movement.c
+			movement.c \
+			raycast.c
 						
 SRC = $(addprefix $(SRC_PATH), $(SRC_FILES))
 

@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/03/29 21:32:08 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/02 21:41:24 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@
 # include <sys/stat.h>
 # include <math.h>
 
+
 /* MATH CONST */
 # define PI 3.1415926535
+# define YAXIS 0
+# define XAXIS 1
+# define ANGLE 3.1415926535 / 180
 
 /* KEYBOARD CODES */
 # define ESC 65307
@@ -34,7 +38,9 @@
 
 /* SIZE OF WINDOW AND EACH TILE */
 # define PX 27
-# define PACE 10
+# define PACE 3
+# define DIVUNITS 20
+# define PLYLEN 8
 
 /* STRUCTURES */
 typedef struct s_vector {
@@ -107,9 +113,14 @@ void	init_mlx(t_file *file);
 int		key_press(int keycode, t_file *file);
 
 /* BUILD MAP FUNCTIONS*/
+void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
 void	draw_map(t_file *file, t_windows *graphic);
 
 /* MOVEMENT FUNCTIONS */
+int		check_wall(int posy, int posx, char **map);
 void	move(t_player *player, char c, char **map);
+
+/* RAYCASTING */
+void	castray(t_image *image, t_player *player, t_file *file, float angle);
 
 #endif

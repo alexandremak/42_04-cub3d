@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 22:31:24 by amak              #+#    #+#             */
-/*   Updated: 2024/03/29 21:25:37 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/02 21:48:47 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ static void	put_player(t_image *image, t_player *player)
 		x = 0;
 		while (x < 9)
 		{
-			my_mlx_pixel_put(image, player->position.x - 4 + x, 
-				player->position.y - 4 + y, 0x00ffff00);
+			my_mlx_pixel_put(image, player->position.x - (PLYLEN / 2) + x, 
+				player->position.y -(PLYLEN / 2) + y, 0x00ffff00);
 			x++;
 		}
 		y++;
@@ -89,9 +89,19 @@ static void	put_player(t_image *image, t_player *player)
 
 void	draw_map(t_file *file, t_windows *graphic)
 {
+	int i;
+
+	i = 1;
 	mlx_clear_window(graphic->mlx, graphic->win);
 	put_grid(&graphic->image, file);
 	put_player(&graphic->image, &file->player);
+	castray(&graphic->image, &file->player, file, file->player.angle);
+	while (i <= 30)
+	{
+		castray(&graphic->image, &file->player, file, (i * ANGLE) + file->player.angle);
+		castray(&graphic->image, &file->player, file, (-i * ANGLE) + file->player.angle);
+		i++;
+	}
 	mlx_put_image_to_window(graphic->mlx, graphic->win, graphic->image.img, 
 							0 , 0);
 }

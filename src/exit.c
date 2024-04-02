@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 20:41:46 by amak              #+#    #+#             */
-/*   Updated: 2024/03/30 02:49:03 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/30 17:54:50 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ void	exit_game(t_file *file)
 		mlx_destroy_window(file->graphic.mlx, file->graphic.win);
 	if (file->graphic.image.img)
 		mlx_destroy_image(file->graphic.mlx, file->graphic.image.img);
-	// if (file->graphic.image.addr)
-		// free(file->graphic.image.addr);
 	if (file->graphic.mlx)
 	{
 		mlx_destroy_display(file->graphic.mlx);

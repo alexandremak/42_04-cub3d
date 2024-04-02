@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 22:05:31 by amak              #+#    #+#             */
-/*   Updated: 2024/03/29 21:16:35 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/02 20:35:00 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ int	key_press(int keycode, t_file *file)
 		exit_game(file);
 	else
 	{
-		printf("Angle = %f \n", file->player.angle);
-		printf("dy = %f | dx = %f \n", file->player.direction.y, 
-			file->player.direction.y);
 		if (keycode == W)
 		{
 			move(&file->player, 'W', file->map);
@@ -46,7 +43,7 @@ int	key_press(int keycode, t_file *file)
 		}
 		else if (keycode == A)
 		{
-			file->player.angle -= (PI / 10);
+			file->player.angle -= (PI / DIVUNITS);
 			if (file->player.angle < 0)
 				file->player.angle += (2 * PI);
 			file->player.direction.x = cos(file->player.angle);
@@ -54,7 +51,7 @@ int	key_press(int keycode, t_file *file)
 		}
 		else if (keycode == D)
 		{
-			file->player.angle += (PI / 10);
+			file->player.angle += (PI / DIVUNITS);
 			if (file->player.angle > (2 * PI))
 				file->player.angle -= (2 * PI);
 			file->player.direction.x = cos(file->player.angle);
