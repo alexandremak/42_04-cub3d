@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:30:11 by amak              #+#    #+#             */
-/*   Updated: 2024/04/04 19:58:15 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/04 20:36:52 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int argc, char **argv)
 	print_content(cube, 1);
 	check_content(&cube);
 	init_mlx(&cube);
-	mlx_key_hook(cube.graphic.win, key_press, &cube);
+	mlx_hook(cube.graphic.win, 2, 1L << 0, key_press, &cube);
 	mlx_hook(cube.graphic.win, 17, 0, (void *)exit_game, &cube);
 	// mlx_loop_hook(
 	mlx_loop(cube.graphic.mlx);
