@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:30:11 by amak              #+#    #+#             */
-/*   Updated: 2024/03/29 21:12:55 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/04 19:58:15 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	print_content(t_file cube, int bool)
 			cube.floor_rgb[1], cube.floor_rgb[2], cube.floor_rgb[3]);
 		printf("\n GAME MAP: \n");
 		printf(" - rows: %d\n", cube.rows);
-		printf(" - collums: %d\n", cube.collums);
+		printf(" - columns: %d\n", cube.columns);
 		printf("\n<begin in next line>\n");
 		while (cube.map && cube.map[++i])
 			printf("%s", cube.map[i]);
