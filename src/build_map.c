@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 22:31:24 by amak              #+#    #+#             */
-/*   Updated: 2024/04/02 21:48:47 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/04 20:20:18 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,16 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
+}
+
+
+void put_pixel_to_image(t_image *image_data, int x, int y, int color) {
+    char			*pixel_address;
+	unsigned int	*pixel_location;
+	
+	pixel_address = image_data->addr + (y * image_data->line_length + x * (image_data->bits_per_pixel / 8));
+    pixel_location = (unsigned int*)pixel_address;
+    *pixel_location = color;
 }
 
 static void	put_square(t_image *image, int x, int y, int color)
@@ -48,7 +58,7 @@ static void	put_grid(t_image *image, t_file *file)
 	while (y < file->rows)
 	{
 		x = 0;
-		while (x < file->collums - 1)
+		while (x < file->columns - 1)
 		{
 			if (file->map[y][x] == '1')
 				put_square(image, x * PX, y * PX, 0x00dfdfdf);
