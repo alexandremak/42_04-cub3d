@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 22:31:24 by amak              #+#    #+#             */
-/*   Updated: 2024/04/02 21:48:47 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/05 00:13:04 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,32 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+static void	clean_image(t_file *file, t_image *image)
+{
+	int y;
+	int x;
+	
+	y = 0;
+	x = 0;
+	while (y <= 100)
+	{
+		x = 0;
+		while (x <= 100)
+		{
+			my_mlx_pixel_put(image, x, y, 0x00ff0000);
+			x++;
+		}
+		y++;
+	}
+}
+
 static void	put_square(t_image *image, int x, int y, int color)
 {
 	int	i;
 	int	j;
 
 	i = 0;
+	j = 0;
 	while (i < (PX))
 	{
 		j = 0;
@@ -66,10 +86,10 @@ static void	put_player(t_image *image, t_player *player)
 	int	x;
 
 	y = 0;
-	while (y < 9)
+	while (y < PLYLEN)
 	{
 		x = 0;
-		while (x < 9)
+		while (x < PLYLEN)
 		{
 			my_mlx_pixel_put(image, player->position.x - (PLYLEN / 2) + x, 
 				player->position.y -(PLYLEN / 2) + y, 0x00ffff00);
@@ -93,15 +113,16 @@ void	draw_map(t_file *file, t_windows *graphic)
 
 	i = 1;
 	mlx_clear_window(graphic->mlx, graphic->win);
+	clean_image(file, &graphic->image);
 	put_grid(&graphic->image, file);
 	put_player(&graphic->image, &file->player);
 	castray(&graphic->image, &file->player, file, file->player.angle);
-	while (i <= 30)
-	{
-		castray(&graphic->image, &file->player, file, (i * ANGLE) + file->player.angle);
-		castray(&graphic->image, &file->player, file, (-i * ANGLE) + file->player.angle);
-		i++;
-	}
+	// while (i <= 30)
+	// {
+	// 	castray(&graphic->image, &file->player, file, (i * ANGLE) + file->player.angle);
+	// 	castray(&graphic->image, &file->player, file, (-i * ANGLE) + file->player.angle);
+	// 	i++;
+	// }
 	mlx_put_image_to_window(graphic->mlx, graphic->win, graphic->image.img, 
 							0 , 0);
 }

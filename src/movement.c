@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 21:13:17 by amak              #+#    #+#             */
-/*   Updated: 2024/04/02 21:08:08 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/04 20:35:36 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int	check_wall(int posy, int posx, char **map)
 static int	check_move_nok(int posy, int posx, char **map)
 {
 	return (check_wall(posy, posx, map) || 
-		check_wall(posy - 4, posx - 4, map) || 
-		check_wall(posy - 4, posx + 4, map) || 
-		check_wall(posy + 4, posx - 4, map) || 
-		check_wall(posy + 4, posx + 4, map));
+		check_wall(posy - (PLYLEN / 2), posx - (PLYLEN / 2), map) || 
+		check_wall(posy - (PLYLEN / 2), posx + (PLYLEN / 2), map) || 
+		check_wall(posy + (PLYLEN / 2), posx - (PLYLEN / 2), map) || 
+		check_wall(posy + (PLYLEN / 2), posx + (PLYLEN / 2), map));
 }
 
 void	move(t_player *player, char c, char **map)

@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/02 21:41:24 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/04 22:13:48 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@
 
 
 /* MATH CONST */
-# define PI 3.1415926535
+# define PI 3.141592
 # define YAXIS 0
 # define XAXIS 1
-# define ANGLE 3.1415926535 / 180
+# define ANGLE 3.141592 / 180
 
 /* KEYBOARD CODES */
 # define ESC 65307
@@ -37,10 +37,10 @@
 # define D 100
 
 /* SIZE OF WINDOW AND EACH TILE */
-# define PX 27
+# define PX 61
 # define PACE 3
-# define DIVUNITS 20
-# define PLYLEN 8
+# define DIVUNITS 18
+# define PLYLEN 15
 
 /* STRUCTURES */
 typedef struct s_vector {
