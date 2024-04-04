@@ -6,20 +6,35 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 20:41:46 by amak              #+#    #+#             */
-/*   Updated: 2024/03/22 01:00:16 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/30 17:54:50 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-void	exit_game(t_exit_code exit_code, char *message, t_file *file)
+void	exit_error(char *message, t_file *file)
 {
 	free_all(file);
 	if (file->fd > -1)
 		close(file->fd);
-	if (exit_code == NORMAL)
-		exit(0);
 	printf("Error\n");
 	printf("%s\n\n", message);
 	exit(1);
+}
+
+void	exit_game(t_file *file)
+{
+	free_all(file);
+	if (file->fd > -1)
+		close(file->fd);
+	if (file->graphic.win)
+		mlx_destroy_window(file->graphic.mlx, file->graphic.win);
+	if (file->graphic.image.img)
+		mlx_destroy_image(file->graphic.mlx, file->graphic.image.img);
+	if (file->graphic.mlx)
+	{
+		mlx_destroy_display(file->graphic.mlx);
+		free(file->graphic.mlx);
+	}
+	exit(0);
 }

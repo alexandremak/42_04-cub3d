@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:30:11 by amak              #+#    #+#             */
-/*   Updated: 2024/03/22 01:33:12 by amak             ###   ########.fr       */
+/*   Updated: 2024/03/29 21:12:55 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,9 @@ int	main(int argc, char **argv)
 	read_content(&cube);
 	print_content(cube, 1);
 	check_content(&cube);
-	exit_game(NORMAL, NULL, &cube);
+	init_mlx(&cube);
+	mlx_key_hook(cube.graphic.win, key_press, &cube);
+	mlx_hook(cube.graphic.win, 17, 0, (void *)exit_game, &cube);
+	// mlx_loop_hook(
+	mlx_loop(cube.graphic.mlx);
 }
