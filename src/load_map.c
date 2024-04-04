@@ -6,44 +6,46 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/18 21:25:49 by amak              #+#    #+#             */
-/*   Updated: 2024/04/04 19:58:15 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/04 21:55:44 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static int	max_columns(char **mtrx)
+static int	max_columns(char **content)
 {
 	int	res;
 
 	res = 0;
-	if (!mtrx)
+	if (!content)
 		return (res);
-	while (*mtrx)
+	while (*content)
 	{
-		if ((int)ft_strlen(*mtrx) > res)
-			res = (int)ft_strlen(*mtrx) + 1;
-		mtrx++;
+		if ((int)ft_strlen(*content) > res)
+			res = (int)ft_strlen(*content) + 1;
+		content++;
 	}
 	return (res);
 }
 
-static int	max_rows(char **mtrx)
+static int	max_rows(t_file *file, char **content)
 {
 	int	res;
 
 	res = 0;
-	if (!mtrx)
+	if (!content)
 		return (res);
-	while (*mtrx)
+	while (*content)
 	{
+		if (ft_noprintchar(*content))
+			exit_error("Map content has to be the last", file);
 		res++;
-		mtrx++;
+		content++;
 	}
 	return (res);
 }
 
-static void	extract_map(t_file *file, char **mtrx)
+static void	extract_map(t_file *file, char **content)
 {
 	int	i;
 	int	j;
@@ -54,18 +56,18 @@ static void	extract_map(t_file *file, char **mtrx)
 	{
 		file->map[i] = ft_calloc(file->columns + 1, sizeof(char));
 		j = 0;
-		while (mtrx[i][j])
+		while (content[i][j])
 		{
-			file->map[i][j] = mtrx[i][j];
+			file->map[i][j] = content[i][j];
 			j++;
 		}
 		i++;
 	}
 }
 
-void	load_map(t_file *file, char **mtrx)
+void	load_map(t_file *file, char **content)
 {
-	file->rows = max_rows(mtrx);
-	file->columns = max_columns(mtrx);
-	extract_map(file, mtrx);
+	file->rows = max_rows(file, content);
+	file->columns = max_columns(content);
+	extract_map(file, content);
 }

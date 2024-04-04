@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 23:40:17 by amak              #+#    #+#             */
-/*   Updated: 2024/04/04 19:58:15 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/04 21:10:59 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	check_player(t_file *file, char **map)
 				if (flag_player == 1)
 					exit_error("Map with more than a player position!", file);
 				flag_player = 1;
-				extract_player(file, i, j, map[i][j]);
+				extract_player_position(file, i, j, map[i][j]);
 			}
 			j++;
 		}

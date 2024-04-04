@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/04 20:36:26 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/04 22:19:04 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct s_file {
 void	exit_error(char *message, t_file *file);
 void	exit_game(t_file *file);
 
-void	free_mtrx(char **mtrx);
+void	free_str_arr(char **mtrx);
 void	free_all(t_file *file);
 
 /* CHECK AND LOAD FUNCTIONS */
@@ -96,8 +96,8 @@ void	check_file(int argc, char **argv, t_file *file);
 void	read_content(t_file *file);
 
 /* EXTRACT DATA FUNCTIONS */
-void	extract_data(t_file *file, char **splited);
-void	extract_player(t_file *file, int y, int x, char c);
+void	extract_metadata(t_file *file, char **splited);
+void	extract_player_position(t_file *file, int y, int x, char c);
 
 /* EXTRACT MAP FUNCTIONS */
 void	load_map(t_file *file, char **mtrx);

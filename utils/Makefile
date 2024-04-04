@@ -6,7 +6,7 @@
 #    By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/27 22:18:14 by amak              #+#    #+#              #
-#    Updated: 2024/04/04 20:04:34 by ftroiter         ###   ########.fr        #
+#    Updated: 2024/04/04 22:30:07 by ftroiter         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,14 @@ OBJ_PATH = ./obj/
 
 SRC_FILES =	ft_atoi.c \
 			ft_calloc.c \
+			ft_isdigit_str.c \
+			ft_isdigit.c \
 			ft_isspace.c \
 			ft_mtrxdup.c \
 			ft_noprintchar.c \
 			ft_putspace.c \
 			ft_split.c \
+			ft_strarr_size.c \
 			ft_strchr.c \
 			ft_strcmp.c \
 			ft_strdup.c \

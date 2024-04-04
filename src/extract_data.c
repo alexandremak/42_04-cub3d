@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:00:21 by amak              #+#    #+#             */
-/*   Updated: 2024/03/30 18:13:12 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/04 22:33:52 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static void	extract_txtr(t_file *file, char **texture, char *pathstr)
 	if (fd < 0)
 	{
 		close(fd);
-		exit_error("Scene description file with a wall texture file not found!",
+		exit_error("Scene description: wall texture file not found",
 			file);
 	}
 	if (texture && *texture)
-		exit_error("Scene description file with duplicate wall texture \
-			identifier!", file);
+		exit_error("Scene description: duplicate wall texture \
+			identifier", file);
 	*texture = ft_strdup(pathstr);
 	close(fd);
 }
@@ -37,26 +37,31 @@ static void	extract_rgb(t_file *file, int *rgb, char *splited)
 
 	i = -1;
 	if (rgb[3])
-		exit_error("Scene description file with duplicate RGB values!", file);
+		exit_error("Scene description: duplicate RGB values", file);
 	if (!splited)
-		exit_error("Scene description file with no RGB values!", file);
+		exit_error("Scene description: no RGB values", file);
 	numbers = ft_split(splited, ',');
+	if (ft_strarr_size(numbers) > 3)
+	{
+		free_str_arr(numbers);
+		exit_error("Scene description: invalid RGB values", file);
+	}
 	while (*numbers && numbers[++i])
 	{
-		if (ft_strlen(numbers[i]) > 4)
+		if (ft_strlen(numbers[i]) > 4 || !ft_isdigit_str(numbers[i]))
 		{
-			free_mtrx(numbers);
-			exit_error("Scene description file with invalid RGB values!", file);
+			free_str_arr(numbers);
+			exit_error("Scene description: invalid RGB values", file);
 		}
 		rgb[i] = ft_atoi(numbers[i]);
 	}
-	free_mtrx(numbers);
+	free_str_arr(numbers);
 	if (i < 3)
-		exit_error("Scene description file with insuficient RGB values!", file);
+		exit_error("Scene description: insuficient RGB values", file);
 	rgb[3] = 1;
 }
 
-void	extract_data(t_file *file, char **splited)
+void	extract_metadata(t_file *file, char **splited)
 {
 	if (ft_strcmp(splited[0], "NO") == 0)
 		extract_txtr(file, &file->no, splited[1]);
@@ -84,7 +89,7 @@ static void	calc_angle(t_player *player, int c)
 		player->angle = PI;
 }
 
-void	extract_player(t_file *file, int y, int x, char c)
+void	extract_player_position(t_file *file, int y, int x, char c)
 {
 	file->player.position.y = y * PX + ((PX + 1) / 2);
 	file->player.position.x = x * PX + ((PX + 1) / 2);
