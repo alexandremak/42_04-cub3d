@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 20:41:46 by amak              #+#    #+#             */
-/*   Updated: 2024/03/30 17:54:50 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/04 21:44:44 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	exit_error(char *message, t_file *file)
 {
+	printf("Error\n");
 	free_all(file);
 	if (file->fd > -1)
 		close(file->fd);

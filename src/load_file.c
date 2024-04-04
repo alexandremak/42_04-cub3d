@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   load_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:43:54 by amak              #+#    #+#             */
-/*   Updated: 2024/03/25 22:27:30 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/04 22:19:04 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void	load_file(t_file *file, int fd, int count_line)
+static void	load_content(t_file *file, int fd, int count_line)
 {
 	char	*line;
 
 	line = get_next_line(fd);
 	if (line)
-		load_file(file, fd, count_line + 1);
+		load_content(file, fd, count_line + 1);
 	else if (count_line > 0)
 		file->content = malloc(sizeof(char *) * (count_line + 1));
 	if (file->content)
@@ -49,8 +49,8 @@ static void	load_values(t_file *file, char **content)
 		{
 			split_line = ft_split(line, ' ');
 			if (split_line && split_line[0])
-				extract_data(file, split_line);
-			free_mtrx(split_line);
+				extract_metadata(file, split_line);
+			free_str_arr(split_line);
 			free (line);
 		}
 		content++;
@@ -63,7 +63,7 @@ static void	load_values(t_file *file, char **content)
 
 void	read_content(t_file *file)
 {
-	load_file(file, file->fd, 0);
+	load_content(file, file->fd, 0);
 	if (!file->content)
 		exit_error("Scene description file without content!", file);
 	load_values(file, file->content);
