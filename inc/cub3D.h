@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/04 22:19:04 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:37:49 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct s_file {
 void	exit_error(char *message, t_file *file);
 void	exit_game(t_file *file);
 
-void	free_str_arr(char **mtrx);
+void	free_str_arr(char **arr);
 void	free_all(t_file *file);
 
 /* CHECK AND LOAD FUNCTIONS */

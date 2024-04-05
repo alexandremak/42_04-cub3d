@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 22:31:24 by amak              #+#    #+#             */
-/*   Updated: 2024/04/04 20:20:18 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/05 15:03:28 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,40 +30,41 @@ void put_pixel_to_image(t_image *image_data, int x, int y, int color) {
     *pixel_location = color;
 }
 
-static void	put_square(t_image *image, int x, int y, int color)
+static void	put_square(t_image *image, int x, int y, int color, int border_color)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < (PX))
+	while (i < PX)
 	{
 		j = 0;
-		while (j < (PX))
+		while (j < PX)
 		{
-			my_mlx_pixel_put(image, x + i, y + j, color);
+			if (i == 0 || j == 0 || i == PX - 1 || j == PX - 1)
+				my_mlx_pixel_put(image, x + i, y + j, border_color);
+			else
+				my_mlx_pixel_put(image, x + i, y + j, color);
 			j++;
 		}
 		i++;
 	}
 }
-
 static void	put_grid(t_image *image, t_file *file)
 {
 	int	y;
 	int	x;
 
 	y = 0;
-	x = 0;
 	while (y < file->rows)
 	{
 		x = 0;
 		while (x < file->columns - 1)
 		{
 			if (file->map[y][x] == '1')
-				put_square(image, x * PX, y * PX, 0x00dfdfdf);
+				put_square(image, x * PX, y * PX, 0x00dfdfdf, 0x00ff0000);
 			else if (file->map[y][x] == '0'|| ft_strchr("NSEW",file->map[y][x]))
-				put_square(image, x * PX, y * PX, 0x00000000);
+				put_square(image, x * PX, y * PX, 0x00000000, 0x00ff0000);
 			x++;
 		}
 		y++;

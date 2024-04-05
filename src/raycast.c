@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 18:17:32 by amak              #+#    #+#             */
-/*   Updated: 2024/04/02 22:15:56 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/05 15:38:12 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-int		offsety(int y, float angle)
+int		offset_y(int y, float angle)
 {
 	int 	i;
 	
@@ -33,7 +33,7 @@ int		offsety(int y, float angle)
 	return (0);
 }
 
-int calc_ydist(t_player *player, int offset, float angle, char **map)
+int calc_y_dist(t_player *player, int offset, float angle, char **map)
 {
 	int	y;
 	int x;
@@ -60,7 +60,7 @@ void	castray(t_image *image, t_player *player, t_file *file, float angle)
 
 	ry = (int)player->position.y;
 	rx = (int)player->position.x;
-		dy = calc_ydist(player, offsety(ry, angle), angle, file->map);
+		dy = calc_y_dist(player, offset_y(ry, angle), angle, file->map);
 	i = 1;
 	while (i <= dy)
 	{
