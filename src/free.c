@@ -6,25 +6,25 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 21:46:48 by amak              #+#    #+#             */
-/*   Updated: 2024/04/04 22:19:04 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/05 16:38:00 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-void	free_str_arr(char **mtrx)
+void	free_str_arr(char **arr)
 {
 	int	i;
 
 	i = 0;
-	if (*mtrx)
+	if (*arr)
 	{
-		while (mtrx[i])
+		while (arr[i])
 		{
-			free(mtrx[i]);
+			free(arr[i]);
 			i++;
 		}
-		free(mtrx);
+		free(arr);
 	}
 }
 

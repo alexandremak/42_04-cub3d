@@ -2,6 +2,7 @@
 	"files.associations": {
 		"*.css": "tailwindcss",
 		"*.js": "javascriptreact",
-		"utils.h": "c"
+		"utils.h": "c",
+		"cub3d.h": "c"
 	}
 }

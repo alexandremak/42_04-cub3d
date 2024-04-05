@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 21:13:17 by amak              #+#    #+#             */
-/*   Updated: 2024/04/02 21:08:08 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/05 15:37:51 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ static int	check_move_nok(int posy, int posx, char **map)
 		check_wall(posy + 4, posx + 4, map));
 }
 
-void	move(t_player *player, char c, char **map)
+void	move(t_player *player, char keycode, char **map)
 {
 	int	i;
 	
 	i = 1;
 	while (i <= PACE)
 	{
-		if (c == 'W')
+		if (keycode == 'W')
 		{
 			if (!check_move_nok(player->position.y + player->direction.y, 
 					player->position.x + player->direction.x, map))
@@ -51,7 +51,7 @@ void	move(t_player *player, char c, char **map)
 				player->position.x += player->direction.x;
 			}
 		}
-		else if (c == 'S')
+		else if (keycode == 'S')
 		{
 			if (!check_move_nok(player->position.y - player->direction.y, 
 					player->position.x - player->direction.x, map))
