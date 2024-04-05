@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/04 22:13:48 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/05 14:24:01 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@
 # define D 100
 
 /* SIZE OF WINDOW AND EACH TILE */
-# define PX 61
-# define PACE 3
+# define PX 50
+# define PACE 1
 # define DIVUNITS 18
-# define PLYLEN 15
+# define PLYLEN 20
 
 /* STRUCTURES */
 typedef struct s_vector {

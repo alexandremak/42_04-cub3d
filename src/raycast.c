@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 18:17:32 by amak              #+#    #+#             */
-/*   Updated: 2024/04/05 00:11:25 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/05 17:49:56 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ void	castray(t_image *image, t_player *player, t_file *file, float angle)
 	int ox;
 	int dy;
 	int dx;
+	int	disty;
+	int distx;
 	float ra;
 	int shortdist;
 	int total;
@@ -108,33 +110,35 @@ void	castray(t_image *image, t_player *player, t_file *file, float angle)
 	total = 0;
 	ry = (int)player->position.y;
 	rx = (int)player->position.x;
-	ra = player->angle;
+	ra = angle;
+	dx = cos(angle);
+	dy = sin(angle);
 	printf("pY= %f | px= %f\n", player->position.y, player->position.x);
 	printf("rY= %d | rx= %d | angle= %f\n", ry, rx, ra);
 	oy = offsety(ry, ra);
 	ox = offsetx(rx, ra);
 	printf("oy= %d\n", oy);
 	printf("ox= %d\n", ox);
-	// while(!stop)
+	// while(stop < 2)
 	// {
-		dy = calc_ydist(ry, oy, ra);
-		dx = calc_xdist(rx, ox, ra);
+		disty = calc_ydist(ry, oy, ra);
+		distx = calc_xdist(rx, ox, ra);
 		printf("hip_y= %d\n", dy);
 		printf("hip_x= %d\n", dx);
 		shortdist = 0;
-		if (!dy)
+		if (!disty)
 			shortdist = dx;
-		else if (!dx)
-			shortdist = dy;
-		else if (dy <= dx)
-			shortdist = dy;
+		else if (!distx)
+			shortdist = disty;
+		else if (disty <= distx)
+			shortdist = disty;
 		else
-			shortdist = dx;
-		// total += shortdist;
-		// ry += shortdist * player->direction.y;
-		// rx += shortdist * player->direction.x;
+			shortdist = distx;
+		total += shortdist;
+		ry += shortdist * dy;
+		rx += shortdist * dx;
 		printf("rY= %d | rx= %d | angle= %f\n", ry, rx, ra);
-	// 	if (check_wall(ry, rx, file->map))
+		// if (check_wall(ry, rx, file->map))
 	// 		stop = 1;
 	// }
 	i = 1;
