@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/05 22:19:31 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/06 15:53:24 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define S 115
 # define A 97
 # define D 100
+# define LA 65361
+# define RA 65363
 
 /* SIZE OF WINDOW AND EACH TILE */
 # define PX 50
@@ -80,7 +82,7 @@ typedef struct s_file {
 	int			ceiling_rgb[4];
 	char		**map;
 	int			rows;
-	int			collums;
+	int			columns;
 	t_player	player;
 	t_windows	graphic;
 }	t_file;
@@ -88,7 +90,7 @@ typedef struct s_file {
 void	exit_error(char *message, t_file *file);
 void	exit_game(t_file *file);
 
-void	free_mtrx(char **mtrx);
+void	free_str_arr(char **arr);
 void	free_all(t_file *file);
 
 /* CHECK AND LOAD FUNCTIONS */
@@ -96,8 +98,8 @@ void	check_file(int argc, char **argv, t_file *file);
 void	read_content(t_file *file);
 
 /* EXTRACT DATA FUNCTIONS */
-void	extract_data(t_file *file, char **splited);
-void	extract_player(t_file *file, int y, int x, char c);
+void	extract_metadata(t_file *file, char **splited);
+void	extract_player_position(t_file *file, int y, int x, char c);
 
 /* EXTRACT MAP FUNCTIONS */
 void	load_map(t_file *file, char **mtrx);

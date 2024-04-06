@@ -3,31 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:53:37 by amak              #+#    #+#             */
-/*   Updated: 2024/03/25 22:23:14 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/04 20:06:26 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static int	file_ext_ok(char *filepath)
-{
-	int		size;
-	int		res;
-
-	res = 0;
+static int file_ext_ok(char *filepath) {
 	if (!filepath)
-		return (0);
-	size = (int)ft_strlen(filepath);
-	if (size > 4)
-		if (filepath[size - 1] == 'b')
-			if (filepath[size - 2] == 'u')
-				if (filepath[size - 3] == 'c')
-					if (filepath[size - 4] == '.')
-						res = 1;
-	return (res);
+		return 0;
+	char *extension = ft_strrchr(filepath, '.');
+	printf("extension: %s\n", extension);
+	if (extension && ft_strcmp(extension, ".cub") == 0)
+		return 1;
+	return 0;
 }
 
 static int	file_exists(char *filepath, t_file *file)

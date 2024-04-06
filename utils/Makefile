@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amak <amak@student.42.fr>                  +#+  +:+       +#+         #
+#    By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/27 22:18:14 by amak              #+#    #+#              #
-#    Updated: 2024/03/21 23:33:57 by amak             ###   ########.fr        #
+#    Updated: 2024/04/04 22:30:07 by ftroiter         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,17 +24,21 @@ OBJ_PATH = ./obj/
 
 SRC_FILES =	ft_atoi.c \
 			ft_calloc.c \
+			ft_isdigit_str.c \
+			ft_isdigit.c \
 			ft_isspace.c \
 			ft_mtrxdup.c \
 			ft_noprintchar.c \
 			ft_putspace.c \
 			ft_split.c \
+			ft_strarr_size.c \
 			ft_strchr.c \
 			ft_strcmp.c \
 			ft_strdup.c \
 			ft_strlcpy.c \
 			ft_strlen.c \
 			ft_strtrim.c \
+			ft_strrchr.c \
 			get_next_line.c 
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_FILES))		

@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 21:13:17 by amak              #+#    #+#             */
-/*   Updated: 2024/04/04 20:35:36 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/06 15:51:14 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ static int	check_move_nok(int posy, int posx, char **map)
 		check_wall(posy + (PLYLEN / 2), posx + (PLYLEN / 2), map));
 }
 
-void	move(t_player *player, char c, char **map)
+void	move(t_player *player, char keycode, char **map)
 {
 	int	i;
 	
 	i = 1;
 	while (i <= PACE)
 	{
-		if (c == 'W')
+		if (keycode == 'W')
 		{
 			if (!check_move_nok(player->position.y + player->direction.y, 
 					player->position.x + player->direction.x, map))
@@ -51,13 +51,31 @@ void	move(t_player *player, char c, char **map)
 				player->position.x += player->direction.x;
 			}
 		}
-		else if (c == 'S')
+		else if (keycode == 'S')
 		{
 			if (!check_move_nok(player->position.y - player->direction.y, 
 					player->position.x - player->direction.x, map))
 			{
 				player->position.y -= player->direction.y;
 				player->position.x -= player->direction.x;
+			}
+		}
+		else if (keycode == 'A')
+		{
+			if (!check_move_nok(player->position.y + -(player->direction.x), 
+					player->position.x + player->direction.y, map))
+			{
+				player->position.y += -(player->direction.x);
+				player->position.x += player->direction.y;
+			}
+		}
+		else if (keycode == 'D')
+		{
+			if (!check_move_nok(player->position.y + player->direction.x, 
+					player->position.x + -(player->direction.y), map))
+			{
+				player->position.y += player->direction.x;
+				player->position.x += -(player->direction.y);
 			}
 		}
 		i++;

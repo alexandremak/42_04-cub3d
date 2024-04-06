@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 23:40:17 by amak              #+#    #+#             */
-/*   Updated: 2024/03/29 13:05:15 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/06 16:57:06 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	check_chr(t_file *file, char **map)
 	while (i < file->rows)
 	{
 		j = 0;
-		while (j < file->collums)
+		while (j < file->columns)
 		{
 			if (!ft_strchr(" 01NSEW\n\0", map[i][j]))
 				exit_error("Map with incorrect characters!", file);
@@ -44,14 +44,14 @@ static void	check_player(t_file *file, char **map)
 	while (i < file->rows)
 	{
 		j = 0;
-		while (j < file->collums)
+		while (j < file->columns)
 		{
 			if (map[i][j] && ft_strchr("NSEW", map[i][j]))
 			{
 				if (flag_player == 1)
 					exit_error("Map with more than a player position!", file);
 				flag_player = 1;
-				extract_player(file, i, j, map[i][j]);
+				extract_player_position(file, i, j, map[i][j]);
 			}
 			j++;
 		}
@@ -71,8 +71,8 @@ static void	check_perimeter(t_file *file, char **map)
 	i = 1;
 	j = 0;
 	last_row = file->rows - 1;
-	last_col = file->collums - 1;
-	while (j < file->collums)
+	last_col = file->columns - 1;
+	while (j < file->columns)
 	{
 		if (map[0][j] && ft_strchr("0NSEW", map[0][j]))
 			exit_error("Map not closed/surrounded by walls!", file);
@@ -96,18 +96,21 @@ static void	check_inside(t_file *file, char **map)
 	int	j;
 
 	i = 1;
-	j = 1;
 	while (i < file->rows - 1)
 	{
 		j = 1;
-		while (j < file->collums)
+		while (j < file->columns)
 		{
 			if (map[i][j] && ft_strchr("0NSEW", map[i][j]))
 			{
 				if (!ft_strchr("10NSEW", map[i - 1][j]) || 
 					!ft_strchr("10NSEW", map[i + 1][j]) ||
 					!ft_strchr("10NSEW", map[i][j - 1]) ||
-					!ft_strchr("10NSEW", map[i][j + 1]))
+					!ft_strchr("10NSEW", map[i][j + 1]) ||
+					!ft_strchr("10NSEW", map[i - 1][j - 1]) ||
+					!ft_strchr("10NSEW", map[i - 1][j + 1]) ||
+					!ft_strchr("10NSEW", map[i + 1][j + 1]) ||
+					!ft_strchr("10NSEW", map[i + 1][j - 1]))
 					exit_error("Map not closed/surrounded by walls!", file);
 			}
 			j++;

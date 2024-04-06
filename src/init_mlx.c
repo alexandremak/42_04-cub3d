@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 22:05:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/05 14:28:23 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/06 15:56:50 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	init_mlx(t_file *file)
 {
 	file->graphic.mlx = mlx_init();
 	file->graphic.win = mlx_new_window(file->graphic.mlx, 
-			(file->collums - 1) * PX, file->rows * PX, "Cub3d - 2D Map");
+			(file->columns - 1) * PX, file->rows * PX, "Cub3d - 2D Map");
 	file->graphic.image.img = mlx_new_image(file->graphic.mlx, 
-			(file->collums - 1) * PX, file->rows * PX);
+			(file->columns - 1) * PX, file->rows * PX);
 	file->graphic.image.addr = mlx_get_data_addr(file->graphic.image.img,
 		 &(file->graphic.image.bits_per_pixel), &file->graphic.image.line_length,	
 		 &file->graphic.image.endian);
@@ -27,6 +27,7 @@ void	init_mlx(t_file *file)
 
 int	key_press(int keycode, t_file *file)
 {
+	// printf("key: %d\n", keycode);
 	if (keycode == ESC)
 		exit_game(file);
 	else
@@ -43,19 +44,31 @@ int	key_press(int keycode, t_file *file)
 		}
 		else if (keycode == A)
 		{
+			move(&file->player, 'A', file->map);
+			printf("A\n");
+		}
+		else if (keycode == D)
+		{
+			move(&file->player, 'D', file->map);
+			printf("D\n");
+		}
+		else if (keycode == LA)
+		{
 			file->player.angle -= (PI / DIVUNITS);
 			if (file->player.angle < 0)
 				file->player.angle += (2 * PI);
 			file->player.direction.x = cos(file->player.angle);
 			file->player.direction.y = sin(file->player.angle);
+			printf("LA\n");
 		}
-		else if (keycode == D)
+		else if (keycode == RA)
 		{
 			file->player.angle += (PI / DIVUNITS);
 			if (file->player.angle > (2 * PI))
 				file->player.angle -= (2 * PI);
 			file->player.direction.x = cos(file->player.angle);
 			file->player.direction.y = sin(file->player.angle);
+			printf("RA\n");
 		}
 		draw_map(file, &file->graphic);
 	}
