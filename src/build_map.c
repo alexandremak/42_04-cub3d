@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 22:31:24 by amak              #+#    #+#             */
-/*   Updated: 2024/04/05 17:50:54 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/06 15:22:12 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 
 static void	clean_image(t_file *file, t_image *image)
 {
-	int y;
 	int x;
-	
-	y = 0;
+	int y;
+		
 	x = 0;
-	while (y <= 100)
+	y = 0;
+	while (x < ((file->collums - 1) * PX))
 	{
-		x = 0;
-		while (x <= 100)
+		y = 0;
+		while (y < file->rows * PX)
 		{
-			my_mlx_pixel_put(image, x, y, 0x00ff0000);
-			x++;
+			my_mlx_pixel_put(image, x, y, 0x00000000);
+			y++;
 		}
-		y++;
+		x++;
 	}
 }
 
@@ -98,7 +98,7 @@ static void	put_player(t_image *image, t_player *player)
 		y++;
 	}
 	y = 1;
-	while (y <= 10)
+	while (y <= PLYLEN)
 	{
 		my_mlx_pixel_put(image, 
 			player->position.x + (y * player->direction.x), 
@@ -117,12 +117,12 @@ void	draw_map(t_file *file, t_windows *graphic)
 	put_grid(&graphic->image, file);
 	put_player(&graphic->image, &file->player);
 	castray(&graphic->image, &file->player, file, file->player.angle);
-	while (i <= 30)
-	{
-		castray(&graphic->image, &file->player, file, (i * ANGLE) + file->player.angle);
-		castray(&graphic->image, &file->player, file, (-i * ANGLE) + file->player.angle);
-		i++;
-	}
+	// while (i <= 30)
+	// {
+	// 	castray(&graphic->image, &file->player, file, (i * ANGLE) + file->player.angle);
+	// 	castray(&graphic->image, &file->player, file, (-i * ANGLE) + file->player.angle);
+	// 	i++;
+	// }
 	mlx_put_image_to_window(graphic->mlx, graphic->win, graphic->image.img, 
 							0 , 0);
 }
