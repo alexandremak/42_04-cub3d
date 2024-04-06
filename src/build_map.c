@@ -20,9 +20,28 @@ void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+static void	clean_image(t_file *file, t_image *image)
+{
+	int x;
+	int y;
+		
+	x = 0;
+	y = 0;
+	while (x < ((file->collums - 1) * PX))
+	{
+		y = 0;
+		while (y < file->rows * PX)
+		{
+			my_mlx_pixel_put(image, x, y, 0x00000000);
+			y++;
+		}
+		x++;
+	}
+}
 
-void put_pixel_to_image(t_image *image_data, int x, int y, int color) {
-    char			*pixel_address;
+void put_pixel_to_image(t_image *image_data, int x, int y, int color)
+{
+  char		      *pixel_address;
 	unsigned int	*pixel_location;
 	
 	pixel_address = image_data->addr + (y * image_data->line_length + x * (image_data->bits_per_pixel / 8));
@@ -50,6 +69,7 @@ static void	put_square(t_image *image, int x, int y, int color, int border_color
 		i++;
 	}
 }
+
 static void	put_grid(t_image *image, t_file *file)
 {
 	int	y;
@@ -77,10 +97,10 @@ static void	put_player(t_image *image, t_player *player)
 	int	x;
 
 	y = 0;
-	while (y < 9)
+	while (y < PLYLEN)
 	{
 		x = 0;
-		while (x < 9)
+		while (x < PLYLEN)
 		{
 			my_mlx_pixel_put(image, player->position.x - (PLYLEN / 2) + x, 
 				player->position.y -(PLYLEN / 2) + y, 0x00ffff00);
@@ -89,7 +109,7 @@ static void	put_player(t_image *image, t_player *player)
 		y++;
 	}
 	y = 1;
-	while (y <= 10)
+	while (y <= PLYLEN)
 	{
 		my_mlx_pixel_put(image, 
 			player->position.x + (y * player->direction.x), 
@@ -104,9 +124,10 @@ void	draw_map(t_file *file, t_windows *graphic)
 
 	i = 1;
 	mlx_clear_window(graphic->mlx, graphic->win);
+	clean_image(file, &graphic->image);
 	put_grid(&graphic->image, file);
 	put_player(&graphic->image, &file->player);
-	// castray(&graphic->image, &file->player, file, file->player.angle);
+	castray(&graphic->image, &file->player, file, file->player.angle);
 	// while (i <= 30)
 	// {
 	// 	castray(&graphic->image, &file->player, file, (i * ANGLE) + file->player.angle);

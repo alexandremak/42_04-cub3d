@@ -29,10 +29,10 @@ int	check_wall(int posy, int posx, char **map)
 static int	check_move_nok(int posy, int posx, char **map)
 {
 	return (check_wall(posy, posx, map) || 
-		check_wall(posy - 4, posx - 4, map) || 
-		check_wall(posy - 4, posx + 4, map) || 
-		check_wall(posy + 4, posx - 4, map) || 
-		check_wall(posy + 4, posx + 4, map));
+		check_wall(posy - (PLYLEN / 2), posx - (PLYLEN / 2), map) || 
+		check_wall(posy - (PLYLEN / 2), posx + (PLYLEN / 2), map) || 
+		check_wall(posy + (PLYLEN / 2), posx - (PLYLEN / 2), map) || 
+		check_wall(posy + (PLYLEN / 2), posx + (PLYLEN / 2), map));
 }
 
 void	move(t_player *player, char keycode, char **map)

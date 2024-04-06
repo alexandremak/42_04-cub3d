@@ -24,10 +24,10 @@
 
 
 /* MATH CONST */
-# define PI 3.1415926535
+# define PI 3.14159265
 # define YAXIS 0
 # define XAXIS 1
-# define ANGLE 3.1415926535 / 180
+# define ANGLE 3.141592 / 180
 
 /* KEYBOARD CODES */
 # define ESC 65307
@@ -39,10 +39,10 @@
 # define RA 65363
 
 /* SIZE OF WINDOW AND EACH TILE */
-# define PX 27
-# define PACE 3
-# define DIVUNITS 20
-# define PLYLEN 8
+# define PX 50
+# define PACE 1
+# define DIVUNITS 18
+# define PLYLEN 20
 
 /* STRUCTURES */
 typedef struct s_vector {
