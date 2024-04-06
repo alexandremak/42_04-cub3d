@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 23:40:17 by amak              #+#    #+#             */
-/*   Updated: 2024/04/04 21:10:59 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/06 16:57:06 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ static void	check_inside(t_file *file, char **map)
 	int	j;
 
 	i = 1;
-	j = 1;
 	while (i < file->rows - 1)
 	{
 		j = 1;
@@ -107,7 +106,11 @@ static void	check_inside(t_file *file, char **map)
 				if (!ft_strchr("10NSEW", map[i - 1][j]) || 
 					!ft_strchr("10NSEW", map[i + 1][j]) ||
 					!ft_strchr("10NSEW", map[i][j - 1]) ||
-					!ft_strchr("10NSEW", map[i][j + 1]))
+					!ft_strchr("10NSEW", map[i][j + 1]) ||
+					!ft_strchr("10NSEW", map[i - 1][j - 1]) ||
+					!ft_strchr("10NSEW", map[i - 1][j + 1]) ||
+					!ft_strchr("10NSEW", map[i + 1][j + 1]) ||
+					!ft_strchr("10NSEW", map[i + 1][j - 1]))
 					exit_error("Map not closed/surrounded by walls!", file);
 			}
 			j++;
