@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 22:05:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/04 19:58:15 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/06 15:56:50 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	init_mlx(t_file *file)
 
 int	key_press(int keycode, t_file *file)
 {
+	// printf("key: %d\n", keycode);
 	if (keycode == ESC)
 		exit_game(file);
 	else
@@ -43,19 +44,31 @@ int	key_press(int keycode, t_file *file)
 		}
 		else if (keycode == A)
 		{
+			move(&file->player, 'A', file->map);
+			printf("A\n");
+		}
+		else if (keycode == D)
+		{
+			move(&file->player, 'D', file->map);
+			printf("D\n");
+		}
+		else if (keycode == LA)
+		{
 			file->player.angle -= (PI / DIVUNITS);
 			if (file->player.angle < 0)
 				file->player.angle += (2 * PI);
 			file->player.direction.x = cos(file->player.angle);
 			file->player.direction.y = sin(file->player.angle);
+			printf("LA\n");
 		}
-		else if (keycode == D)
+		else if (keycode == RA)
 		{
 			file->player.angle += (PI / DIVUNITS);
 			if (file->player.angle > (2 * PI))
 				file->player.angle -= (2 * PI);
 			file->player.direction.x = cos(file->player.angle);
 			file->player.direction.y = sin(file->player.angle);
+			printf("RA\n");
 		}
 		draw_map(file, &file->graphic);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 21:13:17 by amak              #+#    #+#             */
-/*   Updated: 2024/04/05 15:37:51 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/06 15:51:14 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,24 @@ void	move(t_player *player, char keycode, char **map)
 			{
 				player->position.y -= player->direction.y;
 				player->position.x -= player->direction.x;
+			}
+		}
+		else if (keycode == 'A')
+		{
+			if (!check_move_nok(player->position.y + -(player->direction.x), 
+					player->position.x + player->direction.y, map))
+			{
+				player->position.y += -(player->direction.x);
+				player->position.x += player->direction.y;
+			}
+		}
+		else if (keycode == 'D')
+		{
+			if (!check_move_nok(player->position.y + player->direction.x, 
+					player->position.x + -(player->direction.y), map))
+			{
+				player->position.y += player->direction.x;
+				player->position.x += -(player->direction.y);
 			}
 		}
 		i++;
