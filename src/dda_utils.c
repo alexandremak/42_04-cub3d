@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 16:09:38 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 21:51:42 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/07 22:21:24 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	increment_ray_length(t_ray *ray, float step_y, float step_x)
 			ray->y += ray->distance_y;
 		ray->x += step_y * ray->direction.x;
 		ray->length += step_y;
-		ray->vert_wall = 0;
+		ray->hit_vert_wall = 0;
 	}
 	else if (step_y == 0 || (step_x && step_y > step_x))
 	{
@@ -112,6 +112,6 @@ void	increment_ray_length(t_ray *ray, float step_y, float step_x)
 			ray->x += ray->distance_x;
 		ray->y += step_x * ray->direction.y;
 		ray->length += step_x;
-		ray->vert_wall = 1;
+		ray->hit_vert_wall = 1;
 	}
 }

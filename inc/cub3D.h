@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 22:03:05 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/07 22:21:34 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,9 @@ typedef struct s_ray
 	t_vector	direction;
 	float		angle;
 	float		length;
-	int			vert_wall;
+	int			hit_vert_wall;
 	int			wall_texture;
+	int			wall_hit;
 }	t_ray;
 
 typedef struct s_image
