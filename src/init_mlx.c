@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 22:05:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 16:36:50 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/07 19:55:25 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,14 @@ int	key_press(int keycode, t_file *file)
 	else
 	{
 		if (keycode == W)
-		{
 			move(&file->player, 'W', file->map);
-			printf("W\n");
-		}
 		else if (keycode == S)
-		{
 			move(&file->player, 'S', file->map);
-			printf("S\n");
-		}
 		else if (keycode == A)
-		{
+
 			move(&file->player, 'A', file->map);
-			printf("A\n");
-		}
 		else if (keycode == D)
-		{
 			move(&file->player, 'D', file->map);
-			printf("D\n");
-		}
 		else if (keycode == LA)
 		{
 			file->player.angle -= (PI / DIVUNITS);
@@ -59,7 +48,6 @@ int	key_press(int keycode, t_file *file)
 				file->player.angle += (2 * PI);
 			file->player.direction.x = cos(file->player.angle);
 			file->player.direction.y = sin(file->player.angle);
-			printf("LA\n");
 		}
 		else if (keycode == RA)
 		{
@@ -68,7 +56,6 @@ int	key_press(int keycode, t_file *file)
 				file->player.angle -= (2 * PI);
 			file->player.direction.x = cos(file->player.angle);
 			file->player.direction.y = sin(file->player.angle);
-			printf("RA\n");
 		}
 		draw_map(file, &file->graphic);
 	}

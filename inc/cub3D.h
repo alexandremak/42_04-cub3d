@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 16:44:38 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/07 19:58:44 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,11 @@
 # include <sys/stat.h>
 # include <math.h>
 
-
 /* MATH CONST */
 # define PI 3.14159265
 # define YAXIS 0
 # define XAXIS 1
-# define ANGLE 3.141592 / 180
+# define ANGLE 3.141592 / 360
 
 /* KEYBOARD CODES */
 # define ESC 65307
@@ -43,6 +42,15 @@
 # define PACE 5
 # define DIVUNITS 18
 # define PLYLEN 9
+
+/* WALLS COLLISION VALUES*/
+enum wall_direction {
+	NONE,
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
+};
 
 /* STRUCTURES */
 typedef struct s_vector {
@@ -64,6 +72,8 @@ typedef struct s_ray {
 	t_vector	direction;
 	float		angle;
 	float		length;
+	int			vert_wall;
+	int			wall_texture;
 }	t_ray;
 
 typedef struct	s_image {
@@ -135,9 +145,9 @@ void	move(t_player *player, char c, char **map);
 /* DDA UTILS FUNCTIONS*/
 int		offsety(int y, float angle);
 int		offsetx(int x, float angle);
-int		calc_xdist(int adj, float angle);
-int		calc_ydist(int opose, float angle);
-void	add_small_lenght(t_ray *ray, int disty, int distx);
+float	calc_xdist(int adj, float angle);
+float	calc_ydist(int opose, float angle);
+void	add_small_lenght(t_ray *ray, float disty, float distx);
 
 /* RAYCASTING */
 void	draw_ray(t_image *image, t_player *player, t_file *file, float angle);
