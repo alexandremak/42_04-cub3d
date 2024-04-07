@@ -3,23 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   dda_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 16:09:38 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 19:24:21 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/07 20:07:18 by facu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-int	offsety(int y, float angle)
+#define TOLERANCE 0.00001
+
+int	distance_y(int y, float angle)
 {
 	int	i;
 	int	res;		
 
 	i = 0;
 	res = 0;
-	if (angle == 0 || angle == PI)
+	if (fabs(angle - 0) < TOLERANCE || fabs(angle - PI) < TOLERANCE)
 		return (0);
 	if (angle < PI)
 	{
@@ -27,7 +29,7 @@ int	offsety(int y, float angle)
 			i++;
 		res = (i * PX) - y;
 	}
-	if (angle > PI)
+	else if (angle > PI)
 	{
 		while ((i * PX) <= y)
 			i++;
@@ -37,7 +39,7 @@ int	offsety(int y, float angle)
 	return (res);
 }
 
-int	offsetx(int x, float angle)
+int	distance_x(int x, float angle)
 {
 	int	i;
 	int	res;
@@ -60,56 +62,56 @@ int	offsetx(int x, float angle)
 	return (res);
 }
 
-float	calc_xdist(int adj, float angle)
+float	get_x_step(int adj, float angle)
 {
-	int	result;
+	float	result;
 	int	int_angle;
 	int	ninety;
 	int	twoseventy;
 
 	result = 0;
-	int_angle = (int)(angle * 1000000) - 1;
-	ninety = (int)(((PI / 2)) * 1000000);
-	twoseventy = (int)(((3 * PI) / 2) * 1000000);
+	int_angle = (int)(angle * 10000000) - 1;
+	ninety = (int)(((PI / 2)) * 10000000);
+	twoseventy = (int)(((3 * PI) / 2) * 10000000);
 	if (int_angle == ninety || int_angle == twoseventy)
 		return (0);
 	result = fabs(adj / cos(angle));
 	return (result);
 }
 
-float	calc_ydist(int opose, float angle)
+float	get_y_step(int opose, float angle)
 {
 	int	result;
 	int	int_angle;
 	int	oneeighty;
 
 	result = 0;
-	int_angle = (int)(angle * 1000000);
-	oneeighty = (int)(PI * 1000000) + 1;
+	int_angle = (int)(angle * 10000000);
+	oneeighty = (int)(PI * 10000000) + 1;
 	if (int_angle == oneeighty || int_angle == 0)
 		return (0);
 	result = fabs(opose / sin(angle));
 	return (result);
 }
 
-void	add_small_lenght(t_ray *ray, float disty, float distx)
+void	increment_ray_length(t_ray *ray, float step_y, float step_x)
 {
-	if (distx == 0 || (disty && disty <= distx))
+	if (step_x == 0 || (step_y && step_y <= step_x))
 	{
 		if (ray->direction.y < 0)
-			ray->y -= ray->offY;
+			ray->y -= ray->distance_y;
 		else
-			ray->y += ray->offY;
-		ray->x += disty * ray->direction.x;
-		ray->length += disty;
+			ray->y += ray->distance_y;
+		ray->x += step_y * ray->direction.x;
+		ray->length += step_y;
 	}
-	else if (disty == 0 || (distx && disty > distx))
+	else if (step_y == 0 || (step_x && step_y > step_x))
 	{
 		if (ray->direction.x < 0)
-			ray->x -= ray->offX;
+			ray->x -= ray->distance_x;
 		else
-			ray->x += ray->offX;
-		ray->y += distx * ray->direction.y;
-		ray->length += distx;
+			ray->x += ray->distance_x;
+		ray->y += step_x * ray->direction.y;
+		ray->length += step_x;
 	}
 }
