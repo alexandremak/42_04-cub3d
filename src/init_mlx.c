@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 22:05:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 19:55:25 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/07 21:46:23 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,11 @@ int	key_press(int keycode, t_file *file)
 		exit_game(file);
 	else
 	{
-		if (keycode == W)
-			move(&file->player, 'W', file->map);
-		else if (keycode == S)
-			move(&file->player, 'S', file->map);
-		else if (keycode == A)
-
-			move(&file->player, 'A', file->map);
-		else if (keycode == D)
-			move(&file->player, 'D', file->map);
+		if (keycode == W || keycode == S || keycode == A || keycode == D)
+			move(&file->player, keycode, file->map);
 		else if (keycode == LA)
 		{
-			file->player.angle -= (PI / DIVUNITS);
+			file->player.angle -= (PI / PIDIVUNITS);
 			if (file->player.angle < 0)
 				file->player.angle += (2 * PI);
 			file->player.direction.x = cos(file->player.angle);
@@ -51,7 +44,7 @@ int	key_press(int keycode, t_file *file)
 		}
 		else if (keycode == RA)
 		{
-			file->player.angle += (PI / DIVUNITS);
+			file->player.angle += (PI / PIDIVUNITS);
 			if (file->player.angle > (2 * PI))
 				file->player.angle -= (2 * PI);
 			file->player.direction.x = cos(file->player.angle);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 18:17:32 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 20:08:09 by facu             ###   ########.fr       */
+/*   Updated: 2024/04/07 21:48:46 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	wall_collision(t_ray *ray)
 			ray->wall_texture = NORTH;
 		else
 			ray->wall_texture = SOUTH;
-	}	
+	}
 }
 
 static void	castray(t_ray *ray, t_player *player, t_file *file, float angle)
@@ -36,12 +36,13 @@ static void	castray(t_ray *ray, t_player *player, t_file *file, float angle)
 
 	hit = 0;
 	ray->length = 0;
+	ray->wall_texture = NONE;
+	ray->vert_wall = 0;
 	ray->y = (int)player->position.y;
 	ray->x = (int)player->position.x;
 	ray->angle = angle;
 	ray->direction.x = cos(angle);
 	ray->direction.y = sin(angle);
-	printf("\n\n\n\n\n");
 	while (!hit)
 	{
 		ray->distance_y = distance_y(ray->y, angle);
@@ -54,6 +55,7 @@ static void	castray(t_ray *ray, t_player *player, t_file *file, float angle)
 			hit = 1;
 		}
 	}
+	printf("wall= %d\n", ray->wall_texture);
 }
 
 void	draw_ray(t_image *image, t_player *player, t_file *file, float angle)

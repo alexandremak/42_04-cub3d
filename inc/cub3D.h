@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 20:06:32 by facu             ###   ########.fr       */
+/*   Updated: 2024/04/07 21:46:01 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define PI 3.14159265
 # define YAXIS 0
 # define XAXIS 1
-# define ANGLE 3.141592 / 360
+# define TOLERANCE 0.00001
 
 /* KEYBOARD CODES */
 # define ESC 65307
@@ -40,8 +40,9 @@
 /* SIZE OF WINDOW AND EACH TILE */
 # define PX 31
 # define PACE 5
-# define DIVUNITS 18
+# define PIDIVUNITS 18
 # define PLYLEN 9
+# define UANGLE 3.141592 / 360
 
 /* WALLS COLLISION VALUES*/
 enum wall_direction {
@@ -113,50 +114,49 @@ typedef struct s_file
 	t_windows	graphic;
 }				t_file;
 
-void			exit_error(char *message, t_file *file);
-void			exit_game(t_file *file);
-
-void			free_str_arr(char **arr);
-void			free_all(t_file *file);
+/* EXIT FUNCTIONS */
+void	exit_error(char *message, t_file *file);
+void	exit_game(t_file *file);
+void	free_str_arr(char **arr);
+void	free_all(t_file *file);
 
 /* CHECK AND LOAD FUNCTIONS */
-void			check_file(int argc, char **argv, t_file *file);
-void			read_content(t_file *file);
+void	check_file(int argc, char **argv, t_file *file);
+void	read_content(t_file *file);
 
 /* EXTRACT DATA FUNCTIONS */
-void			extract_metadata(t_file *file, char **splited);
-void			extract_player_position(t_file *file, int y, int x, char c);
+void	extract_metadata(t_file *file, char **splited);
+void	extract_player_position(t_file *file, int y, int x, char c);
 
 /* EXTRACT MAP FUNCTIONS */
-void			load_map(t_file *file, char **mtrx);
+void	load_map(t_file *file, char **mtrx);
 
 /* CHECK FILE CONTENT */
-void			check_content(t_file *file);
+void	check_content(t_file *file);
 
 /* CHECK MAP */
-void			check_map(t_file *file, char **map);
+void	check_map(t_file *file, char **map);
 
 /* MLX FUNCTIONS*/
-void			init_mlx(t_file *file);
-int				key_press(int keycode, t_file *file);
+void	init_mlx(t_file *file);
+int		key_press(int keycode, t_file *file);
 
 /* BUILD MAP FUNCTIONS*/
-void			my_mlx_pixel_put(t_image *data, int x, int y, int color);
-void			draw_map(t_file *file, t_windows *graphic);
+void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
+void	draw_map(t_file *file, t_windows *graphic);
 
 /* MOVEMENT FUNCTIONS */
-int				check_wall(int posy, int posx, char **map);
-void			move(t_player *player, char c, char **map);
+int		check_wall(int posy, int posx, char **map);
+void	move(t_player *player, int keycode, char **map);
 
 /* DDA UTILS FUNCTIONS*/
-int				distance_y(int y, float angle);
-int				distance_x(int x, float angle);
-float			get_x_step(int adj, float angle);
-float			get_y_step(int opose, float angle);
-void			increment_ray_length(t_ray *ray, float step_y, float step_x);
+int		distance_y(int y, float angle);
+int		distance_x(int x, float angle);
+float	get_x_step(int adj, float angle);
+float	get_y_step(int opose, float angle);
+void	increment_ray_length(t_ray *ray, float step_y, float step_x);
 
 /* RAYCASTING */
-void			draw_ray(t_image *image, t_player *player, t_file *file,
-					float angle);
+void	draw_ray(t_image *image, t_player *player, t_file *file, float angle);
 
 #endif

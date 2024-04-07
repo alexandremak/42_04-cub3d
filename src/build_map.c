@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 22:31:24 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 20:07:00 by facu             ###   ########.fr       */
+/*   Updated: 2024/04/07 21:49:52 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,15 +107,16 @@ void	draw_map(t_file *file, t_windows *graphic)
 	float	angle;
 
 	i = 1;
-	angle = file->player.angle - (15 * ANGLE);
+	angle = file->player.angle - (15 * UANGLE);
 	mlx_clear_window(graphic->mlx, graphic->win);
 	put_grid(&graphic->image, file);
 	put_player(&graphic->image, &file->player);
-	while (i <= 30)
-	{
-		draw_ray(&graphic->image, &file->player, file, angle + (i * ANGLE));
-		i++;
-	}
+	draw_ray(&graphic->image, &file->player, file, file->player.angle);
+	// while (i <= 30)
+	// {
+	// 	draw_ray(&graphic->image, &file->player, file, angle + (i * UANGLE));
+	// 	i++;
+	// }
 	mlx_put_image_to_window(graphic->mlx, graphic->win, graphic->image.img, 
 		0, 0);
 }

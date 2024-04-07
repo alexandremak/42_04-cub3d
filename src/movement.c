@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 21:13:17 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 16:25:11 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/07 21:48:31 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ static int	check_move_nok(int posy, int posx, char **map)
 		check_wall(posy + (PLYLEN / 2), posx + (PLYLEN / 2), map));
 }
 
-void	move(t_player *player, char keycode, char **map)
+void	move(t_player *player, int keycode, char **map)
 {
 	int	i;
 
 	i = 1;
 	while (i <= PACE)
 	{
-		if (keycode == 'W')
+		if (keycode == W)
 		{
 			if (!check_move_nok(player->position.y + player->direction.y, 
 					player->position.x + player->direction.x, map))
@@ -51,7 +51,7 @@ void	move(t_player *player, char keycode, char **map)
 				player->position.x += player->direction.x;
 			}
 		}
-		else if (keycode == 'S')
+		else if (keycode == S)
 		{
 			if (!check_move_nok(player->position.y - player->direction.y, 
 					player->position.x - player->direction.x, map))
@@ -60,7 +60,7 @@ void	move(t_player *player, char keycode, char **map)
 				player->position.x -= player->direction.x;
 			}
 		}
-		else if (keycode == 'A')
+		else if (keycode == A)
 		{
 			if (!check_move_nok(player->position.y + -(player->direction.x), 
 					player->position.x + player->direction.y, map))
@@ -69,7 +69,7 @@ void	move(t_player *player, char keycode, char **map)
 				player->position.x += player->direction.y;
 			}
 		}
-		else if (keycode == 'D')
+		else if (keycode == D)
 		{
 			if (!check_move_nok(player->position.y + player->direction.x, 
 					player->position.x + -(player->direction.y), map))

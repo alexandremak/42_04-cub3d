@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   dda_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 16:09:38 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 20:07:18 by facu             ###   ########.fr       */
+/*   Updated: 2024/04/07 21:51:42 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
-
-#define TOLERANCE 0.00001
 
 int	distance_y(int y, float angle)
 {
@@ -65,9 +63,9 @@ int	distance_x(int x, float angle)
 float	get_x_step(int adj, float angle)
 {
 	float	result;
-	int	int_angle;
-	int	ninety;
-	int	twoseventy;
+	int		int_angle;
+	int		ninety;
+	int		twoseventy;
 
 	result = 0;
 	int_angle = (int)(angle * 10000000) - 1;
@@ -81,9 +79,9 @@ float	get_x_step(int adj, float angle)
 
 float	get_y_step(int opose, float angle)
 {
-	int	result;
-	int	int_angle;
-	int	oneeighty;
+	float	result;
+	int		int_angle;
+	int		oneeighty;
 
 	result = 0;
 	int_angle = (int)(angle * 10000000);
@@ -104,6 +102,7 @@ void	increment_ray_length(t_ray *ray, float step_y, float step_x)
 			ray->y += ray->distance_y;
 		ray->x += step_y * ray->direction.x;
 		ray->length += step_y;
+		ray->vert_wall = 0;
 	}
 	else if (step_y == 0 || (step_x && step_y > step_x))
 	{
@@ -113,5 +112,6 @@ void	increment_ray_length(t_ray *ray, float step_y, float step_x)
 			ray->x += ray->distance_x;
 		ray->y += step_x * ray->direction.y;
 		ray->length += step_x;
+		ray->vert_wall = 1;
 	}
 }
