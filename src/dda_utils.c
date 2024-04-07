@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 16:09:38 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 16:43:47 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/07 19:24:21 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	offsetx(int x, float angle)
 	return (res);
 }
 
-int	calc_xdist(int adj, float angle)
+float	calc_xdist(int adj, float angle)
 {
 	int	result;
 	int	int_angle;
@@ -77,7 +77,7 @@ int	calc_xdist(int adj, float angle)
 	return (result);
 }
 
-int	calc_ydist(int opose, float angle)
+float	calc_ydist(int opose, float angle)
 {
 	int	result;
 	int	int_angle;
@@ -92,7 +92,7 @@ int	calc_ydist(int opose, float angle)
 	return (result);
 }
 
-void	add_small_lenght(t_ray *ray, int disty, int distx)
+void	add_small_lenght(t_ray *ray, float disty, float distx)
 {
 	if (distx == 0 || (disty && disty <= distx))
 	{
