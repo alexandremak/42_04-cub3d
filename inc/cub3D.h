@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 21:46:01 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/07 22:03:05 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,11 +138,12 @@ void	check_content(t_file *file);
 void	check_map(t_file *file, char **map);
 
 /* MLX FUNCTIONS*/
+void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
+void	put_pixel_to_image(t_image *image_data, int x, int y, int color);
 void	init_mlx(t_file *file);
 int		key_press(int keycode, t_file *file);
 
 /* BUILD MAP FUNCTIONS*/
-void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
 void	draw_map(t_file *file, t_windows *graphic);
 
 /* MOVEMENT FUNCTIONS */
