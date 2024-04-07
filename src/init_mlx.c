@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 22:05:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 21:46:23 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/07 23:49:09 by facu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
+
+
+void load_textures(t_file *cube)
+{
+	int i = 0;
+	while (i < 4)
+	{
+		cube->textures[i].image.img = mlx_xpm_file_to_image(cube->graphic.mlx, cube->texture_paths[i], 
+			&cube->textures[i].width, &cube->textures[i].height);
+		if (cube->textures[i].image.img == NULL) {
+			exit_error("Error: Failed to load texture %d\n", cube);
+		}
+		else {
+			cube->textures[i].image.addr = mlx_get_data_addr(cube->textures[i].image.img, 
+				&cube->textures[i].image.bits_per_pixel, &cube->textures[i].image.line_length, 
+				&cube->textures[i].image.endian);
+		}
+		i++;
+	}
+	i = 0;
+	while (i < 4)
+		printf("texture %d: path: %s, width: %d, height: %d\n", i, cube->texture_paths[i], cube->textures[i].width, cube->textures[i++].height);
+}
 
 void	init_mlx(t_file *file)
 {
@@ -23,6 +46,7 @@ void	init_mlx(t_file *file)
 			&(file->graphic.image.bits_per_pixel), 
 			&file->graphic.image.line_length, 
 			&file->graphic.image.endian);
+	load_textures(file);
 	draw_map(file, &file->graphic);
 }
 

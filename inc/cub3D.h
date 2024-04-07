@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 21:46:01 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/07 23:47:13 by facu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,15 @@ typedef struct s_image
 	int			endian;
 }				t_image;
 
+
+typedef struct s_texture
+{
+	char		*path;
+	t_image		image;
+	int			width;
+	int			height;
+}				t_texture;
+
 typedef struct s_windows
 {
 	void		*mlx;
@@ -101,10 +110,7 @@ typedef struct s_file
 	char		*filepath;
 	int			fd;
 	char		**content;
-	char		*no;
-	char		*so;
-	char		*we;
-	char		*ea;
+	char		*texture_paths[4];
 	int			floor_rgb[4];
 	int			ceiling_rgb[4];
 	char		**map;
@@ -112,6 +118,7 @@ typedef struct s_file
 	int			columns;
 	t_player	player;
 	t_windows	graphic;
+	t_texture	textures[4];
 }				t_file;
 
 /* EXIT FUNCTIONS */
