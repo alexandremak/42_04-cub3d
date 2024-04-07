@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 22:31:24 by amak              #+#    #+#             */
-/*   Updated: 2024/04/06 19:09:16 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/07 16:00:23 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,11 +127,11 @@ void	draw_map(t_file *file, t_windows *graphic)
 	clean_image(file, &graphic->image);
 	put_grid(&graphic->image, file);
 	put_player(&graphic->image, &file->player);
-	castray(&graphic->image, &file->player, file, file->player.angle);
+	draw_ray(&graphic->image, &file->player, file, file->player.angle);
 	while (i <= 30)
 	{
-		castray(&graphic->image, &file->player, file, (i * ANGLE) + file->player.angle);
-		castray(&graphic->image, &file->player, file, (-i * ANGLE) + file->player.angle);
+		draw_ray(&graphic->image, &file->player, file, (i * ANGLE) + file->player.angle);
+		draw_ray(&graphic->image, &file->player, file, (-i * ANGLE) + file->player.angle);
 		i++;
 	}
 	mlx_put_image_to_window(graphic->mlx, graphic->win, graphic->image.img, 

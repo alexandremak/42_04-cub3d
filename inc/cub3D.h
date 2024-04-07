@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/06 19:08:52 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/07 16:13:36 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,16 @@ typedef struct s_player {
 	t_vector	direction;
 	float		angle;
 }	t_player;
+
+typedef struct s_ray {
+	int			y;
+	int			x;
+	int			offY;
+	int			offX;
+	t_vector	direction;
+	float		angle;
+	float		length;
+}	t_ray;
 
 typedef struct	s_image {
 	void		*img;
@@ -122,7 +132,15 @@ void	draw_map(t_file *file, t_windows *graphic);
 int		check_wall(int posy, int posx, char **map);
 void	move(t_player *player, char c, char **map);
 
+/* DDA UTILS FUNCTIONS*/
+int		offsety(int y, float angle);
+int		offsetx(int x, float angle);
+int		calc_xdist(int x, int adj, float angle);
+int		calc_ydist(int y, int opose, float angle);
+void	add_small_lenght(t_ray *ray, int disty, int distx);
+
 /* RAYCASTING */
-void	castray(t_image *image, t_player *player, t_file *file, float angle);
+void	draw_ray(t_image *image, t_player *player, t_file *file, float angle);
+
 
 #endif
