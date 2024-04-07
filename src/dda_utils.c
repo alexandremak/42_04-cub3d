@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 16:09:38 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 16:12:21 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/07 16:43:47 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	offsetx(int x, float angle)
 {
 	int	i;
 	int	res;
-	
+
 	i = 0;
 	res = 0;
 	if (angle > (PI / 2) && angle < ((3 * PI) / 2))
@@ -60,7 +60,7 @@ int	offsetx(int x, float angle)
 	return (res);
 }
 
-int	calc_xdist(int x, int adj, float angle)
+int	calc_xdist(int adj, float angle)
 {
 	int	result;
 	int	int_angle;
@@ -77,7 +77,7 @@ int	calc_xdist(int x, int adj, float angle)
 	return (result);
 }
 
-int	calc_ydist(int y, int opose, float angle)
+int	calc_ydist(int opose, float angle)
 {
 	int	result;
 	int	int_angle;

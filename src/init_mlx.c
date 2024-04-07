@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 22:05:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/06 15:56:50 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/07 16:36:50 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ void	init_mlx(t_file *file)
 			(file->columns - 1) * PX, file->rows * PX, "Cub3d - 2D Map");
 	file->graphic.image.img = mlx_new_image(file->graphic.mlx, 
 			(file->columns - 1) * PX, file->rows * PX);
-	file->graphic.image.addr = mlx_get_data_addr(file->graphic.image.img,
-		 &(file->graphic.image.bits_per_pixel), &file->graphic.image.line_length,	
-		 &file->graphic.image.endian);
+	file->graphic.image.addr = mlx_get_data_addr(file->graphic.image.img, 
+			&(file->graphic.image.bits_per_pixel), 
+			&file->graphic.image.line_length, 
+			&file->graphic.image.endian);
 	draw_map(file, &file->graphic);
 }
 
 int	key_press(int keycode, t_file *file)
 {
-	// printf("key: %d\n", keycode);
 	if (keycode == ESC)
 		exit_game(file);
 	else

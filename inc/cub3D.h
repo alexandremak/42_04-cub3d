@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 16:13:36 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/07 16:44:38 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,8 @@ void	move(t_player *player, char c, char **map);
 /* DDA UTILS FUNCTIONS*/
 int		offsety(int y, float angle);
 int		offsetx(int x, float angle);
-int		calc_xdist(int x, int adj, float angle);
-int		calc_ydist(int y, int opose, float angle);
+int		calc_xdist(int adj, float angle);
+int		calc_ydist(int opose, float angle);
 void	add_small_lenght(t_ray *ray, int disty, int distx);
 
 /* RAYCASTING */

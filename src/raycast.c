@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 18:17:32 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 16:11:42 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/07 16:44:13 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	castray(t_ray *ray, t_player *player, t_file *file, float angle)
 {
-	float	shortdist;
 	int		stop;
 
 	stop = 0;
@@ -28,8 +27,8 @@ static void	castray(t_ray *ray, t_player *player, t_file *file, float angle)
 	{
 		ray->offY = offsety(ray->y, angle);
 		ray->offX = offsetx(ray->x, angle);
-		add_small_lenght(ray, calc_ydist(ray->y, ray->offY, ray->angle), 
-			calc_xdist(ray->x, ray->offX, ray->angle));
+		add_small_lenght(ray, calc_ydist(ray->offY, ray->angle), 
+			calc_xdist(ray->offX, ray->angle));
 		if (check_wall(ray->y, ray->x, file->map))
 			stop = 1;
 	}

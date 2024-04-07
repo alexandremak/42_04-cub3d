@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 21:13:17 by amak              #+#    #+#             */
-/*   Updated: 2024/04/06 15:51:14 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/07 16:25:11 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	check_move_nok(int posy, int posx, char **map)
 void	move(t_player *player, char keycode, char **map)
 {
 	int	i;
-	
+
 	i = 1;
 	while (i <= PACE)
 	{

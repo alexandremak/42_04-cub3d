@@ -6,7 +6,7 @@
 #    By: amak <amak@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/20 19:20:14 by amak              #+#    #+#              #
-#    Updated: 2024/04/07 16:10:19 by amak             ###   ########.fr        #
+#    Updated: 2024/04/07 16:38:12 by amak             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ UTILS_DIR = ./utils/
 
 MINILIBX_DIR = ./minilibx-linux/
 
-CFLAGS = #-Wall -Wextra -Werror -O3
+CFLAGS = -Wall -Wextra -Werror -O3
 
 LFLAGS = -Lminilibx-linux -I/minilibx-linux/mlx.h -L/usr/lib -lmlx -lXext -lX11 -lm -lz
 
