@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 19:58:44 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/07 20:06:32 by facu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 # include "../minilibx-linux/mlx.h"
 # include "../utils/inc/utils.h"
-# include <unistd.h>
-# include <stdlib.h>
 # include <fcntl.h>
-# include <sys/types.h>
-# include <sys/stat.h>
 # include <math.h>
+# include <stdlib.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <unistd.h>
 
 /* MATH CONST */
 # define PI 3.14159265
@@ -53,22 +53,25 @@ enum wall_direction {
 };
 
 /* STRUCTURES */
-typedef struct s_vector {
+typedef struct s_vector
+{
 	float		x;
 	float		y;
-}	t_vector;
+}				t_vector;
 
-typedef struct s_player {
+typedef struct s_player
+{
 	t_vector	position;
 	t_vector	direction;
 	float		angle;
-}	t_player;
+}				t_player;
 
-typedef struct s_ray {
+typedef struct s_ray
+{
 	int			y;
 	int			x;
-	int			offY;
-	int			offX;
+	int			distance_y;
+	int			distance_x;
 	t_vector	direction;
 	float		angle;
 	float		length;
@@ -76,7 +79,8 @@ typedef struct s_ray {
 	int			wall_texture;
 }	t_ray;
 
-typedef struct	s_image {
+typedef struct s_image
+{
 	void		*img;
 	char		*addr;
 	int			bits_per_pixel;
@@ -84,13 +88,15 @@ typedef struct	s_image {
 	int			endian;
 }				t_image;
 
-typedef struct s_windows {
-	void	*mlx;
-	void	*win;
-	t_image	image;
-}	t_windows;
+typedef struct s_windows
+{
+	void		*mlx;
+	void		*win;
+	t_image		image;
+}				t_windows;
 
-typedef struct s_file {
+typedef struct s_file
+{
 	char		*filepath;
 	int			fd;
 	char		**content;
@@ -105,52 +111,52 @@ typedef struct s_file {
 	int			columns;
 	t_player	player;
 	t_windows	graphic;
-}	t_file;
+}				t_file;
 
-void	exit_error(char *message, t_file *file);
-void	exit_game(t_file *file);
+void			exit_error(char *message, t_file *file);
+void			exit_game(t_file *file);
 
-void	free_str_arr(char **arr);
-void	free_all(t_file *file);
+void			free_str_arr(char **arr);
+void			free_all(t_file *file);
 
 /* CHECK AND LOAD FUNCTIONS */
-void	check_file(int argc, char **argv, t_file *file);
-void	read_content(t_file *file);
+void			check_file(int argc, char **argv, t_file *file);
+void			read_content(t_file *file);
 
 /* EXTRACT DATA FUNCTIONS */
-void	extract_metadata(t_file *file, char **splited);
-void	extract_player_position(t_file *file, int y, int x, char c);
+void			extract_metadata(t_file *file, char **splited);
+void			extract_player_position(t_file *file, int y, int x, char c);
 
 /* EXTRACT MAP FUNCTIONS */
-void	load_map(t_file *file, char **mtrx);
+void			load_map(t_file *file, char **mtrx);
 
 /* CHECK FILE CONTENT */
-void	check_content(t_file *file);
+void			check_content(t_file *file);
 
 /* CHECK MAP */
-void	check_map(t_file *file, char **map);
+void			check_map(t_file *file, char **map);
 
 /* MLX FUNCTIONS*/
-void	init_mlx(t_file *file);
-int		key_press(int keycode, t_file *file);
+void			init_mlx(t_file *file);
+int				key_press(int keycode, t_file *file);
 
 /* BUILD MAP FUNCTIONS*/
-void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
-void	draw_map(t_file *file, t_windows *graphic);
+void			my_mlx_pixel_put(t_image *data, int x, int y, int color);
+void			draw_map(t_file *file, t_windows *graphic);
 
 /* MOVEMENT FUNCTIONS */
-int		check_wall(int posy, int posx, char **map);
-void	move(t_player *player, char c, char **map);
+int				check_wall(int posy, int posx, char **map);
+void			move(t_player *player, char c, char **map);
 
 /* DDA UTILS FUNCTIONS*/
-int		offsety(int y, float angle);
-int		offsetx(int x, float angle);
-float	calc_xdist(int adj, float angle);
-float	calc_ydist(int opose, float angle);
-void	add_small_lenght(t_ray *ray, float disty, float distx);
+int				distance_y(int y, float angle);
+int				distance_x(int x, float angle);
+float			get_x_step(int adj, float angle);
+float			get_y_step(int opose, float angle);
+void			increment_ray_length(t_ray *ray, float step_y, float step_x);
 
 /* RAYCASTING */
-void	draw_ray(t_image *image, t_player *player, t_file *file, float angle);
-
+void			draw_ray(t_image *image, t_player *player, t_file *file,
+					float angle);
 
 #endif
