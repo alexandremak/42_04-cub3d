@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 19:11:25 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/08 19:52:04 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 # define UANGLE 3.141592 / 360
 # define FOV			1.047198
 # define HALF_FOV		0.523599
-# define PLANE_DIST		588.007
+# define PLANE_DIST		960
 # define SCREEN_WIDTH	1024
 # define SCREEN_HEIGHT  768
 
