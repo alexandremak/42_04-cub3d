@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 19:40:00 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 20:09:28 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ int		key_press(int keycode, t_file *file);
 
 /* BUILD MAP FUNCTIONS*/
 void	draw_map(t_file *file, t_window *graphic);
-void	put_square(t_image *image, int x, int y, int color, int out_color);
+void	put_square(t_image *image, int size, int x, int y, int color, int out_color);
 
 /* MOVEMENT FUNCTIONS */
 int		check_wall(int posy, int posx, char **map);

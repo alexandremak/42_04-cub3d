@@ -6,24 +6,24 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 22:31:24 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 16:39:19 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 20:11:47 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-void	put_square(t_image *image, int x, int y, int color, int out_color)
+void	put_square(t_image *image, int size, int x, int y, int color, int out_color)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < PX)
+	while (i < size)
 	{
 		j = 0;
-		while (j < PX)
+		while (j < size)
 		{
-			if (i == 0 || j == 0 || i == PX - 1 || j == PX - 1)
+			if (i == 0 || j == 0 || i == size - 1 || j == size - 1)
 				my_mlx_pixel_put(image, x + i, y + j, out_color);
 			else
 				my_mlx_pixel_put(image, x + i, y + j, color);
@@ -45,10 +45,10 @@ static void	put_grid(t_image *image, t_file *file)
 		while (x < file->columns - 1)
 		{
 			if (file->map[y][x] == '1' || file->map[y][x] == '\n')
-				put_square(image, x * PX, y * PX, 0x00dfdfdf, 0x00ff0000);
+				put_square(image, PX, x * PX, y * PX, 0x00dfdfdf, 0x00ff0000);
 			else if (file->map[y][x] == '0' || 
 				ft_strchr("NSEW", file->map[y][x]))
-				put_square(image, x * PX, y * PX, 0x00000000, 0x00ff0000);
+				put_square(image, PX, x * PX, y * PX, 0x00000000, 0x00ff0000);
 			x++;
 		}
 		y++;

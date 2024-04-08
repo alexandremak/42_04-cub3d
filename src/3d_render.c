@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:04:29 by ftroiter          #+#    #+#             */
-/*   Updated: 2024/04/08 18:03:32 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 20:17:56 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,22 @@ void	draw_walls(t_file *file, t_ray *rays)
 	}	
 }
 
+int	rgb_to_int(int r, int g, int b)
+{
+
+	return (r << 16 | g << 8 | b);
+}
+
+void	draw_floor_and_ceiling(t_file *file)
+{
+	int color;
+	color = rgb_to_int(file->ceiling_rgb[0], file->ceiling_rgb[1], file->ceiling_rgb[2]);
+	printf("color: %d\n", color);
+	put_square(&file->graphic.image, SCREEN_WIDTH -1 , 0, 0, color, color);
+	color = rgb_to_int(file->floor_rgb[0], file->floor_rgb[1], file->floor_rgb[2]);
+	put_square(&file->graphic.image, SCREEN_WIDTH, 0, SCREEN_HEIGHT / 2, color, color);
+}
+
 void	render_cicle(t_file *file)
 {
 	t_window	*graphic;
@@ -70,6 +86,7 @@ void	render_cicle(t_file *file)
 			&graphic->image.line_length, 
 			&graphic->image.endian);
 	raycasting(file, rays);
+	draw_floor_and_ceiling(file);
 	draw_walls(file, rays);
 	free(rays);
 	mlx_put_image_to_window(graphic->mlx, graphic->win, graphic->image.img, 0, 0);

@@ -3,6 +3,7 @@
 		"*.css": "tailwindcss",
 		"*.js": "javascriptreact",
 		"utils.h": "c",
-		"cub3d.h": "c"
+		"cub3d.h": "c",
+		"stat.h": "c"
 	}
 }
