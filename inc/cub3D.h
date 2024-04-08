@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 19:40:00 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 21:03:42 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@
 # define RA 65363
 
 /* SIZE OF WINDOW AND EACH TILE */
-# define PX 31
+# define PX 64
 # define PACE 5
 # define PIDIVUNITS 18
 # define PLYLEN 9
 # define UANGLE 3.141592 / 360
 # define FOV			1.047198
 # define HALF_FOV		0.523599
-# define PLANE_DIST		588.007
+# define PLANE_DIST		960
 # define SCREEN_WIDTH	1024
 # define SCREEN_HEIGHT  768
 
