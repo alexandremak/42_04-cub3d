@@ -6,10 +6,31 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 22:05:31 by amak              #+#    #+#             */
+/*   Updated: 2024/04/08 01:21:00 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
+
+
+void	my_mlx_pixel_put(t_image *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
+
+void	put_pixel_to_image(t_image *image_data, int x, int y, int color)
+{
+	char			*pixel_address;
+	unsigned int	*pixel_location;
+
+	pixel_address = image_data->addr + (y * image_data->line_length + x * 
+			(image_data->bits_per_pixel / 8));
+	pixel_location = (unsigned int *)pixel_address;
+	*pixel_location = color;
+}
 
 void load_textures(t_file *cube)
 {
