@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 21:46:48 by amak              #+#    #+#             */
-/*   Updated: 2024/04/05 16:38:00 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 00:08:56 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,13 @@ static void	free_file(t_file *file)
 {
 	if (file->filepath)
 		free(file->filepath);
-	if (file->no)
-		free(file->no);
-	if (file->so)
-		free(file->so);
-	if (file->we)
-		free(file->we);
-	if (file->ea)
-		free(file->ea);
+	int i = 0;
+	while (i < 4)
+	{
+		if (file->texture_paths[i])
+			free(file->texture_paths[i]);
+		i++;
+	}
 	if (file->content)
 		free_str_arr(file->content);
 	if (file->map)

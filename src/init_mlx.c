@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 22:05:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 23:49:09 by facu             ###   ########.fr       */
+/*   Updated: 2024/04/08 01:11:47 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,26 @@
 void load_textures(t_file *cube)
 {
 	int i = 0;
-	while (i < 4)
+	while (i < MAX_TEXTURES)
 	{
 		cube->textures[i].image.img = mlx_xpm_file_to_image(cube->graphic.mlx, cube->texture_paths[i], 
 			&cube->textures[i].width, &cube->textures[i].height);
-		if (cube->textures[i].image.img == NULL) {
+		if (cube->textures[i].image.img == NULL)
 			exit_error("Error: Failed to load texture %d\n", cube);
-		}
-		else {
-			cube->textures[i].image.addr = mlx_get_data_addr(cube->textures[i].image.img, 
-				&cube->textures[i].image.bits_per_pixel, &cube->textures[i].image.line_length, 
-				&cube->textures[i].image.endian);
-		}
+		cube->textures[i].image.addr = mlx_get_data_addr(cube->textures[i].image.img, 
+			&cube->textures[i].image.bits_per_pixel, &cube->textures[i].image.line_length, 
+			&cube->textures[i].image.endian);
+		if (cube->textures[i].image.addr == NULL)
+			exit_error("Error: Failed to get data address for texture %d\n", cube);
 		i++;
 	}
+	printf("\n\n>>> TEXTURES LOADED: <<<\n\n");
 	i = 0;
-	while (i < 4)
-		printf("texture %d: path: %s, width: %d, height: %d\n", i, cube->texture_paths[i], cube->textures[i].width, cube->textures[i++].height);
+	while (i < MAX_TEXTURES)
+	{
+		printf("texture %d: path: %s, width: %d, height: %d\n", i, cube->texture_paths[i], cube->textures[i].width, cube->textures[i].height);
+		i++;
+	}
 }
 
 void	init_mlx(t_file *file)

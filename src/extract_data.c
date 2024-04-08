@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extract_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:00:21 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 23:10:12 by facu             ###   ########.fr       */
+/*   Updated: 2024/04/08 01:10:05 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	extract_txtr(t_file *file, char *pathstr, int index)
 		close(fd);
 		exit_error("Scene description: wall texture file not found", file);
 	}
-	if (file->texture_paths[index]) // Check if texture path already exists
+	if (file->texture_paths[index])
 		exit_error("Scene description: duplicate wall texture identifier",
 			file);
 	file->texture_paths[index] = ft_strdup(pathstr);
@@ -66,13 +66,13 @@ void	extract_metadata(t_file *file, char **splited)
 
 	index = -1;
 	if (ft_strcmp(splited[0], "NO") == 0)
-		index = 0;
+		index = NORTH;
 	else if (ft_strcmp(splited[0], "SO") == 0)
-		index = 1;
-	else if (ft_strcmp(splited[0], "WE") == 0)
-		index = 2;
+		index = SOUTH;
 	else if (ft_strcmp(splited[0], "EA") == 0)
-		index = 3;
+		index = EAST;
+	else if (ft_strcmp(splited[0], "WE") == 0)
+		index = WEST;
 	if (index != -1)
 		extract_txtr(file, splited[1], index);
 	else if (ft_strcmp(splited[0], "C") == 0)

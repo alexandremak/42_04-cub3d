@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 23:47:13 by facu             ###   ########.fr       */
+/*   Updated: 2024/04/08 01:08:06 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,15 @@
 # define PLYLEN 9
 # define UANGLE 3.141592 / 360
 
+# define MAX_TEXTURES 4
+
 /* WALLS COLLISION VALUES*/
 enum wall_direction {
-	NONE,
 	NORTH,
 	SOUTH,
 	EAST,
-	WEST
+	WEST,
+	NONE
 };
 
 /* STRUCTURES */
@@ -92,7 +94,6 @@ typedef struct s_image
 
 typedef struct s_texture
 {
-	char		*path;
 	t_image		image;
 	int			width;
 	int			height;
@@ -129,7 +130,9 @@ void	free_all(t_file *file);
 
 /* CHECK AND LOAD FUNCTIONS */
 void	check_file(int argc, char **argv, t_file *file);
-void	read_content(t_file *file);
+void	read_scene_file(t_file *file);
+int		texture_paths_ok(t_file *file);
+
 
 /* EXTRACT DATA FUNCTIONS */
 void	extract_metadata(t_file *file, char **splited);

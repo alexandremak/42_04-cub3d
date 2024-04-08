@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_content.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:38:34 by amak              #+#    #+#             */
-/*   Updated: 2024/03/29 20:37:53 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/08 00:45:31 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	check_rgb(t_file *file, int *rgb_values)
 
 void	check_content(t_file *file)
 {
-	if (!file->no || !file->so || !file->we || !file->ea)
+	if (!texture_paths_ok(file))
 		exit_error("Scene description file with incomplete textures!", file);
 	check_rgb(file, file->floor_rgb);
 	check_rgb(file, file->ceiling_rgb);

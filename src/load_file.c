@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:43:54 by amak              #+#    #+#             */
-/*   Updated: 2024/04/04 22:19:04 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 00:58:19 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,28 @@ static void	load_content(t_file *file, int fd, int count_line)
 		file->content[count_line] = line;
 }
 
+
+int	texture_paths_ok(t_file *file)
+{
+    int	i;
+
+    i = 0;
+    while (i < MAX_TEXTURES && file->texture_paths[i])
+        i++;
+    return (i == MAX_TEXTURES);
+}
+
 int	text_rgb_ok(t_file *file)
 {
 	int	res;
 
 	res = 0;
-	if (file->no && file->so && file->we && file->ea && \
-		file->ceiling_rgb[3] && file->floor_rgb[3])
+	if (texture_paths_ok(file) && file->ceiling_rgb[3] && file->floor_rgb[3])
 		res = 1;
 	return (res);
 }
 
-static void	load_values(t_file *file, char **content)
+static void	parse_values(t_file *file, char **content)
 {
 	char	*line;
 	char	**split_line;
@@ -61,10 +71,10 @@ static void	load_values(t_file *file, char **content)
 		load_map(file, content);
 }
 
-void	read_content(t_file *file)
+void	read_scene_file(t_file *file)
 {
 	load_content(file, file->fd, 0);
 	if (!file->content)
 		exit_error("Scene description file without content!", file);
-	load_values(file, file->content);
+	parse_values(file, file->content);
 }
