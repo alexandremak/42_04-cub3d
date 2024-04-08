@@ -6,29 +6,11 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:00:21 by amak              #+#    #+#             */
-/*   Updated: 2024/04/04 22:33:52 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 01:10:05 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
-
-static void	extract_txtr(t_file *file, char **texture, char *pathstr)
-{
-	int	fd;
-
-	fd = open(pathstr, O_RDONLY);
-	if (fd < 0)
-	{
-		close(fd);
-		exit_error("Scene description: wall texture file not found",
-			file);
-	}
-	if (texture && *texture)
-		exit_error("Scene description: duplicate wall texture \
-			identifier", file);
-	*texture = ft_strdup(pathstr);
-	close(fd);
-}
 
 static void	extract_rgb(t_file *file, int *rgb, char *splited)
 {
@@ -61,16 +43,38 @@ static void	extract_rgb(t_file *file, int *rgb, char *splited)
 	rgb[3] = 1;
 }
 
+void	extract_txtr(t_file *file, char *pathstr, int index)
+{
+	int	fd;
+
+	fd = open(pathstr, O_RDONLY);
+	if (fd < 0)
+	{
+		close(fd);
+		exit_error("Scene description: wall texture file not found", file);
+	}
+	if (file->texture_paths[index])
+		exit_error("Scene description: duplicate wall texture identifier",
+			file);
+	file->texture_paths[index] = ft_strdup(pathstr);
+	close(fd);
+}
+
 void	extract_metadata(t_file *file, char **splited)
 {
+	int	index;
+
+	index = -1;
 	if (ft_strcmp(splited[0], "NO") == 0)
-		extract_txtr(file, &file->no, splited[1]);
+		index = NORTH;
 	else if (ft_strcmp(splited[0], "SO") == 0)
-		extract_txtr(file, &file->so, splited[1]);
-	else if (ft_strcmp(splited[0], "WE") == 0)
-		extract_txtr(file, &file->we, splited[1]);
+		index = SOUTH;
 	else if (ft_strcmp(splited[0], "EA") == 0)
-		extract_txtr(file, &file->ea, splited[1]);
+		index = EAST;
+	else if (ft_strcmp(splited[0], "WE") == 0)
+		index = WEST;
+	if (index != -1)
+		extract_txtr(file, splited[1], index);
 	else if (ft_strcmp(splited[0], "C") == 0)
 		extract_rgb(file, file->ceiling_rgb, splited[1]);
 	else if (ft_strcmp(splited[0], "F") == 0)

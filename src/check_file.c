@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:53:37 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 16:37:10 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/08 01:01:48 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static int	file_ext_ok(char *filepath)
 	if (!filepath)
 		return (0);
 	extension = ft_strrchr(filepath, '.');
-	printf("extension: %s\n", extension);
 	if (extension && ft_strcmp(extension, ".cub") == 0)
 		return (1);
 	return (0);

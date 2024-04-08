@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 22:21:34 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/08 01:08:06 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,15 @@
 # define PLYLEN 9
 # define UANGLE 3.141592 / 360
 
+# define MAX_TEXTURES 4
+
 /* WALLS COLLISION VALUES*/
 enum wall_direction {
-	NONE,
 	NORTH,
 	SOUTH,
 	EAST,
-	WEST
+	WEST,
+	NONE
 };
 
 /* STRUCTURES */
@@ -90,6 +92,14 @@ typedef struct s_image
 	int			endian;
 }				t_image;
 
+
+typedef struct s_texture
+{
+	t_image		image;
+	int			width;
+	int			height;
+}				t_texture;
+
 typedef struct s_windows
 {
 	void		*mlx;
@@ -102,10 +112,7 @@ typedef struct s_file
 	char		*filepath;
 	int			fd;
 	char		**content;
-	char		*no;
-	char		*so;
-	char		*we;
-	char		*ea;
+	char		*texture_paths[4];
 	int			floor_rgb[4];
 	int			ceiling_rgb[4];
 	char		**map;
@@ -113,6 +120,7 @@ typedef struct s_file
 	int			columns;
 	t_player	player;
 	t_windows	graphic;
+	t_texture	textures[4];
 }				t_file;
 
 /* EXIT FUNCTIONS */
@@ -123,7 +131,9 @@ void	free_all(t_file *file);
 
 /* CHECK AND LOAD FUNCTIONS */
 void	check_file(int argc, char **argv, t_file *file);
-void	read_content(t_file *file);
+void	read_scene_file(t_file *file);
+int		texture_paths_ok(t_file *file);
+
 
 /* EXTRACT DATA FUNCTIONS */
 void	extract_metadata(t_file *file, char **splited);
