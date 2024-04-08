@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 18:17:32 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 14:39:42 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:06:35 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,22 @@ void	castray(t_ray *ray, t_player *player, t_file *file, float angle)
 			hit = 1;
 		}
 	}
-	printf("wall text= %d | wall point= %d\n", ray->wall_texture, ray->wall_hit);
+}
+
+
+void	raycasting(t_file *file, t_ray *rays)
+{
+	float	angle;
+	int		pixel_column;
+
+	angle = file->player.angle - (HALF_FOV);
+	pixel_column = 0;
+	while (pixel_column < SCREEN_WIDTH)
+	{
+		castray(&rays[pixel_column], &file->player, file, angle);
+		angle += (FOV / SCREEN_WIDTH);
+		pixel_column++;
+	}
 }
 
 void	draw_ray(t_image *image, t_player *player, t_file *file, float angle)

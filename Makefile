@@ -6,7 +6,7 @@
 #    By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/20 19:20:14 by amak              #+#    #+#              #
-#    Updated: 2024/04/08 15:19:21 by ftroiter         ###   ########.fr        #
+#    Updated: 2024/04/08 17:12:08 by ftroiter         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,20 +30,22 @@ SRC_PATH = ./src/
 
 OBJ_PATH = ./obj/
 
-SRC_FILES = main.c \
-			free.c \
-			exit.c \
-			check_file.c \
-			load_file.c \
-			extract_data.c \
-			load_map.c \
+SRC_FILES = 3d_render.c \
+			build_map.c \
 			check_content.c \
 			check_map.c \
+			check_file.c \
+			dda_utils.c \
+			free.c \
+			exit.c \
+			extract_data.c \
+			load_file.c \
+			load_map.c \
+			main.c \
 			init_mlx.c \
-			build_map.c \
 			movement.c \
 			raycast.c \
-			dda_utils.c
+			textures.c \
 						
 SRC = $(addprefix $(SRC_PATH), $(SRC_FILES))
 
