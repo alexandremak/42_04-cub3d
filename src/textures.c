@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:05:49 by ftroiter          #+#    #+#             */
-/*   Updated: 2024/04/08 17:06:35 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:25:08 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void load_textures(t_file *cube)
 			&cube->textures[i].image.bits_per_pixel, &cube->textures[i].image.line_length, 
 			&cube->textures[i].image.endian);
 		if (cube->textures[i].image.addr == NULL)
-			exit_error("Error: Failed to get data address for texture %d\n", cube);
+			exit_error("Error: Failed to get data address for texture\n", cube);
 		i++;
 	}
 	printf("\n\n>>> TEXTURES LOADED: <<<\n\n");

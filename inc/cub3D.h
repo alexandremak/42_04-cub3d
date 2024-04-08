@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 17:01:57 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:40:43 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,11 +142,11 @@ int		texture_paths_ok(t_file *file);
 
 
 /* EXTRACT DATA FUNCTIONS */
-void	extract_metadata(t_file *file, char **splited);
+int		extract_metadata(t_file *file, char **splited);
 void	extract_player_position(t_file *file, int y, int x, char c);
 
 /* EXTRACT MAP FUNCTIONS */
-void	load_map(t_file *file, char **mtrx);
+void	get_map(t_file *file, char **mtrx);
 
 /* CHECK FILE CONTENT */
 void	check_content(t_file *file);

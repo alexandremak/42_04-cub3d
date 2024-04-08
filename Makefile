@@ -6,7 +6,7 @@
 #    By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/20 19:20:14 by amak              #+#    #+#              #
-#    Updated: 2024/04/08 17:12:08 by ftroiter         ###   ########.fr        #
+#    Updated: 2024/04/08 17:38:12 by ftroiter         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ SRC_FILES = 3d_render.c \
 			exit.c \
 			extract_data.c \
 			load_file.c \
-			load_map.c \
+			get_map.c \
 			main.c \
 			init_mlx.c \
 			movement.c \

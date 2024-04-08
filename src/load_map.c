@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load_map.c                                         :+:      :+:    :+:   */
+/*   get_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -65,7 +65,7 @@ static void	extract_map(t_file *file, char **content)
 	}
 }
 
-void	load_map(t_file *file, char **content)
+void	get_map(t_file *file, char **content)
 {
 	file->rows = max_rows(file, content);
 	file->columns = max_columns(content);

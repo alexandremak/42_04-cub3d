@@ -6,13 +6,13 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:00:21 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 01:10:05 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:43:00 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void	extract_rgb(t_file *file, int *rgb, char *splited)
+static int	extract_rgb(t_file *file, int *rgb, char *splited)
 {
 	char	**numbers;
 	int		i;
@@ -60,9 +60,10 @@ void	extract_txtr(t_file *file, char *pathstr, int index)
 	close(fd);
 }
 
-void	extract_metadata(t_file *file, char **splited)
+int	extract_metadata(t_file *file, char **splited)
 {
 	int	index;
+	int	err;
 
 	index = -1;
 	if (ft_strcmp(splited[0], "NO") == 0)
@@ -74,11 +75,12 @@ void	extract_metadata(t_file *file, char **splited)
 	else if (ft_strcmp(splited[0], "WE") == 0)
 		index = WEST;
 	if (index != -1)
-		extract_txtr(file, splited[1], index);
+		err = extract_txtr(file, splited[1], index);
 	else if (ft_strcmp(splited[0], "C") == 0)
-		extract_rgb(file, file->ceiling_rgb, splited[1]);
+		err = extract_rgb(file, file->ceiling_rgb, splited[1]);
 	else if (ft_strcmp(splited[0], "F") == 0)
-		extract_rgb(file, file->floor_rgb, splited[1]);
+		err = extract_rgb(file, file->floor_rgb, splited[1]);
+	return (err);
 }
 
 static void	calc_angle(t_player *player, int c)
