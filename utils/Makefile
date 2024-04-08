@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: facu <facu@student.42.fr>                  +#+  +:+       +#+         #
+#    By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/27 22:18:14 by amak              #+#    #+#              #
-#    Updated: 2024/04/07 19:10:17 by facu             ###   ########.fr        #
+#    Updated: 2024/04/08 17:34:01 by ftroiter         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,10 @@ SRC_FILES =	ft_atoi.c \
 			ft_isspace.c \
 			ft_mtrxdup.c \
 			ft_noprintchar.c \
+			ft_print_error.c \
+			ft_putchar_fd.c \
 			ft_putspace.c \
+			ft_putstr_fd.c \
 			ft_split.c \
 			ft_strarr_size.c \
 			ft_strchr.c \

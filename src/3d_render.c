@@ -6,13 +6,13 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:04:29 by ftroiter          #+#    #+#             */
-/*   Updated: 2024/04/08 17:06:45 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 18:03:32 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-void	draw_wall(t_file *file, t_ray ray, int start_point[2], int end_y, int offset_x, int wall_height)
+void	draw_wall_column(t_file *file, t_ray ray, int start_point[2], int end_y, int texture_offset, int wall_height)
 {
 	int		color;
 	int		y;
@@ -22,7 +22,7 @@ void	draw_wall(t_file *file, t_ray ray, int start_point[2], int end_y, int offse
 	{
 		if (y >= 0 && y <= SCREEN_HEIGHT)
 		{
-			color = get_texture_color(file, y, offset_x, ray, wall_height);
+			color = get_texture_color(file, y, texture_offset, ray, wall_height);
 			my_mlx_pixel_put(&file->graphic.image, start_point[0], y, color);
 		}
 		y++;
@@ -34,7 +34,7 @@ void	draw_walls(t_file *file, t_ray *rays)
 	int		ray;
 	int		start_point[2];
 	int		end_y;
-	int		offset_x;
+	int		texture_offset;
 	int		wall_height;
 
 	ray = 0;
@@ -48,8 +48,8 @@ void	draw_walls(t_file *file, t_ray *rays)
 		end_y = floor(SCREEN_HEIGHT / 2) + (wall_height / 2);
 		if (end_y >= SCREEN_HEIGHT)
 			end_y = SCREEN_HEIGHT - 1;
-		offset_x = rays[ray].wall_hit;
-		draw_wall(file, rays[ray], start_point, end_y, offset_x, wall_height);
+		texture_offset = rays[ray].wall_hit;
+		draw_wall_column(file, rays[ray], start_point, end_y, texture_offset, wall_height);
 		ray++;
 	}	
 }

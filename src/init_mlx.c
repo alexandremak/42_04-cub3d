@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 22:05:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 17:06:35 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 17:24:31 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	init_mlx(t_file *file)
 			
 	file->graphic.image.img = mlx_new_image(file->graphic.mlx, 
 			(file->columns - 1) * PX, file->rows * PX); */
+	load_textures(file);
 	file->graphic.win = mlx_new_window(file->graphic.mlx, 
 			SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3d - 3D Map");
-	load_textures(file);
 	render_cicle(file);
 }
 
