@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 22:31:24 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 20:50:27 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 23:30:11 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	draw_map(t_file *file, t_window *graphic)
 {
 	int		i;
 	float	angle;
+	float	sum_angle;
 
 	i = 1;
 	angle = file->player.angle - (15 * UANGLE);
@@ -95,6 +96,11 @@ void	draw_map(t_file *file, t_window *graphic)
 	draw_ray(&graphic->image, &file->player, file, file->player.angle);
 	while (i <= 30)
 	{
+		sum_angle = angle + (i * UANGLE);
+		if (sum_angle < 0)
+			sum_angle += (2 * PI);
+		if (sum_angle > (2 * PI))
+			sum_angle -= (2 * PI);
 		draw_ray(&graphic->image, &file->player, file, angle + (i * UANGLE));
 		i++;
 	}
