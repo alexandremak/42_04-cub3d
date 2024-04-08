@@ -60,5 +60,6 @@ dkms.conf
 ehthumbs.db
 Thumbs.db
 
-# Visual Code file
-.json
+# Visual Code and bin file
+.vscode
+cub3D
