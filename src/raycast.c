@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 18:17:32 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 21:48:46 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/07 22:43:24 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	wall_collision(t_ray *ray)
 {
-	if (ray->vert_wall)
+	if (ray->hit_vert_wall)
 	{
 		if (ray->direction.x >= 0)
 			ray->wall_texture = WEST;
@@ -30,6 +30,18 @@ static void	wall_collision(t_ray *ray)
 	}
 }
 
+static void	wall_point(t_ray *ray)
+{
+	if (ray->wall_texture == WEST)
+		ray->wall_hit = ray->y % PX;
+	else if (ray->wall_texture == EAST)
+		ray->wall_hit = PX - ((ray->y % PX) + 1);
+	else if (ray->wall_texture == NORTH)
+		ray->wall_hit = PX - ((ray->x % PX) + 1);
+	else if (ray->wall_texture == SOUTH)
+		ray->wall_hit = ray->x % PX;
+}
+
 static void	castray(t_ray *ray, t_player *player, t_file *file, float angle)
 {
 	int	hit;
@@ -37,7 +49,8 @@ static void	castray(t_ray *ray, t_player *player, t_file *file, float angle)
 	hit = 0;
 	ray->length = 0;
 	ray->wall_texture = NONE;
-	ray->vert_wall = 0;
+	ray->hit_vert_wall = 0;
+	ray->wall_hit = 0;
 	ray->y = (int)player->position.y;
 	ray->x = (int)player->position.x;
 	ray->angle = angle;
@@ -52,10 +65,11 @@ static void	castray(t_ray *ray, t_player *player, t_file *file, float angle)
 		if (check_wall(ray->y, ray->x, file->map))
 		{
 			wall_collision(ray);
+			wall_point(ray);
 			hit = 1;
 		}
 	}
-	printf("wall= %d\n", ray->wall_texture);
+	printf("wall text= %d | wall point= %d\n", ray->wall_texture, ray->wall_hit);
 }
 
 void	draw_ray(t_image *image, t_player *player, t_file *file, float angle)

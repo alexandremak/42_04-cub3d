@@ -78,8 +78,9 @@ typedef struct s_ray
 	t_vector	direction;
 	float		angle;
 	float		length;
-	int			vert_wall;
+	int			hit_vert_wall;
 	int			wall_texture;
+	int			wall_hit;
 }	t_ray;
 
 typedef struct s_image
@@ -148,11 +149,12 @@ void	check_content(t_file *file);
 void	check_map(t_file *file, char **map);
 
 /* MLX FUNCTIONS*/
+void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
+void	put_pixel_to_image(t_image *image_data, int x, int y, int color);
 void	init_mlx(t_file *file);
 int		key_press(int keycode, t_file *file);
 
 /* BUILD MAP FUNCTIONS*/
-void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
 void	draw_map(t_file *file, t_windows *graphic);
 
 /* MOVEMENT FUNCTIONS */
