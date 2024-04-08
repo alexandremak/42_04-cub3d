@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 18:17:32 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 22:43:24 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/08 17:06:35 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,21 @@ static void	wall_collision(t_ray *ray)
 
 static void	wall_point(t_ray *ray)
 {
-	if (ray->wall_texture == WEST)
+/* 	if (ray->wall_texture == WEST)
 		ray->wall_hit = ray->y % PX;
 	else if (ray->wall_texture == EAST)
 		ray->wall_hit = PX - ((ray->y % PX) + 1);
 	else if (ray->wall_texture == NORTH)
 		ray->wall_hit = PX - ((ray->x % PX) + 1);
 	else if (ray->wall_texture == SOUTH)
-		ray->wall_hit = ray->x % PX;
+		ray->wall_hit = ray->x % PX; */
+	if (ray->hit_vert_wall)
+		ray->wall_hit = (int)ray->y % PX;
+	else
+		ray->wall_hit = (int)ray->x % PX;
 }
 
-static void	castray(t_ray *ray, t_player *player, t_file *file, float angle)
+void	castray(t_ray *ray, t_player *player, t_file *file, float angle)
 {
 	int	hit;
 
@@ -69,7 +73,22 @@ static void	castray(t_ray *ray, t_player *player, t_file *file, float angle)
 			hit = 1;
 		}
 	}
-	printf("wall text= %d | wall point= %d\n", ray->wall_texture, ray->wall_hit);
+}
+
+
+void	raycasting(t_file *file, t_ray *rays)
+{
+	float	angle;
+	int		pixel_column;
+
+	angle = file->player.angle - (HALF_FOV);
+	pixel_column = 0;
+	while (pixel_column < SCREEN_WIDTH)
+	{
+		castray(&rays[pixel_column], &file->player, file, angle);
+		angle += (FOV / SCREEN_WIDTH);
+		pixel_column++;
+	}
 }
 
 void	draw_ray(t_image *image, t_player *player, t_file *file, float angle)

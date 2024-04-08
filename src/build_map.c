@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   build_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 22:31:24 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 22:05:15 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/08 16:39:19 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void	put_square(t_image *image, int x, int y, int color, int out_color)
+void	put_square(t_image *image, int x, int y, int color, int out_color)
 {
 	int	i;
 	int	j;
@@ -82,7 +82,7 @@ static void	put_player(t_image *image, t_player *player)
 	}
 }
 
-void	draw_map(t_file *file, t_windows *graphic)
+void	draw_map(t_file *file, t_window *graphic)
 {
 	int		i;
 	float	angle;
@@ -93,11 +93,11 @@ void	draw_map(t_file *file, t_windows *graphic)
 	put_grid(&graphic->image, file);
 	put_player(&graphic->image, &file->player);
 	draw_ray(&graphic->image, &file->player, file, file->player.angle);
-	// while (i <= 30)
-	// {
-	// 	draw_ray(&graphic->image, &file->player, file, angle + (i * UANGLE));
-	// 	i++;
-	// }
+	while (i <= 30)
+	{
+		draw_ray(&graphic->image, &file->player, file, angle + (i * UANGLE));
+		i++;
+	}
 	mlx_put_image_to_window(graphic->mlx, graphic->win, graphic->image.img, 
 		0, 0);
 }
