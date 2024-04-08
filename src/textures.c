@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:05:49 by ftroiter          #+#    #+#             */
-/*   Updated: 2024/04/08 17:06:35 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 18:43:32 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-void load_textures(t_file *cube)
+void	load_textures(t_file *cube)
 {
 	int i = 0;
 	while (i < MAX_TEXTURES)
@@ -37,7 +37,7 @@ void load_textures(t_file *cube)
 	}
 }
 
-int	get_texture_color(t_file *file, int y, int offset_x, t_ray ray, int wall_height)
+int		get_texture_color(t_file *file, int y, int offset_x, t_ray ray, int wall_height)
 {
 	t_texture	texture;
 	int			offset[2];

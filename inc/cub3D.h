@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 17:01:57 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 19:11:25 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define RA 65363
 
 /* SIZE OF WINDOW AND EACH TILE */
-# define PX 31
+# define PX 64
 # define PACE 5
 # define PIDIVUNITS 18
 # define PLYLEN 9
@@ -183,8 +183,8 @@ void	raycasting(t_file *file, t_ray *rays);
 void	render_cicle(t_file *file);
 void	draw_walls(t_file *file, t_ray *rays);
 
-
-
-
+/* TEXTURE FILES */
+void 	load_textures(t_file *cube);
+int		get_texture_color(t_file *file, int y, int offset_x, t_ray ray, int wall_height);
 
 #endif
