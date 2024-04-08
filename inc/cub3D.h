@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 17:40:43 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 19:40:00 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ typedef struct s_image
 	int			endian;
 }				t_image;
 
-
 typedef struct s_texture
 {
 	t_image		image;
@@ -139,7 +138,9 @@ void	free_all(t_file *file);
 void	check_file(int argc, char **argv, t_file *file);
 void	read_scene_file(t_file *file);
 int		texture_paths_ok(t_file *file);
-
+void	parse_values(t_file *file, char **content);
+int		texture_paths_ok(t_file *file);
+int		text_rgb_ok(t_file *file);
 
 /* EXTRACT DATA FUNCTIONS */
 int		extract_metadata(t_file *file, char **splited);
@@ -164,7 +165,6 @@ int		key_press(int keycode, t_file *file);
 void	draw_map(t_file *file, t_window *graphic);
 void	put_square(t_image *image, int x, int y, int color, int out_color);
 
-
 /* MOVEMENT FUNCTIONS */
 int		check_wall(int posy, int posx, char **map);
 void	move(t_player *player, int keycode, char **map);
@@ -183,8 +183,8 @@ void	raycasting(t_file *file, t_ray *rays);
 void	render_cicle(t_file *file);
 void	draw_walls(t_file *file, t_ray *rays);
 
-
-
-
+/* TEXTURES */
+void	load_textures(t_file *cube);
+int		get_texture_color(t_file *file, int y, int offset_x, t_ray ray, int wall_height);
 
 #endif

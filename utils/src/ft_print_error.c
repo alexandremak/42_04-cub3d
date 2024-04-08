@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:31:01 by ftroiter          #+#    #+#             */
-/*   Updated: 2024/04/08 17:34:17 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 18:46:32 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_print_error(int n, ...)
 	va_list	args;
 
 	va_start(args, n);
-	ft_putstr_fd("👀", STDERR_FILENO);
+	ft_putstr_fd("Error", STDERR_FILENO);
 	while (n--)
 	{
 		ft_putstr_fd(": ", STDERR_FILENO);

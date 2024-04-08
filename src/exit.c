@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 20:41:46 by amak              #+#    #+#             */
-/*   Updated: 2024/04/04 21:44:44 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 18:45:28 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 void	exit_error(char *message, t_file *file)
 {
-	printf("Error\n");
 	free_all(file);
 	if (file->fd > -1)
 		close(file->fd);
-	printf("Error\n");
-	printf("%s\n\n", message);
+	if (message)
+		ft_print_error(1, message);
 	exit(1);
 }
 

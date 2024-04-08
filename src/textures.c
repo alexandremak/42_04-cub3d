@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:05:49 by ftroiter          #+#    #+#             */
-/*   Updated: 2024/04/08 17:25:08 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 18:42:34 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void load_textures(t_file *cube)
 		cube->textures[i].image.img = mlx_xpm_file_to_image(cube->graphic.mlx, cube->texture_paths[i], 
 			&cube->textures[i].width, &cube->textures[i].height);
 		if (cube->textures[i].image.img == NULL)
-			exit_error("Error: Failed to load texture %d\n", cube);
+			exit_error("Error: Failed to load texture\n", cube);
 		cube->textures[i].image.addr = mlx_get_data_addr(cube->textures[i].image.img, 
 			&cube->textures[i].image.bits_per_pixel, &cube->textures[i].image.line_length, 
 			&cube->textures[i].image.endian);

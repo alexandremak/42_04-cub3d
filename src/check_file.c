@@ -6,11 +6,31 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:53:37 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 01:01:48 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 19:39:15 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
+
+int	texture_paths_ok(t_file *file)
+{
+	int	i;
+
+	i = 0;
+	while (i < MAX_TEXTURES && file->texture_paths[i])
+		i++;
+	return (i == MAX_TEXTURES);
+}
+
+int	text_rgb_ok(t_file *file)
+{
+	int	res;
+
+	res = 0;
+	if (texture_paths_ok(file) && file->ceiling_rgb[3] && file->floor_rgb[3])
+		res = 1;
+	return (res);
+}
 
 static int	file_ext_ok(char *filepath)
 {
@@ -42,7 +62,7 @@ void	check_file(int argc, char **argv, t_file *file)
 	if (argc != 2)
 		exit_error("Invalid number of arguments!", file);
 	file->filepath = ft_strtrim(argv[1], " \t\n\v\f\r");
-	if (file->filepath == NULL)
+	if (argc != 2 || file->filepath == NULL)
 		exit_error("Inserted blank filepath or filename!", file);
 	if (!file_ext_ok(file->filepath))
 		exit_error("Scene description file incorrect extension!", file);

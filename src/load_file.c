@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:43:54 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 17:43:00 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 19:40:24 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,52 +23,6 @@ static void	get_content(t_file *file, int fd, int count_line)
 		file->content = malloc(sizeof(char *) * (count_line + 1));
 	if (file->content)
 		file->content[count_line] = line;
-}
-
-int	texture_paths_ok(t_file *file)
-{
-    int	i;
-
-    i = 0;
-    while (i < MAX_TEXTURES && file->texture_paths[i])
-        i++;
-    return (i == MAX_TEXTURES);
-}
-
-int	text_rgb_ok(t_file *file)
-{
-	int	res;
-
-	res = 0;
-	if (texture_paths_ok(file) && file->ceiling_rgb[3] && file->floor_rgb[3])
-		res = 1;
-	return (res);
-}
-
-static void	parse_values(t_file *file, char **content)
-{
-	char	*line;
-	char	**split_line;
-
-	while (content && *content && !text_rgb_ok(file))
-	{
-		ft_putspace(*content);
-		line = ft_strtrim(*content, " \t\v\f\r\n");
-		if (line && *line) 
-		{
-			split_line = ft_split(line, ' ');
-			if (split_line && split_line[0])
-				if (extract_metadata(file, split_line))
-					exit_error("Scene description: invalid metadata", file);
-			free_str_arr(split_line);
-			free (line);
-		}
-		content++;
-	}
-	while (content && *content && ft_noprintchar(*content))
-		content++;
-	if (content && *content)
-		get_map(file, content);
 }
 
 void	read_scene_file(t_file *file)

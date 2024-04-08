@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:00:21 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 17:43:00 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 18:18:22 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,48 +16,52 @@ static int	extract_rgb(t_file *file, int *rgb, char *splited)
 {
 	char	**numbers;
 	int		i;
+	int		error = 0;
 
-	i = -1;
-	if (rgb[3])
-		exit_error("Scene description: duplicate RGB values", file);
-	if (!splited)
-		exit_error("Scene description: no RGB values", file);
-	numbers = ft_split(splited, ',');
-	if (ft_strarr_size(numbers) > 3)
+	if (rgb[3] || !splited)
+		error = 1;
+	else
 	{
-		free_str_arr(numbers);
-		exit_error("Scene description: invalid RGB values", file);
-	}
-	while (*numbers && numbers[++i])
-	{
-		if (ft_strlen(numbers[i]) > 4 || !ft_isdigit_str(numbers[i]))
+		numbers = ft_split(splited, ',');
+		if (ft_strarr_size(numbers) > 3)
+			error = 1;
+		else
 		{
-			free_str_arr(numbers);
-			exit_error("Scene description: invalid RGB values", file);
+			for (i = 0; i < 3 && numbers[i]; i++)
+			{
+				if (ft_strlen(numbers[i]) > 4 || !ft_isdigit_str(numbers[i]))
+				{
+					error = 1;
+					break;
+				}
+				rgb[i] = ft_atoi(numbers[i]);
+			}
+			if (i < 3)
+				error = 1;
+			else
+				rgb[3] = 1;
 		}
-		rgb[i] = ft_atoi(numbers[i]);
+		free_str_arr(numbers);
 	}
-	free_str_arr(numbers);
-	if (i < 3)
-		exit_error("Scene description: insuficient RGB values", file);
-	rgb[3] = 1;
+	if (error)
+		ft_print_error(2, "Scene description", "invalid RGB values");
+	return (error);
 }
 
-void	extract_txtr(t_file *file, char *pathstr, int index)
+int	extract_txtr(t_file *file, char *pathstr, int index)
 {
 	int	fd;
 
 	fd = open(pathstr, O_RDONLY);
-	if (fd < 0)
+	if (fd < 0 || file->texture_paths[index])
 	{
 		close(fd);
-		exit_error("Scene description: wall texture file not found", file);
+		ft_print_error(2, "Scene description", "invalid texture values");
+		return (1);
 	}
-	if (file->texture_paths[index])
-		exit_error("Scene description: duplicate wall texture identifier",
-			file);
 	file->texture_paths[index] = ft_strdup(pathstr);
 	close(fd);
+	return (0);
 }
 
 int	extract_metadata(t_file *file, char **splited)
@@ -65,6 +69,7 @@ int	extract_metadata(t_file *file, char **splited)
 	int	index;
 	int	err;
 
+	err = 0;
 	index = -1;
 	if (ft_strcmp(splited[0], "NO") == 0)
 		index = NORTH;
