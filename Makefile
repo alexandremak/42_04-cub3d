@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+         #
+#    By: amak <amak@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/20 19:20:14 by amak              #+#    #+#              #
-#    Updated: 2024/04/08 19:45:48 by ftroiter         ###   ########.fr        #
+#    Updated: 2024/04/08 21:01:21 by amak             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ UTILS_DIR = ./utils/
 
 MINILIBX_DIR = ./minilibx-linux/
 
-CFLAGS = 
+CFLAGS = #-Wall, -Wextra -Werror -o3
 
 LFLAGS = -Lminilibx-linux -I/minilibx-linux/mlx.h -L/usr/lib -lmlx -lXext -lX11 -lm -lz
 
