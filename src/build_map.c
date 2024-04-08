@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   build_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 22:31:24 by amak              #+#    #+#             */
-/*   Updated: 2024/04/07 22:05:15 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/08 15:20:51 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void	put_square(t_image *image, int x, int y, int color, int out_color)
+void	put_square(t_image *image, int x, int y, int color, int out_color)
 {
 	int	i;
 	int	j;

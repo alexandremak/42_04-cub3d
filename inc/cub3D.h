@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 01:08:06 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:24:01 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@
 # define PIDIVUNITS 18
 # define PLYLEN 9
 # define UANGLE 3.141592 / 360
+# define FOV			1.047198
+# define HALF_FOV		0.523599
+# define PLANE_DIST		588.007
+# define SCREEN_WIDTH	680	
+# define SCREEN_HEIGHT	480
 
 # define MAX_TEXTURES 4
 
@@ -156,6 +161,8 @@ int		key_press(int keycode, t_file *file);
 
 /* BUILD MAP FUNCTIONS*/
 void	draw_map(t_file *file, t_windows *graphic);
+void	put_square(t_image *image, int x, int y, int color, int out_color);
+
 
 /* MOVEMENT FUNCTIONS */
 int		check_wall(int posy, int posx, char **map);
@@ -170,5 +177,9 @@ void	increment_ray_length(t_ray *ray, float step_y, float step_x);
 
 /* RAYCASTING */
 void	draw_ray(t_image *image, t_player *player, t_file *file, float angle);
+void	castray(t_ray *ray, t_player *player, t_file *file, float angle);
+void	raycasting(t_file *file);
+
+
 
 #endif

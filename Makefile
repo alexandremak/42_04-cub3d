@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: facu <facu@student.42.fr>                  +#+  +:+       +#+         #
+#    By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/20 19:20:14 by amak              #+#    #+#              #
-#    Updated: 2024/04/07 19:10:25 by facu             ###   ########.fr        #
+#    Updated: 2024/04/08 15:19:21 by ftroiter         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,4 +75,6 @@ fclean: clean
 	
 re: fclean all
 
+rs: all
+	./$(NAME) maps/example.cub
 .PHONY: all clean fclean re
