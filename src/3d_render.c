@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:04:29 by ftroiter          #+#    #+#             */
-/*   Updated: 2024/04/08 20:17:56 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/08 20:54:44 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,33 @@ void	draw_walls(t_file *file, t_ray *rays)
 
 int	rgb_to_int(int r, int g, int b)
 {
-
 	return (r << 16 | g << 8 | b);
 }
 
-void	draw_floor_and_ceiling(t_file *file)
+void	color_fill(t_file *file, int start_y, int end_y, int color)
+{
+	int x = 0, y = start_y;
+
+	while (y < end_y)
+	{
+		x = 0;
+		while (x < SCREEN_WIDTH)
+		{
+			my_mlx_pixel_put(&file->graphic.image, x, y, color);
+			x++;
+		}
+		y++;
+	}
+}
+
+void	draw_floor_and_ceiling(t_file *cube)
 {
 	int color;
-	color = rgb_to_int(file->ceiling_rgb[0], file->ceiling_rgb[1], file->ceiling_rgb[2]);
-	printf("color: %d\n", color);
-	put_square(&file->graphic.image, SCREEN_WIDTH -1 , 0, 0, color, color);
-	color = rgb_to_int(file->floor_rgb[0], file->floor_rgb[1], file->floor_rgb[2]);
-	put_square(&file->graphic.image, SCREEN_WIDTH, 0, SCREEN_HEIGHT / 2, color, color);
+
+	color = rgb_to_int(cube->ceiling_rgb[0], cube->ceiling_rgb[1], cube->ceiling_rgb[2]);
+	color_fill(cube, 0, SCREEN_HEIGHT / 2, color);
+	color = rgb_to_int(cube->floor_rgb[0], cube->floor_rgb[1], cube->floor_rgb[2]);
+	color_fill(cube, SCREEN_HEIGHT / 2, SCREEN_HEIGHT, color);
 }
 
 void	render_cicle(t_file *file)
