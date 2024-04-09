@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   3d_render.c                                        :+:      :+:    :+:   */
+/*   3d_map.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/08 17:04:29 by ftroiter          #+#    #+#             */
-/*   Updated: 2024/04/08 23:08:44 by amak             ###   ########.fr       */
+/*   Created: 2024/04/09 16:49:01 by ftroiter          #+#    #+#             */
+/*   Updated: 2024/04/09 19:24:17 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,26 +83,4 @@ void	draw_floor_and_ceiling(t_file *cube)
 	color_fill(cube, 0, SCREEN_HEIGHT / 2, color);
 	color = rgb_to_int(cube->floor_rgb[0], cube->floor_rgb[1], cube->floor_rgb[2]);
 	color_fill(cube, SCREEN_HEIGHT / 2, SCREEN_HEIGHT, color);
-}
-
-void	render_cicle(t_file *file)
-{
-	t_window	*graphic;
-	t_ray		*rays; // TODO: move to file struct
-
-	rays = (t_ray *)malloc(sizeof(t_ray) * SCREEN_WIDTH);
-	graphic = &file->graphic;
-	if (graphic->image.img != NULL)
-		mlx_destroy_image(graphic->mlx, graphic->image.img);
-	graphic->image.img = mlx_new_image(graphic->mlx, 
-			SCREEN_WIDTH, SCREEN_HEIGHT);
-	graphic->image.addr = mlx_get_data_addr(graphic->image.img, 
-			&(graphic->image.bits_per_pixel), 
-			&graphic->image.line_length, 
-			&graphic->image.endian);
-	raycasting(file, rays);
-	draw_floor_and_ceiling(file);
-	draw_walls(file, rays);
-	free(rays);
-	mlx_put_image_to_window(graphic->mlx, graphic->win, graphic->image.img, 0, 0);
 }

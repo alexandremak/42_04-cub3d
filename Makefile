@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amak <amak@student.42.fr>                  +#+  +:+       +#+         #
+#    By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/20 19:20:14 by amak              #+#    #+#              #
-#    Updated: 2024/04/08 21:01:21 by amak             ###   ########.fr        #
+#    Updated: 2024/04/09 16:53:34 by ftroiter         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,9 @@ SRC_PATH = ./src/
 
 OBJ_PATH = ./obj/
 
-SRC_FILES = 3d_render.c \
-			build_map.c \
+SRC_FILES = render.c \
+			2d_map.c \
+			3d_map.c \
 			check_content.c \
 			check_map.c \
 			check_file.c \

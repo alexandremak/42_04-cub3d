@@ -6,7 +6,7 @@
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 22:31:24 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 23:30:11 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/09 00:41:16 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,21 @@ static void	put_player(t_image *image, t_player *player)
 			player->position.x + (y * player->direction.x), 
 			player->position.y + (y * player->direction.y), 0x00ff0000);
 		y++;
+	}
+}
+
+void	draw_ray(t_image *image, t_player *player, t_file *file, float angle)
+{
+	int		i;
+	t_ray	ray;
+
+	i = 1;
+	castray(&ray, player, file, angle);
+	while (i <= (int)ray.length)
+	{
+		my_mlx_pixel_put(image, player->position.x + (i * cos(angle)),
+			player->position.y + (i * sin(angle)), 0x0000ff00);
+		i++;
 	}
 }
 

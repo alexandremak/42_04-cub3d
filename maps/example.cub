@@ -3,8 +3,8 @@ SO ./assets/eagle.xpm
 WE ./assets/greystone.xpm
 EA ./assets/redbrick.xpm
 
-F 220,100,0
-C 225,30,100
+F 0,0,0
+C 225,225,225
 
         1111111111111111111111111
         1000000000110000000000001
