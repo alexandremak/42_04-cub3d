@@ -98,8 +98,7 @@ void	draw_minimap(t_cube *cube, t_window *graphic)
 	float	angle;
 	i = 1;
 	angle = cube->player.angle - (15 * UANGLE);
-	cube->map_scale = min(SCREEN_WIDTH / cube->columns, SCREEN_HEIGHT
-			/ cube->rows);
+    cube->map_scale = SCREEN_HEIGHT / (3 * cube->rows);
 	printf("cube->map_scale: %d\n", cube->map_scale);
 	draw_grid(cube);
 	draw_player(&graphic->image, &cube->player, cube->map_scale);
