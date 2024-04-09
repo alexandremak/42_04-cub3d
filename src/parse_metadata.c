@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extract_data.c                                     :+:      :+:    :+:   */
+/*   parse_metadata.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:00:21 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 18:18:22 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:45:11 by facu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static int	extract_rgb(t_file *file, int *rgb, char *splited)
+static int	extract_rgb(t_cube *file, int *rgb, char *splited)
 {
 	char	**numbers;
-	int		i;
-	int		error = 0;
+	int		error;
 
+	error = 0;
 	if (rgb[3] || !splited)
 		error = 1;
 	else
@@ -26,21 +26,7 @@ static int	extract_rgb(t_file *file, int *rgb, char *splited)
 		if (ft_strarr_size(numbers) > 3)
 			error = 1;
 		else
-		{
-			for (i = 0; i < 3 && numbers[i]; i++)
-			{
-				if (ft_strlen(numbers[i]) > 4 || !ft_isdigit_str(numbers[i]))
-				{
-					error = 1;
-					break;
-				}
-				rgb[i] = ft_atoi(numbers[i]);
-			}
-			if (i < 3)
-				error = 1;
-			else
-				rgb[3] = 1;
-		}
+			error = process_numbers(numbers, rgb);
 		free_str_arr(numbers);
 	}
 	if (error)
@@ -48,7 +34,7 @@ static int	extract_rgb(t_file *file, int *rgb, char *splited)
 	return (error);
 }
 
-int	extract_txtr(t_file *file, char *pathstr, int index)
+int	extract_txtr(t_cube *file, char *pathstr, int index)
 {
 	int	fd;
 
@@ -64,7 +50,7 @@ int	extract_txtr(t_file *file, char *pathstr, int index)
 	return (0);
 }
 
-int	extract_metadata(t_file *file, char **splited)
+int	extract_metadata(t_cube *file, char **splited)
 {
 	int	index;
 	int	err;
@@ -88,7 +74,7 @@ int	extract_metadata(t_file *file, char **splited)
 	return (err);
 }
 
-static void	calc_angle(t_player *player, int c)
+static void	extract_angle(t_player *player, int c)
 {
 	if (c == 'N')
 		player->angle = (3 * PI) / 2;
@@ -100,7 +86,7 @@ static void	calc_angle(t_player *player, int c)
 		player->angle = PI;
 }
 
-void	extract_player_position(t_file *file, int y, int x, char c)
+void	extract_player_position(t_cube *file, int y, int x, char c)
 {
 	file->player.position.y = y * PX + ((PX + 1) / 2);
 	file->player.position.x = x * PX + ((PX + 1) / 2);
@@ -124,5 +110,5 @@ void	extract_player_position(t_file *file, int y, int x, char c)
 		file->player.direction.y = 0;
 		file->player.direction.x = -1;
 	}
-	calc_angle(&file->player, c);
+	extract_angle(&file->player, c);
 }

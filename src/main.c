@@ -3,53 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:30:11 by amak              #+#    #+#             */
-/*   Updated: 2024/04/09 16:36:31 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/09 20:45:06 by facu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void	print_content(t_file cube, int bool)
+void	setup_textures(t_cube *cube)
 {
-	int	i, j;
+	int	i;
 
-	i = -1;
-	j = 0;
-	if (bool)
-	{
-		printf("\n\n>>> DATA EXTRACTED VALUES: <<<\n\n");
-		while (j < 4)
-		{
-			printf(" T%d: %s\n", j, cube.texture_paths[j]);
-			j++;
-		}
-		printf(" C: %d %d %d | full RGB: %d\n", cube.ceiling_rgb[0], 
-			cube.ceiling_rgb[1], cube.ceiling_rgb[2], cube.ceiling_rgb[3]);
-		printf(" F: %d %d %d | full RGB: %d\n", cube.floor_rgb[0], 
-			cube.floor_rgb[1], cube.floor_rgb[2], cube.floor_rgb[3]);
-		printf("\n\n>>> GAME MAP:: <<<\n\n");
-		printf(" - rows: %d\n", cube.rows);
-		printf(" - columns: %d\n", cube.columns);
-		printf("<start after the next line>\n");
-		while (cube.map && cube.map[++i])
-			printf("%s", cube.map[i]);
-		printf("<end>");
-		printf("\n\n");
-	}
+	i = 0;
+	while (i < MAX_TEXTURES)
+		cube->texture_paths[i++] = NULL;
 }
 
-void	setup(t_file *cube)
+void	setup_rgb(t_cube *cube)
 {
-	cube->filepath = NULL;
-	cube->fd = 0;
-	cube->content = NULL;
-	cube->texture_paths[0] = NULL;
-	cube->texture_paths[1] = NULL;
-	cube->texture_paths[2] = NULL;
-	cube->texture_paths[3] = NULL;
 	cube->floor_rgb[0] = -1;
 	cube->floor_rgb[1] = -1;
 	cube->floor_rgb[2] = -1;
@@ -58,25 +31,27 @@ void	setup(t_file *cube)
 	cube->ceiling_rgb[1] = -1;
 	cube->ceiling_rgb[2] = -1;
 	cube->ceiling_rgb[3] = 0;
+}
+
+void	setup_properties(t_cube *cube)
+{
+	cube->filepath = NULL;
+	cube->fd = 0;
+	cube->content = NULL;
 	cube->show_minimap = 0;
-/* 	cube->map = NULL;
-	cube->rows = 0;
-	cube->columns = 0;
-	cube->player.x = 0;
-	cube->player.y = 0;
-	cube->player.direction = 0;
-	cube->graphic.mlx = NULL;
-	cube->graphic.win = NULL;
-	cube->graphic.image.img = NULL;
-	cube->graphic.image.addr = NULL;
-	cube->graphic.image.bits_per_pixel = 0;
-	cube->graphic.image.line_length = 0;
-	cube->graphic.image.endian = 0; */
+}
+
+void	setup(t_cube *cube)
+{
+	setup_properties(cube);
+	setup_textures(cube);
+	setup_rgb(cube);
 }
 
 int	main(int argc, char **argv)
 {
-	static t_file	cube;
+	static t_cube	cube;
+
 	setup(&cube);
 	check_file(argc, argv, &cube);
 	read_scene_file(&cube);

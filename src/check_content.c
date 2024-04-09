@@ -6,13 +6,13 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 21:38:34 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 00:45:31 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:06:42 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void	check_rgb(t_file *file, int *rgb_values)
+static void	check_rgb(t_cube *file, int *rgb_values)
 {
 	int	i;
 
@@ -27,7 +27,7 @@ static void	check_rgb(t_file *file, int *rgb_values)
 	}
 }
 
-void	check_content(t_file *file)
+void	check_content(t_cube *file)
 {
 	if (!texture_paths_ok(file))
 		exit_error("Scene description file with incomplete textures!", file);

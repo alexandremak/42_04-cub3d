@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 21:13:17 by amak              #+#    #+#             */
 /*   Updated: 2024/04/08 22:54:05 by amak             ###   ########.fr       */
@@ -28,11 +28,11 @@ int	check_wall(int posy, int posx, char **map)
 
 static int	check_move_nok(int posy, int posx, char **map)
 {
-	return (check_wall(posy, posx, map) || 
-		check_wall(posy - (PLYLEN / 2), posx - (PLYLEN / 2), map) || 
-		check_wall(posy - (PLYLEN / 2), posx + (PLYLEN / 2), map) || 
-		check_wall(posy + (PLYLEN / 2), posx - (PLYLEN / 2), map) || 
-		check_wall(posy + (PLYLEN / 2), posx + (PLYLEN / 2), map));
+	return (check_wall(posy, posx, map) || check_wall(posy - (PLYLEN / 2), posx
+			- (PLYLEN / 2), map) || check_wall(posy - (PLYLEN / 2), posx
+			+ (PLYLEN / 2), map) || check_wall(posy + (PLYLEN / 2), posx
+			- (PLYLEN / 2), map) || check_wall(posy + (PLYLEN / 2), posx
+			+ (PLYLEN / 2), map));
 }
 
 void	move(t_player *player, int keycode, char **map)
@@ -44,7 +44,7 @@ void	move(t_player *player, int keycode, char **map)
 	{
 		if (keycode == W)
 		{
-			if (!check_move_nok(player->position.y + player->direction.y, 
+			if (!check_move_nok(player->position.y + player->direction.y,
 					player->position.x + player->direction.x, map))
 			{
 				player->position.y += player->direction.y;
@@ -53,7 +53,7 @@ void	move(t_player *player, int keycode, char **map)
 		}
 		else if (keycode == S)
 		{
-			if (!check_move_nok(player->position.y - player->direction.y, 
+			if (!check_move_nok(player->position.y - player->direction.y,
 					player->position.x - player->direction.x, map))
 			{
 				player->position.y -= player->direction.y;
@@ -62,7 +62,7 @@ void	move(t_player *player, int keycode, char **map)
 		}
 		else if (keycode == A)
 		{
-			if (!check_move_nok(player->position.y + -(player->direction.x), 
+			if (!check_move_nok(player->position.y + -(player->direction.x),
 					player->position.x + player->direction.y, map))
 			{
 				player->position.y += -(player->direction.x);
@@ -71,7 +71,7 @@ void	move(t_player *player, int keycode, char **map)
 		}
 		else if (keycode == D)
 		{
-			if (!check_move_nok(player->position.y + player->direction.x, 
+			if (!check_move_nok(player->position.y + player->direction.x,
 					player->position.x + -(player->direction.y), map))
 			{
 				player->position.y += player->direction.x;

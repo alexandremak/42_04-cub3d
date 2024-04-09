@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+         #
+#    By: facu <facu@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/20 19:20:14 by amak              #+#    #+#              #
-#    Updated: 2024/04/09 16:53:34 by ftroiter         ###   ########.fr        #
+#    Updated: 2024/04/09 21:06:10 by facu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,13 +35,16 @@ SRC_FILES = render.c \
 			3d_map.c \
 			check_content.c \
 			check_map.c \
+			check_map2.c \
 			check_file.c \
 			dda_utils.c \
+			debug.c \
 			free.c \
 			exit.c \
-			extract_data.c \
 			load_file.c \
-			get_map.c \
+			parse_map.c \
+			parse_metadata.c \
+			parse_metadata_utils.c \
 			main.c \
 			init_mlx.c \
 			movement.c \

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 23:40:17 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 19:48:46 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/09 21:05:21 by facu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void	check_chr(t_file *file, char **map)
+static void	check_invalid_chr(t_cube *file, char **map)
 {
 	int	i;
 	int	j;
@@ -32,7 +32,7 @@ static void	check_chr(t_file *file, char **map)
 	}
 }
 
-static void	check_player(t_file *file, char **map)
+static void	check_player(t_cube *file, char **map)
 {
 	int	i;
 	int	j;
@@ -61,7 +61,7 @@ static void	check_player(t_file *file, char **map)
 		exit_error("Invalid player position", file);
 }
 
-static void	check_perimeter(t_file *file, char **map)
+static void	check_perimeter(t_cube *file, char **map)
 {
 	int	i;
 	int	last_row;
@@ -86,44 +86,10 @@ static void	check_perimeter(t_file *file, char **map)
 		i++;
 	}
 }
-static int	is_invalid_cell(t_file *file, char **map, int i, int j)
-{
-	if (map[i][j] && ft_strchr("0NSEW", map[i][j]))
-	{
-		if (!ft_strchr("10NSEW", map[i - 1][j]) || 
-			!ft_strchr("10NSEW", map[i + 1][j]) ||
-			!ft_strchr("10NSEW", map[i][j - 1]) ||
-			!ft_strchr("10NSEW", map[i][j + 1]) ||
-			!ft_strchr("10NSEW", map[i - 1][j - 1]) ||
-			!ft_strchr("10NSEW", map[i - 1][j + 1]) ||
-			!ft_strchr("10NSEW", map[i + 1][j + 1]) ||
-			!ft_strchr("10NSEW", map[i + 1][j - 1]))
-			return (1);
-	}
-	return (0);
-}
 
-static void	check_inside(t_file *file, char **map)
+void	check_map(t_cube *file, char **map)
 {
-	int	i = 1;
-	int	j;
-
-	while (i < file->rows - 1)
-	{
-		j = 1;
-		while (j < file->columns)
-		{
-			if (is_invalid_cell(file, map, i, j))
-				exit_error("Invalid map perimeter", file);
-			j++;
-		}
-		i++;
-	}
-}
-
-void	check_map(t_file *file, char **map)
-{
-	check_chr(file, map);
+	check_invalid_chr(file, map);
 	check_player(file, map);
 	check_perimeter(file, map);
 	check_inside(file, map);

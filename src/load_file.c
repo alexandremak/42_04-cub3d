@@ -6,13 +6,13 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:43:54 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 19:40:24 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:06:42 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void	get_content(t_file *file, int fd, int count_line)
+static void	get_content(t_cube *file, int fd, int count_line)
 {
 	char	*line;
 
@@ -25,7 +25,7 @@ static void	get_content(t_file *file, int fd, int count_line)
 		file->content[count_line] = line;
 }
 
-void	read_scene_file(t_file *file)
+void	read_scene_file(t_cube *file)
 {
 	get_content(file, file->fd, 0);
 	if (!file->content)

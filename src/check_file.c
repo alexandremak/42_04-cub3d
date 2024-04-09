@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:53:37 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 19:39:15 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:12:39 by facu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-int	texture_paths_ok(t_file *file)
+int	texture_paths_ok(t_cube *file)
 {
 	int	i;
 
@@ -22,7 +22,7 @@ int	texture_paths_ok(t_file *file)
 	return (i == MAX_TEXTURES);
 }
 
-int	text_rgb_ok(t_file *file)
+int	text_rgb_ok(t_cube *file)
 {
 	int	res;
 
@@ -44,9 +44,9 @@ static int	file_ext_ok(char *filepath)
 	return (0);
 }
 
-static int	file_exists(char *filepath, t_file *file)
+static int	file_exists(char *filepath, t_cube *file)
 {
-	int		res;
+	int	res;
 
 	res = 0;
 	if (!filepath)
@@ -57,7 +57,7 @@ static int	file_exists(char *filepath, t_file *file)
 	return (res);
 }
 
-void	check_file(int argc, char **argv, t_file *file)
+void	check_file(int argc, char **argv, t_cube *file)
 {
 	if (argc != 2)
 		exit_error("Invalid number of arguments!", file);

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 18:17:32 by amak              #+#    #+#             */
 /*   Updated: 2024/04/08 23:33:42 by amak             ###   ########.fr       */
@@ -42,7 +42,7 @@ static void	wall_point(t_ray *ray)
 		ray->wall_hit = ray->x % PX;
 }
 
-void	castray(t_ray *ray, t_player *player, t_file *file, float angle)
+void	castray(t_ray *ray, t_player *player, t_cube *file, float angle)
 {
 	int	hit;
 
@@ -84,8 +84,7 @@ void	castray(t_ray *ray, t_player *player, t_file *file, float angle)
 	// printf("side= %d", ray->hit_vert_wall);
 }
 
-
-void	raycasting(t_file *file, t_ray *rays)
+void	raycasting(t_cube *file, t_ray *rays)
 {
 	float	angle;
 	float	delta_angle;
@@ -111,7 +110,7 @@ void	raycasting(t_file *file, t_ray *rays)
 	}
 }
 
-void	draw_ray(t_image *image, t_player *player, t_file *file, float angle)
+void	draw_ray(t_image *image, t_player *player, t_cube *file, float angle)
 {
 	int		i;
 	t_ray	ray;

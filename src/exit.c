@@ -6,13 +6,13 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 20:41:46 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 18:45:28 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:06:42 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-void	exit_error(char *message, t_file *file)
+void	exit_error(char *message, t_cube *file)
 {
 	free_all(file);
 	if (file->fd > -1)
@@ -22,7 +22,7 @@ void	exit_error(char *message, t_file *file)
 	exit(1);
 }
 
-void	exit_game(t_file *file)
+void	exit_game(t_cube *file)
 {
 	free_all(file);
 	if (file->fd > -1)

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_map.c                                         :+:      :+:    :+:   */
+/*   parse_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -28,7 +28,7 @@ static int	max_columns(char **content)
 	return (res);
 }
 
-static int	max_rows(t_file *file, char **content)
+static int	max_rows(t_cube *file, char **content)
 {
 	int	res;
 
@@ -45,7 +45,7 @@ static int	max_rows(t_file *file, char **content)
 	return (res);
 }
 
-static void	extract_map(t_file *file, char **content)
+static void	extract_map(t_cube *file, char **content)
 {
 	int	i;
 	int	j;
@@ -65,7 +65,7 @@ static void	extract_map(t_file *file, char **content)
 	}
 }
 
-void	get_map(t_file *file, char **content)
+void	parse_map(t_cube *file, char **content)
 {
 	file->rows = max_rows(file, content);
 	file->columns = max_columns(content);
