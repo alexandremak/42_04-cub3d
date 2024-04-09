@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:05:49 by ftroiter          #+#    #+#             */
-/*   Updated: 2024/04/09 20:38:15 by facu             ###   ########.fr       */
+/*   Updated: 2024/04/10 00:03:59 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	get_texture_color(t_cube *file, int y, int offset_x, t_ray ray)
 	texture = file->textures[ray.wall_texture];
 	offset[0] = offset_x;
 	dist_to_top = y + (ray.wall_height / 2) - (SCREEN_HEIGHT / 2);
-	offset[1] = (dist_to_top * ((float)texture.height / ray.wall_height));
+	offset[1] = (dist_to_top * ((double)texture.height / ray.wall_height));
 	color = *(unsigned int *)(texture.image.addr + (offset[1]
 				* texture.image.line_length + offset[0]
 				* (texture.image.bits_per_pixel / 8)));
