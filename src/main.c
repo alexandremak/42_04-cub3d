@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:30:11 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 17:00:27 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/09 16:36:31 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	setup(t_file *cube)
 	cube->ceiling_rgb[1] = -1;
 	cube->ceiling_rgb[2] = -1;
 	cube->ceiling_rgb[3] = 0;
+	cube->show_minimap = 0;
 /* 	cube->map = NULL;
 	cube->rows = 0;
 	cube->columns = 0;
