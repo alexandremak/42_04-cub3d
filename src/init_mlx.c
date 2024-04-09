@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 22:05:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/09 19:12:39 by facu             ###   ########.fr       */
+/*   Updated: 2024/04/09 19:24:09 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	key_press(int keycode, t_cube *file)
 			move(&file->player, keycode, file->map);
 		else if (keycode == LA)
 		{
-			file->player.angle -= (PI / PIDIVUNITS);
+			file->player.angle -= TURNANGLE;
 			if (file->player.angle < 0)
 				file->player.angle += (2 * PI);
 			file->player.direction.x = cos(file->player.angle);
@@ -58,7 +58,7 @@ int	key_press(int keycode, t_cube *file)
 		}
 		else if (keycode == RA)
 		{
-			file->player.angle += (PI / PIDIVUNITS);
+			file->player.angle += TURNANGLE;
 			if (file->player.angle > (2 * PI))
 				file->player.angle -= (2 * PI);
 			file->player.direction.x = cos(file->player.angle);

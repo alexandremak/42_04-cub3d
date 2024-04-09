@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   2d_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 22:31:24 by amak              #+#    #+#             */
 /*   Updated: 2024/04/09 16:34:43 by ftroiter         ###   ########.fr       */
@@ -96,7 +96,6 @@ void	draw_minimap(t_cube *cube, t_window *graphic)
 {
 	int		i;
 	float	angle;
-
 	i = 1;
 	angle = cube->player.angle - (15 * UANGLE);
 	cube->map_scale = min(SCREEN_WIDTH / cube->columns, SCREEN_HEIGHT

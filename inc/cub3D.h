@@ -41,7 +41,7 @@
 /* SIZE OF WINDOW AND EACH TILE */
 # define PX 64
 # define PACE 5
-# define PIDIVUNITS 18
+# define TURNANGLE 0.1
 # define PLYLEN 9
 # define UANGLE 3.141592 / 360
 # define FOV			1.047198

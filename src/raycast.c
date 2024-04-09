@@ -6,7 +6,7 @@
 /*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 18:17:32 by amak              #+#    #+#             */
-/*   Updated: 2024/04/09 19:12:39 by facu             ###   ########.fr       */
+/*   Updated: 2024/04/08 23:33:42 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,19 @@ void	castray(t_ray *ray, t_player *player, t_cube *file, float angle)
 			hit = 1;
 		}
 	}
+	// printf("--------------------------------\n");
+	// printf("py= %d | px= %d | pa= %f \n", (int)player->position.y, (int)player->position.x, player->angle);
+	// printf("ry= %d | rx= %d | ra= %f \n", ray->y, ray->x, ray->angle);
+	// printf("collision= ");
+	// if (ray->wall_texture == NORTH)
+	// 	printf("NORTH | \n");
+	// if (ray->wall_texture == SOUTH)
+	// 		printf("SOUTH | ");
+	// if (ray->wall_texture == EAST)
+	// 	printf("EAST | ");
+	// if (ray->wall_texture == WEST)
+	// 	printf("WEST | ");
+	// printf("side= %d", ray->hit_vert_wall);
 }
 
 void	raycasting(t_cube *file, t_ray *rays)
@@ -89,6 +102,10 @@ void	raycasting(t_cube *file, t_ray *rays)
 			delta_angle -= (2 * PI);
 		rays[pixel_column].length *= cos(delta_angle);
 		angle += (FOV / SCREEN_WIDTH);
+		if (angle < 0)
+			angle += (2 * PI);
+		if (angle > (2 * PI))
+			angle -= (2 * PI);
 		pixel_column++;
 	}
 }
