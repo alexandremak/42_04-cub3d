@@ -12,40 +12,49 @@
 
 #include "../inc/cub3D.h"
 
-void	draw_square(t_image *image, int x, int y, int color, int map_scale)
+void	draw_square(t_cube *cube, int x, int y, int color)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < map_scale)
+	printf("cube->map_scale: %d\n", cube->map_scale);
+	while (i < cube->map_scale)
 	{
 		j = 0;
-		while (j < map_scale)
+		while (j < cube->map_scale)
 		{
-			if (i == 0 || j == 0 || i == map_scale - 1 || j == map_scale - 1)
-				my_mlx_pixel_put(image, x + i, y + j, RED);
+			if (i == 0 || j == 0 || i == cube->map_scale - 1
+				|| j == cube->map_scale - 1)
+				my_mlx_pixel_put(&cube->graphic.image, x + i, y + j, RED);
 			else
-				my_mlx_pixel_put(image, x + i, y + j, color);
+				my_mlx_pixel_put(&cube->graphic.image, x + i, y + j, color);
 			j++;
 		}
 		i++;
 	}
 }
 
-static void draw_grid(t_image *image, t_cube *cube, int map_scale)
+static void	draw_grid(t_cube *cube)
 {
-	int y = 0;
+	int		y;
+	int		x;
+	char	cell;
+
+	y = 0;
 	while (y < cube->rows)
 	{
-		int x = 0;
+		x = 0;
 		while (x < cube->columns - 1)
 		{
-			char cell = cube->map[y][x];
+			cell = cube->map[y][x];
 			if (cell == '1')
-				draw_square(image, x * map_scale, y * map_scale, LIGHT_GREY, map_scale);
-			else if (cell != '\n' && cell != '\0' && (cell == '0' || ft_strchr("NSEW", cell)))
-				draw_square(image, x * map_scale, y * map_scale, BLACK, map_scale);
+				draw_square(cube, x * cube->map_scale, y * cube->map_scale,
+					LIGHT_GREY);
+			else if (cell != '\n' && cell != '\0' && (cell == '0'
+					|| ft_strchr("NSEW", cell)))
+				draw_square(cube, x * cube->map_scale, y * cube->map_scale,
+					BLACK);
 			x++;
 		}
 		y++;
@@ -54,11 +63,15 @@ static void draw_grid(t_image *image, t_cube *cube, int map_scale)
 
 static void	draw_player(t_image *image, t_player *player, int map_scale)
 {
-	int	y;
-	int	x;
-	float px_division = (float)PX / map_scale;
-	int player_x = round(player->position.x / px_division);
-	int player_y = round(player->position.y / px_division);
+	int		y;
+	int		x;
+	float	px_division;
+	int		player_x;
+	int		player_y;
+
+	px_division = (float)PX / map_scale;
+	player_x = round(player->position.x / px_division);
+	player_y = round(player->position.y / px_division);
 	y = 0;
 	while (y < PLYLEN)
 	{
@@ -72,30 +85,25 @@ static void	draw_player(t_image *image, t_player *player, int map_scale)
 	}
 }
 
-int min(int a, int b)
+int	min(int a, int b)
 {
 	if (a < b)
-		return a;
-	return b;
+		return (a);
+	return (b);
 }
 
 void	draw_minimap(t_cube *cube, t_window *graphic)
 {
 	int		i;
 	float	angle;
-	int		map_scale;
-	
+
 	i = 1;
 	angle = cube->player.angle - (15 * UANGLE);
-    map_scale = min(SCREEN_WIDTH / cube->columns, SCREEN_HEIGHT / cube->rows);
-	draw_grid(&graphic->image, cube, map_scale);
-	draw_player(&graphic->image, &cube->player, map_scale);
-	//draw_ray_scaled(&graphic->image, &cube->player, file, cube->player.angle, map_scale);
-	/*while (i <= 30)
-	{
-		draw_ray(&graphic->image, &cube->player, file, angle + (i * UANGLE));
-		i++;
-	}*/
-	mlx_put_image_to_window(graphic->mlx, graphic->win, graphic->image.img, 
-		0, 0);
+	cube->map_scale = min(SCREEN_WIDTH / cube->columns, SCREEN_HEIGHT
+			/ cube->rows);
+	printf("cube->map_scale: %d\n", cube->map_scale);
+	draw_grid(cube);
+	draw_player(&graphic->image, &cube->player, cube->map_scale);
+	mlx_put_image_to_window(graphic->mlx, graphic->win, graphic->image.img, 0,
+		0);
 }

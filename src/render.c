@@ -12,29 +12,30 @@
 
 #include "../inc/cub3D.h"
 
-static void create_new_image(t_window *graphic) {
+static void	create_new_image(t_window *graphic)
+{
 	if (graphic->image.img != NULL)
 		mlx_destroy_image(graphic->mlx, graphic->image.img);
-	graphic->image.img = mlx_new_image(graphic->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
-	graphic->image.addr = mlx_get_data_addr(graphic->image.img, 
-			&(graphic->image.bits_per_pixel), 
-			&(graphic->image.line_length), 
+	graphic->image.img = mlx_new_image(graphic->mlx, SCREEN_WIDTH,
+			SCREEN_HEIGHT);
+	graphic->image.addr = mlx_get_data_addr(graphic->image.img,
+			&(graphic->image.bits_per_pixel), &(graphic->image.line_length),
 			&(graphic->image.endian));
 }
 
-void	render_scene(t_cube *file)
+void	render_scene(t_cube *cube)
 {
-	t_window	*graphic;
-	t_ray		*rays; // TODO: move to file struct
+	t_window *graphic;
 
-	rays = (t_ray *)malloc(sizeof(t_ray) * SCREEN_WIDTH);
-	graphic = &file->graphic;
+	cube->rays = (t_ray *)malloc(sizeof(t_ray) * SCREEN_WIDTH);
+	graphic = &cube->graphic;
 	create_new_image(graphic);
-	raycasting(file, rays);
-	draw_floor_and_ceiling(file);
-	draw_walls(file, rays);
-	if (file->show_minimap)
-		draw_minimap(file, graphic);
-	free(rays);
-	mlx_put_image_to_window(graphic->mlx, graphic->win, graphic->image.img, 0, 0);
+	raycasting(cube, cube->rays);
+	draw_floor_and_ceiling(cube);
+	draw_walls(cube, cube->rays);
+	if (cube->show_minimap)
+		draw_minimap(cube, graphic);
+	free(cube->rays);
+	mlx_put_image_to_window(graphic->mlx, graphic->win, graphic->image.img, 0,
+		0);
 }

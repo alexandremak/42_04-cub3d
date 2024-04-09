@@ -1,53 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   parse_metadata_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/27 21:46:48 by amak              #+#    #+#             */
-/*   Updated: 2024/04/09 19:12:39 by facu             ###   ########.fr       */
+/*   Created: 2024/04/09 19:47:23 by facu              #+#    #+#             */
+/*   Updated: 2024/04/09 19:48:53 by facu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-void	free_str_arr(char **arr)
+int	is_valid_rgb(char *number)
 {
-	int	i;
-
-	i = 0;
-	if (*arr)
-	{
-		while (arr[i])
-		{
-			free(arr[i]);
-			i++;
-		}
-		free(arr);
-	}
+	return (ft_strlen(number) <= 4 && ft_isdigit_str(number));
 }
 
-static void	free_file(t_cube *file)
+int	process_numbers(char **numbers, int *rgb)
 {
 	int	i;
+	int	error;
 
-	if (file->filepath)
-		free(file->filepath);
 	i = 0;
-	while (i < 4)
+	error = 0;
+	while (i < 3 && numbers[i])
 	{
-		if (file->texture_paths[i])
-			free(file->texture_paths[i]);
+		if (!is_valid_rgb(numbers[i]))
+		{
+			error = 1;
+			break ;
+		}
+		rgb[i] = ft_atoi(numbers[i]);
 		i++;
 	}
-	if (file->content)
-		free_str_arr(file->content);
-	if (file->map)
-		free_str_arr(file->map);
-}
-
-void	free_all(t_cube *file)
-{
-	free_file(file);
+	while (i < 3)
+	{
+		error = 1;
+		i++;
+	}
+	if (!error)
+		rgb[3] = 1;
+	return (error);
 }

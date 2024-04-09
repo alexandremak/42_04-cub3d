@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/09 19:06:42 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/09 21:05:43 by facu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_ray
 	int			hit_vert_wall;
 	int			wall_texture;
 	int			wall_hit;
+	int			wall_height;
 }	t_ray;
 
 typedef struct s_image
@@ -134,8 +135,9 @@ typedef struct s_file
 	t_player	player;
 	t_window	graphic;
 	int			show_minimap;
+	int			map_scale;
 	t_texture	textures[4];
-	t_ray		rays[SCREEN_WIDTH];
+	t_ray		*rays;
 }				t_cube;
 
 /* EXIT  */
@@ -157,7 +159,9 @@ void	check_map(t_cube *file, char **map);
 int		extract_metadata(t_cube *file, char **splited);
 void	parse_values(t_cube *file, char **content);
 void	extract_player_position(t_cube *file, int y, int x, char c);
-void	get_map(t_cube *file, char **mtrx);
+void	parse_map(t_cube *file, char **mtrx);
+int		is_valid_rgb(char *number);
+int		process_numbers(char **numbers, int *rgb);
 
 /* MLX */
 void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
@@ -193,6 +197,11 @@ void	draw_walls(t_cube *file, t_ray *rays);
 
 /* TEXTURES */
 void	load_textures(t_cube *cube);
-int		get_texture_color(t_cube *file, int y, int offset_x, t_ray ray, int wall_height);
+int		get_texture_color(t_cube *file, int y, int offset_x, t_ray ray);
+
+void	print_content(t_cube cube, int bool);
+void	check_inside(t_cube *file, char **map);
+
+
 
 #endif

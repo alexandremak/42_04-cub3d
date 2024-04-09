@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extract_data.c                                     :+:      :+:    :+:   */
+/*   parse_metadata.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 21:00:21 by amak              #+#    #+#             */
-/*   Updated: 2024/04/09 19:06:42 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:45:11 by facu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static int	extract_rgb(t_cube *file, int *rgb, char *splited)
 {
 	char	**numbers;
-	int		i;
-	int		error = 0;
+	int		error;
 
+	error = 0;
 	if (rgb[3] || !splited)
 		error = 1;
 	else
@@ -26,21 +26,7 @@ static int	extract_rgb(t_cube *file, int *rgb, char *splited)
 		if (ft_strarr_size(numbers) > 3)
 			error = 1;
 		else
-		{
-			for (i = 0; i < 3 && numbers[i]; i++)
-			{
-				if (ft_strlen(numbers[i]) > 4 || !ft_isdigit_str(numbers[i]))
-				{
-					error = 1;
-					break;
-				}
-				rgb[i] = ft_atoi(numbers[i]);
-			}
-			if (i < 3)
-				error = 1;
-			else
-				rgb[3] = 1;
-		}
+			error = process_numbers(numbers, rgb);
 		free_str_arr(numbers);
 	}
 	if (error)

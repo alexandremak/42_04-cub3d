@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:53:37 by amak              #+#    #+#             */
-/*   Updated: 2024/04/09 19:06:42 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:12:39 by facu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	file_ext_ok(char *filepath)
 
 static int	file_exists(char *filepath, t_cube *file)
 {
-	int		res;
+	int	res;
 
 	res = 0;
 	if (!filepath)

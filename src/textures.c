@@ -3,41 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:05:49 by ftroiter          #+#    #+#             */
-/*   Updated: 2024/04/09 19:06:42 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/09 20:38:15 by facu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-void load_textures(t_cube *cube)
+void	load_texture(t_cube *cube, t_texture *tx, char *path)
 {
-	int i = 0;
-	while (i < MAX_TEXTURES)
-	{
-		cube->textures[i].image.img = mlx_xpm_file_to_image(cube->graphic.mlx, cube->texture_paths[i], 
-			&cube->textures[i].width, &cube->textures[i].height);
-		if (cube->textures[i].image.img == NULL)
-			exit_error("Error: Failed to load texture\n", cube);
-		cube->textures[i].image.addr = mlx_get_data_addr(cube->textures[i].image.img, 
-			&cube->textures[i].image.bits_per_pixel, &cube->textures[i].image.line_length, 
-			&cube->textures[i].image.endian);
-		if (cube->textures[i].image.addr == NULL)
-			exit_error("Error: Failed to get data address for texture\n", cube);
-		i++;
-	}
-	printf("\n\n>>> TEXTURES LOADED: <<<\n\n");
+	tx->image.img = mlx_xpm_file_to_image(cube->graphic.mlx, path, &tx->width,
+			&tx->height);
+	if (tx->image.img == NULL)
+		exit_error("Error: Failed to load texture\n", cube);
+	tx->image.addr = mlx_get_data_addr(tx->image.img, &tx->image.bits_per_pixel,
+			&tx->image.line_length, &tx->image.endian);
+	if (tx->image.addr == NULL)
+		exit_error("Error: Failed to get data address for texture\n", cube);
+}
+
+void	load_textures(t_cube *cube)
+{
+	int			i;
+	t_texture	*tx;
+
 	i = 0;
 	while (i < MAX_TEXTURES)
 	{
-		printf("texture %d: path: %s, width: %d, height: %d\n", i, cube->texture_paths[i], cube->textures[i].width, cube->textures[i].height);
+		tx = &cube->textures[i];
+		load_texture(cube, tx, cube->texture_paths[i]);
 		i++;
 	}
 }
 
-int	get_texture_color(t_cube *file, int y, int offset_x, t_ray ray, int wall_height)
+int	get_texture_color(t_cube *file, int y, int offset_x, t_ray ray)
 {
 	t_texture	texture;
 	int			offset[2];
@@ -46,8 +47,10 @@ int	get_texture_color(t_cube *file, int y, int offset_x, t_ray ray, int wall_hei
 
 	texture = file->textures[ray.wall_texture];
 	offset[0] = offset_x;
-	dist_to_top = y + (wall_height / 2) - (SCREEN_HEIGHT / 2);
-	offset[1] = (dist_to_top * ((float)texture.height / wall_height)); 
-	color = *(unsigned int *)(texture.image.addr + (offset[1] * texture.image.line_length + offset[0] * (texture.image.bits_per_pixel / 8)));
+	dist_to_top = y + (ray.wall_height / 2) - (SCREEN_HEIGHT / 2);
+	offset[1] = (dist_to_top * ((float)texture.height / ray.wall_height));
+	color = *(unsigned int *)(texture.image.addr + (offset[1]
+				* texture.image.line_length + offset[0]
+				* (texture.image.bits_per_pixel / 8)));
 	return (color);
 }
