@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 21:15:14 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/09 16:53:05 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define D 100
 # define LA 65361
 # define RA 65363
+# define M 109
 
 /* SIZE OF WINDOW AND EACH TILE */
 # define PX 64
@@ -124,52 +125,51 @@ typedef struct s_file
 	int			columns;
 	t_player	player;
 	t_window	graphic;
+	int			show_minimap;
 	t_texture	textures[4];
 	t_ray		rays[SCREEN_WIDTH];
 }				t_file;
 
-/* EXIT FUNCTIONS */
+/* EXIT  */
 void	exit_error(char *message, t_file *file);
 void	exit_game(t_file *file);
 void	free_str_arr(char **arr);
 void	free_all(t_file *file);
 
-/* CHECK AND LOAD FUNCTIONS */
-void	check_file(int argc, char **argv, t_file *file);
+/* VALIDATION  */
 void	read_scene_file(t_file *file);
+void	check_file(int argc, char **argv, t_file *file);
 int		texture_paths_ok(t_file *file);
-void	parse_values(t_file *file, char **content);
 int		texture_paths_ok(t_file *file);
 int		text_rgb_ok(t_file *file);
-
-/* EXTRACT DATA FUNCTIONS */
-int		extract_metadata(t_file *file, char **splited);
-void	extract_player_position(t_file *file, int y, int x, char c);
-
-/* EXTRACT MAP FUNCTIONS */
-void	get_map(t_file *file, char **mtrx);
-
-/* CHECK FILE CONTENT */
 void	check_content(t_file *file);
-
-/* CHECK MAP */
 void	check_map(t_file *file, char **map);
 
-/* MLX FUNCTIONS*/
+/* PARSE DATA  */
+int		extract_metadata(t_file *file, char **splited);
+void	parse_values(t_file *file, char **content);
+void	extract_player_position(t_file *file, int y, int x, char c);
+void	get_map(t_file *file, char **mtrx);
+
+/* MLX */
 void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
 void	put_pixel_to_image(t_image *image_data, int x, int y, int color);
 void	init_mlx(t_file *file);
 int		key_press(int keycode, t_file *file);
 
-/* BUILD MAP FUNCTIONS*/
-void	draw_map(t_file *file, t_window *graphic);
-void	put_square(t_image *image, int x, int y, int color, int out_color);
+/* 2D RENDER */
+void	draw_minimap(t_file *file, t_window *graphic);
 
-/* MOVEMENT FUNCTIONS */
+/* 3D RENDER */
+void	draw_floor_and_ceiling(t_file *cube);
+void	draw_walls(t_file *file, t_ray *rays);
+
+
+/* MOVEMENT  */
 int		check_wall(int posy, int posx, char **map);
 void	move(t_player *player, int keycode, char **map);
 
-/* DDA UTILS FUNCTIONS*/
+/* DDA UTILS */
 int		distance_y(int y, float angle);
 int		distance_x(int x, float angle);
 float	get_x_step(int adj, float angle);
@@ -180,7 +180,7 @@ void	increment_ray_length(t_ray *ray, float step_y, float step_x);
 void	draw_ray(t_image *image, t_player *player, t_file *file, float angle);
 void	castray(t_ray *ray, t_player *player, t_file *file, float angle);
 void	raycasting(t_file *file, t_ray *rays);
-void	render_cicle(t_file *file);
+void	render_scene(t_file *file);
 void	draw_walls(t_file *file, t_ray *rays);
 
 /* TEXTURES */
