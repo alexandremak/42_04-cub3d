@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/09 21:05:43 by facu             ###   ########.fr       */
+/*   Updated: 2024/04/10 00:11:04 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,30 +72,30 @@ enum wall_direction {
 /* STRUCTURES */
 typedef struct s_vector
 {
-	float		x;
-	float		y;
+	double		x;
+	double		y;
 }				t_vector;
 
 typedef struct s_player
 {
 	t_vector	position;
 	t_vector	direction;
-	float		angle;
+	double		angle;
 }				t_player;
 
 typedef struct s_ray
 {
-	int			y;
-	int			x;
-	int			distance_y;
-	int			distance_x;
-	t_vector	direction;
-	float		angle;
-	float		length;
-	int			hit_vert_wall;
-	int			wall_texture;
-	int			wall_hit;
-	int			wall_height;
+	double			y;
+	double			x;
+	double			distance_y;
+	double			distance_x;
+	t_vector		direction;
+	double			angle;
+	double			length;
+	int				hit_vert_wall;
+	int				wall_texture;
+	double			wall_hit;
+	int				wall_height;
 }	t_ray;
 
 typedef struct s_image
@@ -182,15 +182,15 @@ int		check_wall(int posy, int posx, char **map);
 void	move(t_player *player, int keycode, char **map);
 
 /* DDA UTILS */
-int		distance_y(int y, float angle);
-int		distance_x(int x, float angle);
-float	get_x_step(int adj, float angle);
-float	get_y_step(int opose, float angle);
-void	increment_ray_length(t_ray *ray, float step_y, float step_x);
+double		distance_y(int y, double angle);
+double		distance_x(int x, double angle);
+double	get_x_step(int adj, double angle);
+double	get_y_step(int opose, double angle);
+void	increment_ray_length(t_ray *ray, double step_y, double step_x);
 
 /* RAYCASTING */
-void	draw_ray(t_image *image, t_player *player, t_cube *file, float angle);
-void	castray(t_ray *ray, t_player *player, t_cube *file, float angle);
+void	draw_ray(t_image *image, t_player *player, t_cube *file, double angle);
+void	castray(t_ray *ray, t_player *player, t_cube *file, double angle);
 void	raycasting(t_cube *file, t_ray *rays);
 void	render_scene(t_cube *file);
 void	draw_walls(t_cube *file, t_ray *rays);

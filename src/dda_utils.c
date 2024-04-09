@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   dda_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 16:09:38 by amak              #+#    #+#             */
-/*   Updated: 2024/04/09 19:12:39 by facu             ###   ########.fr       */
+/*   Updated: 2024/04/10 00:05:56 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-int	distance_y(int y, float angle)
+double	distance_y(int y, double angle)
 {
 	int	i;
-	int	res;
+	double	res;
 
 	i = 0;
 	res = 0;
@@ -23,76 +23,76 @@ int	distance_y(int y, float angle)
 		return (0);
 	if (angle < PI)
 	{
-		while ((i * PX) <= y)
+		while ((i* PX) <= y)
 			i++;
-		res = (i * PX) - y;
+		res = (i* PX) - y;
 	}
 	else if (angle > PI)
 	{
-		while ((i * PX) <= y)
+		while ((i* PX) <= y)
 			i++;
 		i--;
-		res = y - (i * PX) + 1;
+		res = y - (i* PX) + 1;
 	}
 	return (res);
 }
 
-int	distance_x(int x, float angle)
+double	distance_x(int x, double angle)
 {
 	int	i;
-	int	res;
+	double	res;
 
 	i = 0;
 	res = 0;
 	if (angle > (PI / 2) && angle < ((3 * PI) / 2))
 	{
-		while ((i * PX) <= x)
+		while ((i* PX) <= x)
 			i++;
 		i--;
-		res = x - (i * PX) + 1;
+		res = x - (i* PX) + 1;
 	}
 	if (angle < (PI / 2) || angle > ((3 * PI) / 2))
 	{
-		while ((i * PX) <= x)
+		while ((i* PX) <= x)
 			i++;
-		res = (i * PX) - x;
+		res = (i* PX) - x;
 	}
 	return (res);
 }
 
-float	get_x_step(int adj, float angle)
+double	get_x_step(int adj, double angle)
 {
-	float	result;
-	int		int_angle;
-	int		ninety;
-	int		twoseventy;
+	double		result;
+	double		int_angle;
+	double		ninety;
+	double		twoseventy;
 
 	result = 0;
-	int_angle = (int)(angle * 10000000) - 1;
-	ninety = (int)(((PI / 2)) * 10000000);
-	twoseventy = (int)(((3 * PI) / 2) * 10000000);
+	int_angle = (double)(angle * 10000000) - 1;
+	ninety = (double)(((PI / 2)) * 10000000);
+	twoseventy = (double)(((3 * PI) / 2) * 10000000);
 	if (int_angle == ninety || int_angle == twoseventy)
 		return (0);
 	result = fabs(adj / cos(angle));
 	return (result);
 }
 
-float	get_y_step(int opose, float angle)
+double	get_y_step(int opose, double angle)
 {
-	float	result;
+	double	result;
 	int		int_angle;
 	int		oneeighty;
 
 	result = 0;
-	int_angle = (int)(angle * 10000000);
-	oneeighty = (int)(PI * 10000000) + 1;
+	int_angle = (double)(angle * 10000000);
+	oneeighty = (double)(PI * 10000000) + 1;
 	if (int_angle == oneeighty || int_angle == 0)
 		return (0);
 	result = fabs(opose / sin(angle));
 	return (result);
 }
 
-void	increment_ray_length(t_ray *ray, float step_y, float step_x)
+void	increment_ray_length(t_ray *ray, double step_y, double step_x)
 {
 	if (step_x == 0 || (step_y && step_y <= step_x))
 	{

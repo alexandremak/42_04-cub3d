@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 18:17:32 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 23:33:42 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/10 00:08:49 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,16 @@ static void	wall_collision(t_ray *ray)
 static void	wall_point(t_ray *ray)
 {
 	if (ray->wall_texture == WEST)
-		ray->wall_hit = ray->y % PX;
+		ray->wall_hit = (int)ray->y % PX;
 	else if (ray->wall_texture == EAST)
-		ray->wall_hit = PX - ((ray->y % PX) + 1);
+		ray->wall_hit = PX - (((int)ray->y % PX) + 1);
 	else if (ray->wall_texture == NORTH)
-		ray->wall_hit = PX - ((ray->x % PX) + 1);
+		ray->wall_hit = PX - (((int)ray->x % PX) + 1);
 	else if (ray->wall_texture == SOUTH)
-		ray->wall_hit = ray->x % PX;
+		ray->wall_hit = (int)ray->x % PX;
 }
 
-void	castray(t_ray *ray, t_player *player, t_cube *file, float angle)
+void	castray(t_ray *ray, t_player *player, t_cube *file, double angle)
 {
 	int	hit;
 
@@ -51,8 +51,8 @@ void	castray(t_ray *ray, t_player *player, t_cube *file, float angle)
 	ray->wall_texture = NONE;
 	ray->hit_vert_wall = 0;
 	ray->wall_hit = 0;
-	ray->y = (int)player->position.y;
-	ray->x = (int)player->position.x;
+	ray->y = (double)player->position.y;
+	ray->x = (double)player->position.x;
 	ray->angle = angle;
 	ray->direction.x = cos(angle);
 	ray->direction.y = sin(angle);
@@ -70,7 +70,7 @@ void	castray(t_ray *ray, t_player *player, t_cube *file, float angle)
 		}
 	}
 	// printf("--------------------------------\n");
-	// printf("py= %d | px= %d | pa= %f \n", (int)player->position.y, (int)player->position.x, player->angle);
+	// printf("py= %d | px= %d | pa= %f \n", (double)player->position.y, (double)player->position.x, player->angle);
 	// printf("ry= %d | rx= %d | ra= %f \n", ray->y, ray->x, ray->angle);
 	// printf("collision= ");
 	// if (ray->wall_texture == NORTH)
@@ -86,8 +86,8 @@ void	castray(t_ray *ray, t_player *player, t_cube *file, float angle)
 
 void	raycasting(t_cube *file, t_ray *rays)
 {
-	float	angle;
-	float	delta_angle;
+	double	angle;
+	double	delta_angle;
 	int		pixel_column;
 
 	angle = file->player.angle - (HALF_FOV);
@@ -110,14 +110,14 @@ void	raycasting(t_cube *file, t_ray *rays)
 	}
 }
 
-void	draw_ray(t_image *image, t_player *player, t_cube *file, float angle)
+void	draw_ray(t_image *image, t_player *player, t_cube *file, double angle)
 {
 	int		i;
 	t_ray	ray;
 
 	i = 1;
 	castray(&ray, player, file, angle);
-	while (i <= (int)ray.length)
+	while (i <= (double)ray.length)
 	{
 		my_mlx_pixel_put(image, player->position.x + (i * cos(angle)),
 			player->position.y + (i * sin(angle)), 0x0000ff00);
