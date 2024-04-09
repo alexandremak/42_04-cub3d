@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   2d_map.c                                        :+:      :+:    :+:   */
+/*   build_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 22:31:24 by amak              #+#    #+#             */
-/*   Updated: 2024/04/09 16:34:43 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/09 00:41:16 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-void	draw_square(t_image *image, int x, int y, int color, int out_color)
+void	put_square(t_image *image, int x, int y, int color, int out_color)
 {
 	int	i;
 	int	j;
@@ -33,7 +33,7 @@ void	draw_square(t_image *image, int x, int y, int color, int out_color)
 	}
 }
 
-static void	draw_grid(t_image *image, t_file *file, int map_scale)
+static void	put_grid(t_image *image, t_file *file)
 {
 	int	y;
 	int	x;
@@ -45,57 +45,71 @@ static void	draw_grid(t_image *image, t_file *file, int map_scale)
 		while (x < file->columns - 1)
 		{
 			if (file->map[y][x] == '1' || file->map[y][x] == '\n')
-				draw_square(image, x * map_scale, y * map_scale, 0x00dfdfdf, 0x00ff0000);
+				put_square(image, x * PX, y * PX, 0x00dfdfdf, 0x00ff0000);
 			else if (file->map[y][x] == '0' || 
 				ft_strchr("NSEW", file->map[y][x]))
-				draw_square(image, x * map_scale, y * map_scale, 0x00000000, 0x00ff0000);
+				put_square(image, x * PX, y * PX, 0x00000000, 0x00ff0000);
 			x++;
 		}
 		y++;
 	}
 }
 
-static void	draw_player(t_image *image, t_player *player, int map_scale)
+static void	put_player(t_image *image, t_player *player)
 {
 	int	y;
 	int	x;
-	float px_division = (float)PX / map_scale;
-	int player_x = round(player->position.x / px_division);
-	int player_y = round(player->position.y / px_division);
+
 	y = 0;
 	while (y < PLYLEN)
 	{
 		x = 0;
 		while (x < PLYLEN)
 		{
-			my_mlx_pixel_put(image, player_x + x, player_y + y, 0x00ffff00);
+			my_mlx_pixel_put(image, player->position.x - (PLYLEN / 2) + x, 
+				player->position.y -(PLYLEN / 2) + y, 0x00ffff00);
 			x++;
 		}
 		y++;
 	}
+	y = 1;
+	while (y <= PLYLEN)
+	{
+		my_mlx_pixel_put(image, 
+			player->position.x + (y * player->direction.x), 
+			player->position.y + (y * player->direction.y), 0x00ff0000);
+		y++;
+	}
 }
 
-int min(int a, int b)
+void	draw_ray(t_image *image, t_player *player, t_file *file, float angle)
 {
-	if (a < b)
-		return a;
-	return b;
+	int		i;
+	t_ray	ray;
+
+	i = 1;
+	castray(&ray, player, file, angle);
+	while (i <= (int)ray.length)
+	{
+		my_mlx_pixel_put(image, player->position.x + (i * cos(angle)),
+			player->position.y + (i * sin(angle)), 0x0000ff00);
+		i++;
+	}
 }
 
-void	draw_minimap(t_file *file, t_window *graphic)
+void	draw_map(t_file *file, t_window *graphic)
 {
 	int		i;
 	float	angle;
 	float	sum_angle;
-	int		map_scale;
-	
+
 	i = 1;
 	angle = file->player.angle - (15 * UANGLE);
-    map_scale = min(SCREEN_WIDTH / file->columns, SCREEN_HEIGHT / file->rows);
-	draw_grid(&graphic->image, file, map_scale);
-	draw_player(&graphic->image, &file->player, map_scale);
-	//draw_ray_scaled(&graphic->image, &file->player, file, file->player.angle, map_scale);
-	/*while (i <= 30)
+	mlx_clear_window(graphic->mlx, graphic->win);
+	put_grid(&graphic->image, file);
+	put_player(&graphic->image, &file->player);
+	draw_ray(&graphic->image, &file->player, file, file->player.angle);
+	while (i <= 30)
 	{
 		sum_angle = angle + (i * UANGLE);
 		if (sum_angle < 0)
@@ -104,7 +118,7 @@ void	draw_minimap(t_file *file, t_window *graphic)
 			sum_angle -= (2 * PI);
 		draw_ray(&graphic->image, &file->player, file, angle + (i * UANGLE));
 		i++;
-	}*/
+	}
 	mlx_put_image_to_window(graphic->mlx, graphic->win, graphic->image.img, 
 		0, 0);
 }

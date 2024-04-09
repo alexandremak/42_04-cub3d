@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/09 16:53:05 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:23:02 by amak             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 /* SIZE OF WINDOW AND EACH TILE */
 # define PX 64
 # define PACE 5
-# define PIDIVUNITS 18
+# define TURNANGLE 0.1
 # define PLYLEN 9
 # define UANGLE 3.141592 / 360
 # define FOV			1.047198
