@@ -12,18 +12,18 @@
 
 #include "../inc/cub3D.h"
 
-void	draw_square(t_image *image, int x, int y, int color)
+void	draw_square(t_image *image, int x, int y, int color, int map_scale)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (i < PX)
+	while (i < map_scale)
 	{
 		j = 0;
-		while (j < PX)
+		while (j < map_scale)
 		{
-			if (i == 0 || j == 0 || i == PX - 1 || j == PX - 1)
+			if (i == 0 || j == 0 || i == map_scale - 1 || j == map_scale - 1)
 				my_mlx_pixel_put(image, x + i, y + j, RED);
 			else
 				my_mlx_pixel_put(image, x + i, y + j, color);
@@ -33,22 +33,19 @@ void	draw_square(t_image *image, int x, int y, int color)
 	}
 }
 
-static void	draw_grid(t_image *image, t_file *file, int map_scale)
+static void draw_grid(t_image *image, t_cube *cube, int map_scale)
 {
-	int	y;
-	int	x;
-
-	y = 0;
-	while (y < file->rows)
+	int y = 0;
+	while (y < cube->rows)
 	{
-		x = 0;
-		while (x < file->columns - 1)
+		int x = 0;
+		while (x < cube->columns - 1)
 		{
-			if (file->map[y][x] == '1' || file->map[y][x] == '\n')
-				draw_square(image, x * map_scale, y * map_scale, LIGHT_GREY);
-			else if (file->map[y][x] == '0' || 
-				ft_strchr("NSEW", file->map[y][x]))
-				draw_square(image, x * map_scale, y * map_scale, BLACK);
+			char cell = cube->map[y][x];
+			if (cell == '1')
+				draw_square(image, x * map_scale, y * map_scale, LIGHT_GREY, map_scale);
+			else if (cell != '\n' && cell != '\0' && (cell == '0' || ft_strchr("NSEW", cell)))
+				draw_square(image, x * map_scale, y * map_scale, BLACK, map_scale);
 			x++;
 		}
 		y++;
@@ -82,21 +79,21 @@ int min(int a, int b)
 	return b;
 }
 
-void	draw_minimap(t_file *file, t_window *graphic)
+void	draw_minimap(t_cube *cube, t_window *graphic)
 {
 	int		i;
 	float	angle;
 	int		map_scale;
 	
 	i = 1;
-	angle = file->player.angle - (15 * UANGLE);
-    map_scale = min(SCREEN_WIDTH / file->columns, SCREEN_HEIGHT / file->rows);
-	draw_grid(&graphic->image, file, map_scale);
-	draw_player(&graphic->image, &file->player, map_scale);
-	//draw_ray_scaled(&graphic->image, &file->player, file, file->player.angle, map_scale);
+	angle = cube->player.angle - (15 * UANGLE);
+    map_scale = min(SCREEN_WIDTH / cube->columns, SCREEN_HEIGHT / cube->rows);
+	draw_grid(&graphic->image, cube, map_scale);
+	draw_player(&graphic->image, &cube->player, map_scale);
+	//draw_ray_scaled(&graphic->image, &cube->player, file, cube->player.angle, map_scale);
 	/*while (i <= 30)
 	{
-		draw_ray(&graphic->image, &file->player, file, angle + (i * UANGLE));
+		draw_ray(&graphic->image, &cube->player, file, angle + (i * UANGLE));
 		i++;
 	}*/
 	mlx_put_image_to_window(graphic->mlx, graphic->win, graphic->image.img, 

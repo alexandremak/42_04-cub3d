@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 22:05:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/09 16:48:28 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:06:42 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	put_pixel_to_image(t_image *image_data, int x, int y, int color)
 	*pixel_location = color;
 }
 
-void	init_mlx(t_file *file)
+void	init_mlx(t_cube *file)
 {
 	file->graphic.mlx = mlx_init();
 	load_textures(file);
@@ -40,7 +40,7 @@ void	init_mlx(t_file *file)
 }
 
 
-int	key_press(int keycode, t_file *file)
+int	key_press(int keycode, t_cube *file)
 {
 	if (keycode == ESC)
 		exit_game(file);

@@ -6,13 +6,13 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:37:21 by ftroiter          #+#    #+#             */
-/*   Updated: 2024/04/08 19:38:31 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:06:42 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void handle_line(t_file *file, char *line)
+static void handle_line(t_cube *file, char *line)
 {
 	char **split_line;
 
@@ -30,7 +30,7 @@ static void handle_line(t_file *file, char *line)
 	free(line);
 }
 
-static void parse_metadata(t_file *file, char ***content)
+static void parse_metadata(t_cube *file, char ***content)
 {
 	char *line;
 
@@ -52,7 +52,7 @@ static void skip_empty_lines(char ***content)
 		(*content)++;
 }
 
-void	parse_values(t_file *file, char **content)
+void	parse_values(t_cube *file, char **content)
 {
 	parse_metadata(file, &content);
 	skip_empty_lines(&content);

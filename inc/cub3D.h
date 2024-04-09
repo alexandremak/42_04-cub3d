@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/09 17:07:50 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:06:42 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@
 # define RED 0x00ff0000
 # define LIGHT_GREY 0x00dfdfdf
 # define BLACK 0x00000000
+# define X 0
+# define Y 1
 
 /* WALLS COLLISION VALUES*/
 enum wall_direction {
@@ -134,41 +136,41 @@ typedef struct s_file
 	int			show_minimap;
 	t_texture	textures[4];
 	t_ray		rays[SCREEN_WIDTH];
-}				t_file;
+}				t_cube;
 
 /* EXIT  */
-void	exit_error(char *message, t_file *file);
-void	exit_game(t_file *file);
+void	exit_error(char *message, t_cube *file);
+void	exit_game(t_cube *file);
 void	free_str_arr(char **arr);
-void	free_all(t_file *file);
+void	free_all(t_cube *file);
 
 /* VALIDATION  */
-void	read_scene_file(t_file *file);
-void	check_file(int argc, char **argv, t_file *file);
-int		texture_paths_ok(t_file *file);
-int		texture_paths_ok(t_file *file);
-int		text_rgb_ok(t_file *file);
-void	check_content(t_file *file);
-void	check_map(t_file *file, char **map);
+void	read_scene_file(t_cube *file);
+void	check_file(int argc, char **argv, t_cube *file);
+int		texture_paths_ok(t_cube *file);
+int		texture_paths_ok(t_cube *file);
+int		text_rgb_ok(t_cube *file);
+void	check_content(t_cube *file);
+void	check_map(t_cube *file, char **map);
 
 /* PARSE DATA  */
-int		extract_metadata(t_file *file, char **splited);
-void	parse_values(t_file *file, char **content);
-void	extract_player_position(t_file *file, int y, int x, char c);
-void	get_map(t_file *file, char **mtrx);
+int		extract_metadata(t_cube *file, char **splited);
+void	parse_values(t_cube *file, char **content);
+void	extract_player_position(t_cube *file, int y, int x, char c);
+void	get_map(t_cube *file, char **mtrx);
 
 /* MLX */
 void	my_mlx_pixel_put(t_image *data, int x, int y, int color);
 void	put_pixel_to_image(t_image *image_data, int x, int y, int color);
-void	init_mlx(t_file *file);
-int		key_press(int keycode, t_file *file);
+void	init_mlx(t_cube *file);
+int		key_press(int keycode, t_cube *file);
 
 /* 2D RENDER */
-void	draw_minimap(t_file *file, t_window *graphic);
+void	draw_minimap(t_cube *file, t_window *graphic);
 
 /* 3D RENDER */
-void	draw_floor_and_ceiling(t_file *cube);
-void	draw_walls(t_file *file, t_ray *rays);
+void	draw_floor_and_ceiling(t_cube *cube);
+void	draw_walls(t_cube *file, t_ray *rays);
 
 
 /* MOVEMENT  */
@@ -183,14 +185,14 @@ float	get_y_step(int opose, float angle);
 void	increment_ray_length(t_ray *ray, float step_y, float step_x);
 
 /* RAYCASTING */
-void	draw_ray(t_image *image, t_player *player, t_file *file, float angle);
-void	castray(t_ray *ray, t_player *player, t_file *file, float angle);
-void	raycasting(t_file *file, t_ray *rays);
-void	render_scene(t_file *file);
-void	draw_walls(t_file *file, t_ray *rays);
+void	draw_ray(t_image *image, t_player *player, t_cube *file, float angle);
+void	castray(t_ray *ray, t_player *player, t_cube *file, float angle);
+void	raycasting(t_cube *file, t_ray *rays);
+void	render_scene(t_cube *file);
+void	draw_walls(t_cube *file, t_ray *rays);
 
 /* TEXTURES */
-void	load_textures(t_file *cube);
-int		get_texture_color(t_file *file, int y, int offset_x, t_ray ray, int wall_height);
+void	load_textures(t_cube *cube);
+int		get_texture_color(t_cube *file, int y, int offset_x, t_ray ray, int wall_height);
 
 #endif

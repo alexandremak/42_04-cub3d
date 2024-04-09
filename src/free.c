@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 21:46:48 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 00:08:56 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:06:42 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_str_arr(char **arr)
 	}
 }
 
-static void	free_file(t_file *file)
+static void	free_file(t_cube *file)
 {
 	if (file->filepath)
 		free(file->filepath);
@@ -45,7 +45,7 @@ static void	free_file(t_file *file)
 		free_str_arr(file->map);
 }
 
-void	free_all(t_file *file)
+void	free_all(t_cube *file)
 {
 	free_file(file);
 }

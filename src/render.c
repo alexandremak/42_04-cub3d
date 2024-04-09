@@ -22,7 +22,7 @@ static void create_new_image(t_window *graphic) {
 			&(graphic->image.endian));
 }
 
-void	render_scene(t_file *file)
+void	render_scene(t_cube *file)
 {
 	t_window	*graphic;
 	t_ray		*rays; // TODO: move to file struct

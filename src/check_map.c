@@ -6,13 +6,13 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 23:40:17 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 19:48:46 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:06:42 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void	check_chr(t_file *file, char **map)
+static void	check_chr(t_cube *file, char **map)
 {
 	int	i;
 	int	j;
@@ -32,7 +32,7 @@ static void	check_chr(t_file *file, char **map)
 	}
 }
 
-static void	check_player(t_file *file, char **map)
+static void	check_player(t_cube *file, char **map)
 {
 	int	i;
 	int	j;
@@ -61,7 +61,7 @@ static void	check_player(t_file *file, char **map)
 		exit_error("Invalid player position", file);
 }
 
-static void	check_perimeter(t_file *file, char **map)
+static void	check_perimeter(t_cube *file, char **map)
 {
 	int	i;
 	int	last_row;
@@ -86,7 +86,7 @@ static void	check_perimeter(t_file *file, char **map)
 		i++;
 	}
 }
-static int	is_invalid_cell(t_file *file, char **map, int i, int j)
+static int	is_invalid_cell(t_cube *file, char **map, int i, int j)
 {
 	if (map[i][j] && ft_strchr("0NSEW", map[i][j]))
 	{
@@ -103,7 +103,7 @@ static int	is_invalid_cell(t_file *file, char **map, int i, int j)
 	return (0);
 }
 
-static void	check_inside(t_file *file, char **map)
+static void	check_inside(t_cube *file, char **map)
 {
 	int	i = 1;
 	int	j;
@@ -121,7 +121,7 @@ static void	check_inside(t_file *file, char **map)
 	}
 }
 
-void	check_map(t_file *file, char **map)
+void	check_map(t_cube *file, char **map)
 {
 	check_chr(file, map);
 	check_player(file, map);

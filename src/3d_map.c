@@ -6,13 +6,13 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 16:49:01 by ftroiter          #+#    #+#             */
-/*   Updated: 2024/04/09 16:52:07 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:06:42 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-void	draw_wall_column(t_file *file, t_ray ray, int start_point[2], int end_y, int texture_offset, int wall_height)
+void	draw_wall_column(t_cube *file, t_ray ray, int start_point[2], int end_y, int texture_offset, int wall_height)
 {
 	int		color;
 	int		y;
@@ -20,16 +20,13 @@ void	draw_wall_column(t_file *file, t_ray ray, int start_point[2], int end_y, in
 	y = start_point[1];
 	while (y < end_y)
 	{
-		if (y >= 0 && y <= SCREEN_HEIGHT)
-		{
-			color = get_texture_color(file, y, texture_offset, ray, wall_height);
-			my_mlx_pixel_put(&file->graphic.image, start_point[0], y, color);
-		}
+		color = get_texture_color(file, y, texture_offset, ray, wall_height);
+		my_mlx_pixel_put(&file->graphic.image, start_point[0], y, color);
 		y++;
 	}
 }
 
-void	draw_walls(t_file *file, t_ray *rays)
+void	draw_walls(t_cube *file, t_ray *rays)
 {
 	int		ray;
 	int		start_point[2];
@@ -41,10 +38,10 @@ void	draw_walls(t_file *file, t_ray *rays)
 	while (ray < SCREEN_WIDTH)
 	{
 		wall_height = ((PX / rays[ray].length) * PLANE_DIST);
-		start_point[0] = ray;
-		start_point[1] = floor(SCREEN_HEIGHT / 2) - (wall_height / 2);
-		if (start_point[1] < 0)
-			start_point[1] = 0;
+		start_point[X] = ray;
+		start_point[Y] = floor(SCREEN_HEIGHT / 2) - (wall_height / 2);
+		if (start_point[Y] < 0)
+			start_point[Y] = 0;
 		end_y = floor(SCREEN_HEIGHT / 2) + (wall_height / 2);
 		if (end_y >= SCREEN_HEIGHT)
 			end_y = SCREEN_HEIGHT - 1;
@@ -59,7 +56,7 @@ int	rgb_to_int(int r, int g, int b)
 	return (r << 16 | g << 8 | b);
 }
 
-void	color_fill(t_file *file, int start_y, int end_y, int color)
+void	color_fill(t_cube *file, int start_y, int end_y, int color)
 {
 	int x = 0, y = start_y;
 
@@ -75,7 +72,7 @@ void	color_fill(t_file *file, int start_y, int end_y, int color)
 	}
 }
 
-void	draw_floor_and_ceiling(t_file *cube)
+void	draw_floor_and_ceiling(t_cube *cube)
 {
 	int color;
 

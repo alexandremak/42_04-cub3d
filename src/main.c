@@ -6,13 +6,13 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:30:11 by amak              #+#    #+#             */
-/*   Updated: 2024/04/09 16:36:31 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:06:42 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void	print_content(t_file cube, int bool)
+static void	print_content(t_cube cube, int bool)
 {
 	int	i, j;
 
@@ -41,7 +41,7 @@ static void	print_content(t_file cube, int bool)
 	}
 }
 
-void	setup(t_file *cube)
+void	setup(t_cube *cube)
 {
 	cube->filepath = NULL;
 	cube->fd = 0;
@@ -76,7 +76,7 @@ void	setup(t_file *cube)
 
 int	main(int argc, char **argv)
 {
-	static t_file	cube;
+	static t_cube	cube;
 	setup(&cube);
 	check_file(argc, argv, &cube);
 	read_scene_file(&cube);
