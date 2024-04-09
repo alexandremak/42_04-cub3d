@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/09 16:53:05 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/09 17:07:50 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,13 @@
 # define SCREEN_WIDTH	1024
 # define SCREEN_HEIGHT  768
 
+/* STRUCT VALUES */
 # define MAX_TEXTURES 4
+
+/* COLORS */
+# define RED 0x00ff0000
+# define LIGHT_GREY 0x00dfdfdf
+# define BLACK 0x00000000
 
 /* WALLS COLLISION VALUES*/
 enum wall_direction {

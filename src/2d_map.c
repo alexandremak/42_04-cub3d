@@ -12,7 +12,7 @@
 
 #include "../inc/cub3D.h"
 
-void	draw_square(t_image *image, int x, int y, int color, int out_color)
+void	draw_square(t_image *image, int x, int y, int color)
 {
 	int	i;
 	int	j;
@@ -24,7 +24,7 @@ void	draw_square(t_image *image, int x, int y, int color, int out_color)
 		while (j < PX)
 		{
 			if (i == 0 || j == 0 || i == PX - 1 || j == PX - 1)
-				my_mlx_pixel_put(image, x + i, y + j, out_color);
+				my_mlx_pixel_put(image, x + i, y + j, RED);
 			else
 				my_mlx_pixel_put(image, x + i, y + j, color);
 			j++;
@@ -45,10 +45,10 @@ static void	draw_grid(t_image *image, t_file *file, int map_scale)
 		while (x < file->columns - 1)
 		{
 			if (file->map[y][x] == '1' || file->map[y][x] == '\n')
-				draw_square(image, x * map_scale, y * map_scale, 0x00dfdfdf, 0x00ff0000);
+				draw_square(image, x * map_scale, y * map_scale, LIGHT_GREY);
 			else if (file->map[y][x] == '0' || 
 				ft_strchr("NSEW", file->map[y][x]))
-				draw_square(image, x * map_scale, y * map_scale, 0x00000000, 0x00ff0000);
+				draw_square(image, x * map_scale, y * map_scale, BLACK);
 			x++;
 		}
 		y++;
