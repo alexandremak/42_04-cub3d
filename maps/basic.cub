@@ -1,7 +1,8 @@
-NO ./textures/north_texture
-SO ./textures/south_texture
-WE ./textures/west_texture
-EA ./textures/east_texture
+NO ./assets/bluestone.xpm
+SO ./assets/eagle.xpm
+WE ./assets/greystone.xpm
+EA ./assets/redbrick.xpm
+
 
 F 220,100,0
 C 225,30,100
