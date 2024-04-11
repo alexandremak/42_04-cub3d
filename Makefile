@@ -6,7 +6,7 @@
 #    By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/20 19:20:14 by amak              #+#    #+#              #
-#    Updated: 2024/04/11 15:48:16 by ftroiter         ###   ########.fr        #
+#    Updated: 2024/04/11 18:02:09 by ftroiter         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,29 +60,29 @@ OBJ = $(SRC:$(SRC_PATH)%.c=$(OBJ_PATH)%.o)
 all: $(NAME)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	@mkdir -p $(OBJ_PATH)
+	mkdir -p $(OBJ_PATH)
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 $(NAME): $(OBJ)
-	@make -C $(UTILS_DIR)
-	@make -C $(MINILIBX_DIR)
-	@$(CC) $(CFLAGS) $(OBJ) $(UTILS) $(LFLAGS) -o $(NAME)
+	make -C $(UTILS_DIR)
+	make -C $(MINILIBX_DIR) > /dev/null 2>&1
+	$(CC) $(CFLAGS) $(OBJ) $(UTILS) $(LFLAGS) -o $(NAME)
 	@echo [CUB3D] :: Object files created!
 	@echo [CUB3D] :: Executable file created!
 
 clean:
-	@rm -rf $(OBJ_PATH)
-	@make -C $(UTILS_DIR) clean
-	@make -C $(MINILIBX_DIR) clean
+	rm -rf $(OBJ_PATH)
+	make -C $(UTILS_DIR) clean > /dev/null 2>&1
+	make -C $(MINILIBX_DIR) clean
 	@echo [CUB3D] :: Deleted objected files!
 
 fclean: clean
-	@rm -f $(NAME)
-	@make -C $(UTILS_DIR) fclean
+	rm -f $(NAME)
+	make -C $(UTILS_DIR) fclean
 	@echo [CUB3D] :: Deleted executable!
 	
 re: fclean all
 
 rs: all
-	./$(NAME) maps/example.cub
+	./$(NAME) maps/valid/example.cub
 .PHONY: all clean fclean re
