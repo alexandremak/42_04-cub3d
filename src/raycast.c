@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 18:17:32 by amak              #+#    #+#             */
-/*   Updated: 2024/04/10 00:08:49 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:40:49 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	wall_point(t_ray *ray)
 		ray->wall_hit = (int)ray->x % PX;
 }
 
-void	castray(t_ray *ray, t_player *player, t_cube *file, double angle)
+void	castray(t_ray *ray, t_player *player, t_cube *cube, double angle)
 {
 	int	hit;
 
@@ -62,40 +62,27 @@ void	castray(t_ray *ray, t_player *player, t_cube *file, double angle)
 		ray->distance_x = distance_x(ray->x, angle);
 		increment_ray_length(ray, get_y_step(ray->distance_y, ray->angle),
 			get_x_step(ray->distance_x, ray->angle));
-		if (check_wall(ray->y, ray->x, file->map))
+		if (check_wall(ray->y, ray->x, cube->map))
 		{
 			wall_collision(ray);
 			wall_point(ray);
 			hit = 1;
 		}
 	}
-	// printf("--------------------------------\n");
-	// printf("py= %d | px= %d | pa= %f \n", (double)player->position.y, (double)player->position.x, player->angle);
-	// printf("ry= %d | rx= %d | ra= %f \n", ray->y, ray->x, ray->angle);
-	// printf("collision= ");
-	// if (ray->wall_texture == NORTH)
-	// 	printf("NORTH | \n");
-	// if (ray->wall_texture == SOUTH)
-	// 		printf("SOUTH | ");
-	// if (ray->wall_texture == EAST)
-	// 	printf("EAST | ");
-	// if (ray->wall_texture == WEST)
-	// 	printf("WEST | ");
-	// printf("side= %d", ray->hit_vert_wall);
 }
 
-void	raycasting(t_cube *file, t_ray *rays)
+void	raycasting(t_cube *cube, t_ray *rays)
 {
 	double	angle;
 	double	delta_angle;
 	int		pixel_column;
 
-	angle = file->player.angle - (HALF_FOV);
+	angle = cube->player.angle - (HALF_FOV);
 	pixel_column = 0;
 	while (pixel_column < SCREEN_WIDTH)
 	{
-		castray(&rays[pixel_column], &file->player, file, angle);
-		delta_angle = file->player.angle - angle;
+		castray(&rays[pixel_column], &cube->player, cube, angle);
+		delta_angle = cube->player.angle - angle;
 		if (delta_angle < 0)
 			delta_angle += (2 * PI);
 		if (delta_angle > (2 * PI))
@@ -110,13 +97,13 @@ void	raycasting(t_cube *file, t_ray *rays)
 	}
 }
 
-void	draw_ray(t_image *image, t_player *player, t_cube *file, double angle)
+void	draw_ray(t_image *image, t_player *player, t_cube *cube, double angle)
 {
 	int		i;
 	t_ray	ray;
 
 	i = 1;
-	castray(&ray, player, file, angle);
+	castray(&ray, player, cube, angle);
 	while (i <= (double)ray.length)
 	{
 		my_mlx_pixel_put(image, player->position.x + (i * cos(angle)),

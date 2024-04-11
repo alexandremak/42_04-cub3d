@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 21:13:17 by amak              #+#    #+#             */
-/*   Updated: 2024/04/08 22:54:05 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/11 16:15:58 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,49 +35,30 @@ static int	check_move_nok(int posy, int posx, char **map)
 			+ (PLYLEN / 2), map));
 }
 
-void	move(t_player *player, int keycode, char **map)
+void	move_player(t_player *p, double dir_y, double dir_x, char **map)
+{
+	if (!check_move_nok(p->position.y + dir_y, p->position.x + dir_x, map))
+	{
+		p->position.y += dir_y;
+		p->position.x += dir_x;
+	}
+}
+
+void	move(t_player *p, int keycode, char **map)
 {
 	int	i;
 
-	i = 1;
-	while (i <= PACE)
+	i = 0;
+	while (i < PACE)
 	{
 		if (keycode == W)
-		{
-			if (!check_move_nok(player->position.y + player->direction.y,
-					player->position.x + player->direction.x, map))
-			{
-				player->position.y += player->direction.y;
-				player->position.x += player->direction.x;
-			}
-		}
+			move_player(p, p->direction.y, p->direction.x, map);
 		else if (keycode == S)
-		{
-			if (!check_move_nok(player->position.y - player->direction.y,
-					player->position.x - player->direction.x, map))
-			{
-				player->position.y -= player->direction.y;
-				player->position.x -= player->direction.x;
-			}
-		}
+			move_player(p, -p->direction.y, -p->direction.x, map);
 		else if (keycode == A)
-		{
-			if (!check_move_nok(player->position.y + -(player->direction.x),
-					player->position.x + player->direction.y, map))
-			{
-				player->position.y += -(player->direction.x);
-				player->position.x += player->direction.y;
-			}
-		}
+			move_player(p, -p->direction.x, p->direction.y, map);
 		else if (keycode == D)
-		{
-			if (!check_move_nok(player->position.y + player->direction.x,
-					player->position.x + -(player->direction.y), map))
-			{
-				player->position.y += player->direction.x;
-				player->position.x += -(player->direction.y);
-			}
-		}
+			move_player(p, p->direction.x, -p->direction.y, map);
 		i++;
 	}
 }

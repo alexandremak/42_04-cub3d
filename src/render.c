@@ -25,7 +25,7 @@ static void	create_new_image(t_window *graphic)
 
 void	render_scene(t_cube *cube)
 {
-	t_window *graphic;
+	t_window	*graphic;
 
 	cube->rays = (t_ray *)malloc(sizeof(t_ray) * SCREEN_WIDTH);
 	graphic = &cube->graphic;

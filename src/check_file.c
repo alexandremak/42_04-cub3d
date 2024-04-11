@@ -3,31 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:53:37 by amak              #+#    #+#             */
-/*   Updated: 2024/04/09 19:12:39 by facu             ###   ########.fr       */
+/*   Updated: 2024/04/11 16:23:09 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-int	texture_paths_ok(t_cube *file)
+int	texture_paths_ok(t_cube *cube)
 {
 	int	i;
 
 	i = 0;
-	while (i < MAX_TEXTURES && file->texture_paths[i])
+	while (i < MAX_TEXTURES && cube->texture_paths[i])
 		i++;
 	return (i == MAX_TEXTURES);
 }
 
-int	text_rgb_ok(t_cube *file)
+int	text_rgb_ok(t_cube *cube)
 {
 	int	res;
 
 	res = 0;
-	if (texture_paths_ok(file) && file->ceiling_rgb[3] && file->floor_rgb[3])
+	if (texture_paths_ok(cube) && cube->ceiling_rgb[3] && cube->floor_rgb[3])
 		res = 1;
 	return (res);
 }
@@ -44,28 +44,28 @@ static int	file_ext_ok(char *filepath)
 	return (0);
 }
 
-static int	file_exists(char *filepath, t_cube *file)
+static int	file_exists(char *filepath, t_cube *cube)
 {
 	int	res;
 
 	res = 0;
 	if (!filepath)
 		return (res);
-	file->fd = open(filepath, O_RDONLY);
-	if (file->fd > -1)
+	cube->fd = open(filepath, O_RDONLY);
+	if (cube->fd > -1)
 		res = 1;
 	return (res);
 }
 
-void	check_file(int argc, char **argv, t_cube *file)
+void	check_file(int argc, char **argv, t_cube *cube)
 {
 	if (argc != 2)
-		exit_error("Invalid number of arguments!", file);
-	file->filepath = ft_strtrim(argv[1], " \t\n\v\f\r");
-	if (argc != 2 || file->filepath == NULL)
-		exit_error("Inserted blank filepath or filename!", file);
-	if (!file_ext_ok(file->filepath))
-		exit_error("Scene description file incorrect extension!", file);
-	if (!file_exists(file->filepath, file))
-		exit_error("Scene description file doesn't exist!", file);
+		exit_error("Invalid arguments", cube);
+	cube->filepath = ft_strtrim(argv[1], " \t\n\v\f\r");
+	if (argc != 2 || cube->filepath == NULL)
+		exit_error("Invalid filepath", cube);
+	if (!file_ext_ok(cube->filepath))
+		exit_error("Invalid scene description extension", cube);
+	if (!file_exists(cube->filepath, cube))
+		exit_error("Scene description not found", cube);
 }

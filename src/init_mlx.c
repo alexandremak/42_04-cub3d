@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 22:05:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/09 19:24:09 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/11 16:38:19 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,42 +31,11 @@ void	put_pixel_to_image(t_image *image_data, int x, int y, int color)
 	*pixel_location = color;
 }
 
-void	init_mlx(t_cube *file)
+void	init_mlx(t_cube *cube)
 {
-	file->graphic.mlx = mlx_init();
-	load_textures(file);
-	file->graphic.win = mlx_new_window(file->graphic.mlx, SCREEN_WIDTH,
+	cube->graphic.mlx = mlx_init();
+	load_textures(cube);
+	cube->graphic.win = mlx_new_window(cube->graphic.mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT, "Cub3d - 3D Map");
-	render_scene(file);
-}
-
-int	key_press(int keycode, t_cube *file)
-{
-	if (keycode == ESC)
-		exit_game(file);
-	else
-	{
-		if (keycode == W || keycode == S || keycode == A || keycode == D)
-			move(&file->player, keycode, file->map);
-		else if (keycode == LA)
-		{
-			file->player.angle -= TURNANGLE;
-			if (file->player.angle < 0)
-				file->player.angle += (2 * PI);
-			file->player.direction.x = cos(file->player.angle);
-			file->player.direction.y = sin(file->player.angle);
-		}
-		else if (keycode == RA)
-		{
-			file->player.angle += TURNANGLE;
-			if (file->player.angle > (2 * PI))
-				file->player.angle -= (2 * PI);
-			file->player.direction.x = cos(file->player.angle);
-			file->player.direction.y = sin(file->player.angle);
-		}
-		else if (keycode == M)
-			file->show_minimap = !file->show_minimap;
-		render_scene(file);
-	}
-	return (0);
+	render_scene(cube);
 }

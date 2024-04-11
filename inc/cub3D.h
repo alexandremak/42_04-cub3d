@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/10 00:11:04 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:52:11 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # define PI 3.14159265
 # define YAXIS 0
 # define XAXIS 1
-# define TOLERANCE 0.00001
 
 /* KEYBOARD CODES */
 # define ESC 65307
@@ -43,7 +42,6 @@
 # define PACE 5
 # define TURNANGLE 0.1
 # define PLYLEN 9
-# define UANGLE 3.141592 / 360
 # define FOV			1.047198
 # define HALF_FOV		0.523599
 # define PLANE_DIST		960
@@ -54,14 +52,16 @@
 # define MAX_TEXTURES 4
 
 /* COLORS */
-# define RED 0x00ff0000
-# define LIGHT_GREY 0x00dfdfdf
-# define BLACK 0x00000000
+# define RED			0x00ff0000
+# define LIGHT_GREY		0x00dfdfdf
+# define BLACK			0x00000000
+
 # define X 0
 # define Y 1
+# define TOLERANCE 0.00001
 
 /* WALLS COLLISION VALUES*/
-enum wall_direction {
+enum e_wall_direction {
 	NORTH,
 	SOUTH,
 	EAST,
@@ -176,14 +176,16 @@ void	draw_minimap(t_cube *file, t_window *graphic);
 void	draw_floor_and_ceiling(t_cube *cube);
 void	draw_walls(t_cube *file, t_ray *rays);
 
+/* EVENTS */
+int		key_press(int keycode, t_cube *file);
 
 /* MOVEMENT  */
 int		check_wall(int posy, int posx, char **map);
 void	move(t_player *player, int keycode, char **map);
 
 /* DDA UTILS */
-double		distance_y(int y, double angle);
-double		distance_x(int x, double angle);
+double	distance_y(int y, double angle);
+double	distance_x(int x, double angle);
 double	get_x_step(int adj, double angle);
 double	get_y_step(int opose, double angle);
 void	increment_ray_length(t_ray *ray, double step_y, double step_x);
@@ -201,7 +203,5 @@ int		get_texture_color(t_cube *file, int y, int offset_x, t_ray ray);
 
 void	print_content(t_cube cube, int bool);
 void	check_inside(t_cube *file, char **map);
-
-
 
 #endif

@@ -6,29 +6,29 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 19:43:54 by amak              #+#    #+#             */
-/*   Updated: 2024/04/09 19:06:42 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:38:19 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static void	get_content(t_cube *file, int fd, int count_line)
+static void	get_content(t_cube *cube, int fd, int count_line)
 {
 	char	*line;
 
 	line = get_next_line(fd);
 	if (line)
-		get_content(file, fd, count_line + 1);
+		get_content(cube, fd, count_line + 1);
 	else if (count_line > 0)
-		file->content = malloc(sizeof(char *) * (count_line + 1));
-	if (file->content)
-		file->content[count_line] = line;
+		cube->content = malloc(sizeof(char *) * (count_line + 1));
+	if (cube->content)
+		cube->content[count_line] = line;
 }
 
-void	read_scene_file(t_cube *file)
+void	read_scene_file(t_cube *cube)
 {
-	get_content(file, file->fd, 0);
-	if (!file->content)
-		exit_error("Scene description file without content!", file);
-	parse_values(file, file->content);
+	get_content(cube, cube->fd, 0);
+	if (!cube->content)
+		exit_error("Empty scene description file", cube);
+	parse_values(cube, cube->content);
 }
