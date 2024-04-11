@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 16:09:38 by amak              #+#    #+#             */
-/*   Updated: 2024/04/10 00:05:56 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/11 15:22:25 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 double	distance_y(int y, double angle)
 {
-	int	i;
+	int		i;
 	double	res;
 
 	i = 0;
@@ -23,39 +23,39 @@ double	distance_y(int y, double angle)
 		return (0);
 	if (angle < PI)
 	{
-		while ((i* PX) <= y)
+		while ((i * PX) <= y)
 			i++;
-		res = (i* PX) - y;
+		res = (i * PX) - y;
 	}
 	else if (angle > PI)
 	{
-		while ((i* PX) <= y)
+		while ((i * PX) <= y)
 			i++;
 		i--;
-		res = y - (i* PX) + 1;
+		res = y - (i * PX) + 1;
 	}
 	return (res);
 }
 
 double	distance_x(int x, double angle)
 {
-	int	i;
+	int		i;
 	double	res;
 
 	i = 0;
 	res = 0;
 	if (angle > (PI / 2) && angle < ((3 * PI) / 2))
 	{
-		while ((i* PX) <= x)
+		while ((i * PX) <= x)
 			i++;
 		i--;
-		res = x - (i* PX) + 1;
+		res = x - (i * PX) + 1;
 	}
 	if (angle < (PI / 2) || angle > ((3 * PI) / 2))
 	{
-		while ((i* PX) <= x)
+		while ((i * PX) <= x)
 			i++;
-		res = (i* PX) - x;
+		res = (i * PX) - x;
 	}
 	return (res);
 }

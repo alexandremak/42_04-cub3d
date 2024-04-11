@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   3d_map.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amak <amak@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 16:49:01 by ftroiter          #+#    #+#             */
-/*   Updated: 2024/04/09 19:24:17 by amak             ###   ########.fr       */
+/*   Updated: 2024/04/11 16:00:17 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-void	draw_wall_column(t_cube *file, t_ray ray, int start_point[2], int end_y)
+void	draw_wall_column(t_cube *cube, t_ray ray, int start_point[2], int end_y)
 {
 	int	color;
 	int	y;
@@ -20,13 +20,13 @@ void	draw_wall_column(t_cube *file, t_ray ray, int start_point[2], int end_y)
 	y = start_point[Y];
 	while (y < end_y)
 	{
-		color = get_texture_color(file, y, ray.wall_hit, ray);
-		my_mlx_pixel_put(&file->graphic.image, start_point[0], y, color);
+		color = get_texture_color(cube, y, ray.wall_hit, ray);
+		my_mlx_pixel_put(&cube->graphic.image, start_point[0], y, color);
 		y++;
 	}
 }
 
-void	draw_walls(t_cube *file, t_ray *rays)
+void	draw_walls(t_cube *cube, t_ray *rays)
 {
 	int	i;
 	int	start_point[2];
@@ -44,7 +44,7 @@ void	draw_walls(t_cube *file, t_ray *rays)
 		end_y = floor(SCREEN_HEIGHT / 2) + (rays[i].wall_height / 2);
 		if (end_y >= SCREEN_HEIGHT)
 			end_y = SCREEN_HEIGHT - 1;
-		draw_wall_column(file, rays[i], start_point, end_y);
+		draw_wall_column(cube, rays[i], start_point, end_y);
 		i++;
 	}
 }
@@ -54,7 +54,7 @@ int	rgb_to_int(int r, int g, int b)
 	return (r << 16 | g << 8 | b);
 }
 
-void	color_fill(t_cube *file, int start_y, int end_y, int color)
+void	color_fill(t_cube *cube, int start_y, int end_y, int color)
 {
 	int	x;
 	int	y;
@@ -66,7 +66,7 @@ void	color_fill(t_cube *file, int start_y, int end_y, int color)
 		x = 0;
 		while (x < SCREEN_WIDTH)
 		{
-			my_mlx_pixel_put(&file->graphic.image, x, y, color);
+			my_mlx_pixel_put(&cube->graphic.image, x, y, color);
 			x++;
 		}
 		y++;

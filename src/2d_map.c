@@ -18,7 +18,6 @@ void	draw_square(t_cube *cube, int x, int y, int color)
 	int	j;
 
 	i = 0;
-	printf("cube->map_scale: %d\n", cube->map_scale);
 	while (i < cube->map_scale)
 	{
 		j = 0;
@@ -96,10 +95,10 @@ void	draw_minimap(t_cube *cube, t_window *graphic)
 {
 	int		i;
 	float	angle;
+
 	i = 1;
-	angle = cube->player.angle - (15 * UANGLE);
-    cube->map_scale = SCREEN_HEIGHT / (3 * cube->rows);
-	printf("cube->map_scale: %d\n", cube->map_scale);
+	angle = cube->player.angle - (15 * (PI / 360));
+	cube->map_scale = SCREEN_HEIGHT / (3 * cube->rows);
 	draw_grid(cube);
 	draw_player(&graphic->image, &cube->player, cube->map_scale);
 	mlx_put_image_to_window(graphic->mlx, graphic->win, graphic->image.img, 0,

@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:05:49 by ftroiter          #+#    #+#             */
-/*   Updated: 2024/04/10 00:03:59 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:41:31 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ void	load_textures(t_cube *cube)
 	}
 }
 
-int	get_texture_color(t_cube *file, int y, int offset_x, t_ray ray)
+int	get_texture_color(t_cube *cube, int y, int offset_x, t_ray ray)
 {
 	t_texture	texture;
 	int			offset[2];
 	int			dist_to_top;
 	int			color;
 
-	texture = file->textures[ray.wall_texture];
+	texture = cube->textures[ray.wall_texture];
 	offset[0] = offset_x;
 	dist_to_top = y + (ray.wall_height / 2) - (SCREEN_HEIGHT / 2);
 	offset[1] = (dist_to_top * ((double)texture.height / ray.wall_height));

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: facu <facu@student.42.fr>                  +#+  +:+       +#+         #
+#    By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/20 19:20:14 by amak              #+#    #+#              #
-#    Updated: 2024/04/09 21:06:10 by facu             ###   ########.fr        #
+#    Updated: 2024/04/11 15:48:16 by ftroiter         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC_FILES = render.c \
 			check_file.c \
 			dda_utils.c \
 			debug.c \
+			events.c \
 			free.c \
 			exit.c \
 			load_file.c \

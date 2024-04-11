@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 21:46:48 by amak              #+#    #+#             */
-/*   Updated: 2024/04/09 19:12:39 by facu             ###   ########.fr       */
+/*   Updated: 2024/04/11 16:38:37 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,26 +28,26 @@ void	free_str_arr(char **arr)
 	}
 }
 
-static void	free_file(t_cube *file)
+static void	free_cube(t_cube *cube)
 {
 	int	i;
 
-	if (file->filepath)
-		free(file->filepath);
+	if (cube->filepath)
+		free(cube->filepath);
 	i = 0;
 	while (i < 4)
 	{
-		if (file->texture_paths[i])
-			free(file->texture_paths[i]);
+		if (cube->texture_paths[i])
+			free(cube->texture_paths[i]);
 		i++;
 	}
-	if (file->content)
-		free_str_arr(file->content);
-	if (file->map)
-		free_str_arr(file->map);
+	if (cube->content)
+		free_str_arr(cube->content);
+	if (cube->map)
+		free_str_arr(cube->map);
 }
 
-void	free_all(t_cube *file)
+void	free_all(t_cube *cube)
 {
-	free_file(file);
+	free_cube(cube);
 }

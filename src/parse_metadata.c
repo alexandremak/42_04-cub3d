@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_metadata.c                                     :+:      :+:    :+:   */
+/*   parse_metadata.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: facu <facu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/13 21:00:21 by amak              #+#    #+#             */
-/*   Updated: 2024/04/09 19:45:11 by facu             ###   ########.fr       */
+/*   Created: 2024/04/11 15:18:01 by ftroiter          #+#    #+#             */
+/*   Updated: 2024/04/11 16:40:09 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3D.h"
 
-static int	extract_rgb(t_cube *file, int *rgb, char *splited)
+static int	extract_rgb(int *rgb, char *splited)
 {
 	char	**numbers;
 	int		error;
@@ -34,23 +34,23 @@ static int	extract_rgb(t_cube *file, int *rgb, char *splited)
 	return (error);
 }
 
-int	extract_txtr(t_cube *file, char *pathstr, int index)
+int	extract_txtr(t_cube *cube, char *pathstr, int index)
 {
 	int	fd;
 
 	fd = open(pathstr, O_RDONLY);
-	if (fd < 0 || file->texture_paths[index])
+	if (fd < 0 || cube->texture_paths[index])
 	{
 		close(fd);
 		ft_print_error(2, "Scene description", "invalid texture values");
 		return (1);
 	}
-	file->texture_paths[index] = ft_strdup(pathstr);
+	cube->texture_paths[index] = ft_strdup(pathstr);
 	close(fd);
 	return (0);
 }
 
-int	extract_metadata(t_cube *file, char **splited)
+int	extract_metadata(t_cube *cube, char **splited)
 {
 	int	index;
 	int	err;
@@ -66,11 +66,11 @@ int	extract_metadata(t_cube *file, char **splited)
 	else if (ft_strcmp(splited[0], "WE") == 0)
 		index = WEST;
 	if (index != -1)
-		err = extract_txtr(file, splited[1], index);
+		err = extract_txtr(cube, splited[1], index);
 	else if (ft_strcmp(splited[0], "C") == 0)
-		err = extract_rgb(file, file->ceiling_rgb, splited[1]);
+		err = extract_rgb(cube->ceiling_rgb, splited[1]);
 	else if (ft_strcmp(splited[0], "F") == 0)
-		err = extract_rgb(file, file->floor_rgb, splited[1]);
+		err = extract_rgb(cube->floor_rgb, splited[1]);
 	return (err);
 }
 
@@ -86,29 +86,29 @@ static void	extract_angle(t_player *player, int c)
 		player->angle = PI;
 }
 
-void	extract_player_position(t_cube *file, int y, int x, char c)
+void	extract_player_position(t_cube *cube, int y, int x, char c)
 {
-	file->player.position.y = y * PX + ((PX + 1) / 2);
-	file->player.position.x = x * PX + ((PX + 1) / 2);
+	cube->player.position.y = y * PX + ((PX + 1) / 2);
+	cube->player.position.x = x * PX + ((PX + 1) / 2);
 	if (c == 'N')
 	{
-		file->player.direction.y = -1;
-		file->player.direction.x = 0;
+		cube->player.direction.y = -1;
+		cube->player.direction.x = 0;
 	}
 	else if (c == 'S')
 	{
-		file->player.direction.y = 1;
-		file->player.direction.x = 0;
+		cube->player.direction.y = 1;
+		cube->player.direction.x = 0;
 	}
 	else if (c == 'E')
 	{
-		file->player.direction.y = 0;
-		file->player.direction.x = 1;
+		cube->player.direction.y = 0;
+		cube->player.direction.x = 1;
 	}
 	else if (c == 'W')
 	{
-		file->player.direction.y = 0;
-		file->player.direction.x = -1;
+		cube->player.direction.y = 0;
+		cube->player.direction.x = -1;
 	}
-	extract_angle(&file->player, c);
+	extract_angle(&cube->player, c);
 }

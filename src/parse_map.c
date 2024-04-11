@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map.c                                         :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/18 21:25:49 by amak              #+#    #+#             */
-/*   Updated: 2024/04/04 21:55:44 by ftroiter         ###   ########.fr       */
+/*   Created: 2024/04/11 15:52:51 by ftroiter          #+#    #+#             */
+/*   Updated: 2024/04/11 16:39:17 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	max_columns(char **content)
 	return (res);
 }
 
-static int	max_rows(t_cube *file, char **content)
+static int	max_rows(t_cube *cube, char **content)
 {
 	int	res;
 
@@ -38,36 +38,36 @@ static int	max_rows(t_cube *file, char **content)
 	while (*content)
 	{
 		if (ft_noprintchar(*content))
-			exit_error("Map content has to be the last", file);
+			exit_error("Map content has to be the last", cube);
 		res++;
 		content++;
 	}
 	return (res);
 }
 
-static void	extract_map(t_cube *file, char **content)
+static void	extract_map(t_cube *cube, char **content)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	file->map = ft_calloc(file->rows + 1, sizeof(char *));
-	while (i < file->rows)
+	cube->map = ft_calloc(cube->rows + 1, sizeof(char *));
+	while (i < cube->rows)
 	{
-		file->map[i] = ft_calloc(file->columns + 1, sizeof(char));
+		cube->map[i] = ft_calloc(cube->columns + 1, sizeof(char));
 		j = 0;
 		while (content[i][j])
 		{
-			file->map[i][j] = content[i][j];
+			cube->map[i][j] = content[i][j];
 			j++;
 		}
 		i++;
 	}
 }
 
-void	parse_map(t_cube *file, char **content)
+void	parse_map(t_cube *cube, char **content)
 {
-	file->rows = max_rows(file, content);
-	file->columns = max_columns(content);
-	extract_map(file, content);
+	cube->rows = max_rows(cube, content);
+	cube->columns = max_columns(content);
+	extract_map(cube, content);
 }
