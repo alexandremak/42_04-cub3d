@@ -6,7 +6,7 @@
 /*   By: ftroiter <ftroiter@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 22:54:31 by amak              #+#    #+#             */
-/*   Updated: 2024/04/11 16:52:11 by ftroiter         ###   ########.fr       */
+/*   Updated: 2024/04/11 17:37:34 by ftroiter         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@
 
 /* SIZE OF WINDOW AND EACH TILE */
 # define PX 64
-# define PACE 5
+# define PACE 10
 # define TURNANGLE 0.1
 # define PLYLEN 9
 # define FOV			1.047198
 # define HALF_FOV		0.523599
-# define PLANE_DIST		960
-# define SCREEN_WIDTH	1024
-# define SCREEN_HEIGHT  768
+# define PLANE_DIST		652.719
+# define SCREEN_WIDTH	680
+# define SCREEN_HEIGHT 	480
 
 /* STRUCT VALUES */
 # define MAX_TEXTURES 4
