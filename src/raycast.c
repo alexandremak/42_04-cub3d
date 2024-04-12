@@ -48,21 +48,63 @@ void	castray(t_ray *ray, t_player *player, t_cube *cube, double angle)
 
 	hit = 0;
 	ray->length = 0;
-	ray->wall_texture = NONE;
+	ray->wall_texture = 0;
 	ray->hit_vert_wall = 0;
 	ray->wall_hit = 0;
 	ray->y = (double)player->position.y;
 	ray->x = (double)player->position.x;
+	ray->origin = (t_vector){ray->x, ray->y};
 	ray->angle = angle;
 	ray->direction.x = cos(angle);
 	ray->direction.y = sin(angle);
+	ray->is_east = ray->direction.x > 0;
+	ray->is_north = ray->direction.y < 0;
+	//
+	// X      | SIN
+	//   x    |
+	//     x  |
+	// _ _ _ o
+	// COS
+	//                      90 | PI / 2
+  //                      NORTH
+  //         	        , - ~ ~ ~ - ,
+  //              , '   \---x---/   ' ,  45 | 0.786
+  //            ,        \  |  / |      ,
+  //           ,          \ | /  |       ,
+  // 180 | PI ,            \|/   |cos     ,
+  //     WEST ,_____________O____x________, EAST 0 | 2PI // 6.2112
+  //          ,            /|\   |        ,
+  //           ,          / | \  |       ,
+  //            ,        /  |  \ |      ,
+  //              ,     /---x---\|   , '
+  //                ' - , _ _ _ ,  '
+  //                       SOUTH
+  //                     270 | 3PI /2
+  //
+
+	if ((int)(ray - cube->rays) == 349)
+		printf("Start\n");
 	while (!hit)
 	{
-		ray->distance_y = distance_y(ray->y, angle);
-		ray->distance_x = distance_x(ray->x, angle);
+		ray->distance_y = distance_y(ray->y, ray->direction.y, ray->is_north);
+		ray->distance_x = distance_x(ray->x, ray->direction.x, ray->is_east);
+		if ((int)(ray - cube->rays) == 349) {
+			printf("\tRay[%f %f] Updated Distances: [%f %f]\n",
+				ray->y,
+				ray->x,
+				ray->distance_y,
+				ray->distance_x
+			);
+		}
 		increment_ray_length(ray, get_y_step(ray->distance_y, ray->angle),
 			get_x_step(ray->distance_x, ray->angle));
-		if (check_wall(ray->y, ray->x, cube->map))
+		if ((int)(ray - cube->rays) == 349) {
+			printf("After increment [%f %f]\n",
+				ray->y,
+				ray->x
+			);
+		}
+		if (check_wall(ray->y, ray->x, cube))
 		{
 			wall_collision(ray);
 			wall_point(ray);

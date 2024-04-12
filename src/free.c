@@ -45,6 +45,7 @@ static void	free_cube(t_cube *cube)
 		free_str_arr(cube->content);
 	if (cube->map)
 		free_str_arr(cube->map);
+	free(cube->rays);
 }
 
 void	free_all(t_cube *cube)

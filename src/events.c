@@ -15,7 +15,7 @@
 void	handle_movement(int keycode, t_cube *cube)
 {
 	if (keycode == W || keycode == S || keycode == A || keycode == D)
-		move(&cube->player, keycode, cube->map);
+		move(&cube->player, keycode, cube);
 }
 
 void	handle_left_angle(t_cube *cube)
@@ -47,6 +47,10 @@ int	key_press(int keycode, t_cube *cube)
 		exit_game(cube);
 	else
 	{
+		if (keycode == 120 || keycode == 122)
+			cube->redline += ((keycode == 120) ? 1 : -1) % SCREEN_WIDTH;
+		if (keycode == 99)
+			printf("Redline #[%d]\n", cube->redline);
 		handle_movement(keycode, cube);
 		if (keycode == LA)
 			handle_left_angle(cube);

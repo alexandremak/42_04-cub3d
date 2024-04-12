@@ -18,9 +18,9 @@ UTILS_DIR = ./utils/
 
 MINILIBX_DIR = ./minilibx-linux/
 
-CFLAGS = #-Wall, -Wextra -Werror -o3
+CFLAGS = -Wall -Werror -Wextra -o3
 
-LFLAGS = -Lminilibx-linux -I/minilibx-linux/mlx.h -L/usr/lib -lmlx -lXext -lX11 -lm -lz
+LFLAGS = -Lminilibx-linux -I./utils/inc/ -I./minilibx-linux -L/usr/lib -lmlx -lXext -lX11 -lm -lz -L./utils
 
 UTILS = $(UTILS_DIR)utils.a
 
@@ -61,9 +61,9 @@ all: $(NAME)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	mkdir -p $(OBJ_PATH)
-	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
+	@$(CC) $(CFLAGS) $(LFLAGS) $(INC) -c $< -o $@
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) inc/cub3D.h
 	make -C $(UTILS_DIR)
 	make -C $(MINILIBX_DIR) > /dev/null 2>&1
 	$(CC) $(CFLAGS) $(OBJ) $(UTILS) $(LFLAGS) -o $(NAME)

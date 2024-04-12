@@ -13,10 +13,12 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../minilibx-linux/mlx.h"
-# include "../utils/inc/utils.h"
+# include <stdbool.h>
 # include <fcntl.h>
 # include <math.h>
+
+# include "mlx.h"
+# include "utils.h"
 
 /* MATH CONST */
 # define PI 3.14159265
@@ -34,13 +36,13 @@
 # define M 109
 
 /* SIZE OF WINDOW AND EACH TILE */
-# define PX 64
+# define PX 200
 # define PACE 10
 # define TURNANGLE 0.1
 # define PLYLEN 9
-# define FOV			1.047198
-# define HALF_FOV		0.523599
-# define PLANE_DIST		652.719
+# define FOV			1.047198 // 60 deg in rad
+# define HALF_FOV		0.523599 // 30 deg in rad
+# define PLANE_DIST		652.719 // Hard codede :P
 # define SCREEN_WIDTH	680
 # define SCREEN_HEIGHT 	480
 
@@ -54,7 +56,7 @@
 
 # define X 0
 # define Y 1
-# define TOLERANCE 0.00001
+# define TOLERANCE 0.00001 // res + 0.00001
 
 /* WALLS COLLISION VALUES*/
 enum e_wall_direction {
@@ -62,7 +64,7 @@ enum e_wall_direction {
 	SOUTH,
 	EAST,
 	WEST,
-	NONE
+	NONE // WHAT ? Weird
 };
 
 /* STRUCTURES */
@@ -86,11 +88,14 @@ typedef struct s_ray
 	double			distance_y;
 	double			distance_x;
 	t_vector		direction;
+	t_vector		origin;
+	bool				is_north;
+	bool				is_east;
 	double			angle;
 	double			length;
-	int				hit_vert_wall;
-	int				wall_texture;
-	double			wall_hit;
+	int				hit_vert_wall; // Boolean if 1 hit vert else hit horz
+	int				wall_texture; // Texture to hit...
+	double			wall_hit; // KEY Point!
 	int				wall_height;
 }	t_ray;
 
@@ -117,7 +122,7 @@ typedef struct s_window
 	t_image		image;
 }				t_window;
 
-typedef struct s_file
+typedef struct s_cube
 {
 	char		*filepath;
 	int			fd;
@@ -134,6 +139,7 @@ typedef struct s_file
 	int			map_scale;
 	t_texture	textures[4];
 	t_ray		*rays;
+	int 		redline;
 }				t_cube;
 
 /* EXIT  */
@@ -176,12 +182,12 @@ void	draw_walls(t_cube *file, t_ray *rays);
 int		key_press(int keycode, t_cube *file);
 
 /* MOVEMENT  */
-int		check_wall(int posy, int posx, char **map);
-void	move(t_player *player, int keycode, char **map);
+int		check_wall(double posy, double posx, t_cube *cube);
+void	move(t_player *player, int keycode, t_cube *cube);
 
 /* DDA UTILS */
-double	distance_y(int y, double angle);
-double	distance_x(int x, double angle);
+double	distance_y(double y, double direction_y, bool is_north);
+double	distance_x(double x, double direction_x, bool is_east);
 double	get_x_step(int adj, double angle);
 double	get_y_step(int opose, double angle);
 void	increment_ray_length(t_ray *ray, double step_y, double step_x);
@@ -197,7 +203,7 @@ void	draw_walls(t_cube *file, t_ray *rays);
 void	load_textures(t_cube *cube);
 int		get_texture_color(t_cube *file, int y, int offset_x, t_ray ray);
 
-void	print_content(t_cube cube, int bool);
+void	print_content(t_cube cube, int is_bool);
 void	check_inside(t_cube *file, char **map);
 
 #endif

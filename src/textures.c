@@ -46,7 +46,7 @@ int	get_texture_color(t_cube *cube, int y, int offset_x, t_ray ray)
 	int			color;
 
 	texture = cube->textures[ray.wall_texture];
-	offset[0] = offset_x;
+	offset[0] = (offset_x * texture.width) / (PX); // Pulga Fix LOL
 	dist_to_top = y + (ray.wall_height / 2) - (SCREEN_HEIGHT / 2);
 	offset[1] = (dist_to_top * ((double)texture.height / ray.wall_height));
 	color = *(unsigned int *)(texture.image.addr + (offset[1]

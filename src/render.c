@@ -27,7 +27,7 @@ void	render_scene(t_cube *cube)
 {
 	t_window	*graphic;
 
-	cube->rays = (t_ray *)malloc(sizeof(t_ray) * SCREEN_WIDTH);
+	// cube->rays = (t_ray *)malloc(sizeof(t_ray) * SCREEN_WIDTH);
 	graphic = &cube->graphic;
 	create_new_image(graphic);
 	raycasting(cube, cube->rays);
@@ -35,7 +35,10 @@ void	render_scene(t_cube *cube)
 	draw_walls(cube, cube->rays);
 	if (cube->show_minimap)
 		draw_minimap(cube, graphic);
-	free(cube->rays);
+	// free(cube->rays);
+	for (int i = 0; i < SCREEN_HEIGHT; ++i) {
+		my_mlx_pixel_put(&cube->graphic.image, cube->redline, i, 0xff0000);
+	}
 	mlx_put_image_to_window(graphic->mlx, graphic->win, graphic->image.img, 0,
 		0);
 }

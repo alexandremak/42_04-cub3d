@@ -31,7 +31,6 @@ void	draw_walls(t_cube *cube, t_ray *rays)
 	int	i;
 	int	start_point[2];
 	int	end_y;
-	int	wall_height;
 
 	i = 0;
 	while (i < SCREEN_WIDTH)
