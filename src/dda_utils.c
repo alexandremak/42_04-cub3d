@@ -12,46 +12,53 @@
 
 #include "../inc/cub3D.h"
 
-double	distance_y(int y, double angle)
+double	distance_y(double p_y, double direction_y, bool is_north)
 {
 	int		i;
 	double	res;
 
 	i = 0;
 	res = 0;
-	if (fabs(angle - 0) < TOLERANCE || fabs(angle - PI) < TOLERANCE)
+	if (direction_y == 0)
 		return (0);
-	if (angle < PI)
+	if (!is_north)
 	{
-		while ((i * PX) <= y)
+		while ((i * PX) <= p_y)
 			i++;
-		res = (i * PX) - y;
+		res = (i * PX) - p_y; // Hotizontal distance
+		// |-----|-----|-----|-----|-----|
+		// |-------------------------XOOO|
 	}
-	else if (angle > PI)
+	else
 	{
-		while ((i * PX) <= y)
+		while ((i * PX) <= p_y)
 			i++;
 		i--;
-		res = y - (i * PX) + 1;
+		res = p_y - (i * PX) + 1;
+		// |-------------------------XOOO|
+		// |-----|-----|-----|-----|-
+		//                            ===|
 	}
 	return (res);
 }
 
-double	distance_x(int x, double angle)
+double	distance_x(double x, double direction_x, bool is_east)
 {
 	int		i;
 	double	res;
 
 	i = 0;
 	res = 0;
-	if (angle > (PI / 2) && angle < ((3 * PI) / 2))
+	if (direction_x == 0)
+		return (0);
+	if (!is_east)
 	{
 		while ((i * PX) <= x)
 			i++;
 		i--;
 		res = x - (i * PX) + 1;
 	}
-	if (angle < (PI / 2) || angle > ((3 * PI) / 2))
+	else
 	{
 		while ((i * PX) <= x)
 			i++;
@@ -96,21 +103,28 @@ void	increment_ray_length(t_ray *ray, double step_y, double step_x)
 {
 	if (step_x == 0 || (step_y && step_y <= step_x))
 	{
-		if (ray->direction.y < 0)
+		if (ray->is_north)
 			ray->y -= ray->distance_y;
 		else
 			ray->y += ray->distance_y;
-		ray->x += step_y * ray->direction.x;
+		// Only ceil if you are looking to the west
+		if (!ray->is_east)
+			ray->x += ceil(step_y * ray->direction.x); // Round Up with ceil! ,for example, if 99.99 -> 100.00
+		else
+			ray->x += floor(step_y * ray->direction.x);
 		ray->length += step_y;
 		ray->hit_vert_wall = 0;
 	}
 	else if (step_y == 0 || (step_x && step_y > step_x))
 	{
-		if (ray->direction.x < 0)
+		if (!ray->is_east)
 			ray->x -= ray->distance_x;
 		else
 			ray->x += ray->distance_x;
-		ray->y += step_x * ray->direction.y;
+		if (ray->is_north)
+			ray->y += floor(step_x * ray->direction.y);
+		else
+			ray->y += ceil(step_x * ray->direction.y);
 		ray->length += step_x;
 		ray->hit_vert_wall = 1;
 	}

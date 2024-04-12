@@ -19,6 +19,7 @@ void	exit_error(char *message, t_cube *cube)
 		close(cube->fd);
 	if (message)
 		ft_print_error(1, message);
+	free(cube);
 	exit(1);
 }
 
@@ -36,5 +37,6 @@ void	exit_game(t_cube *cube)
 		mlx_destroy_display(cube->graphic.mlx);
 		free(cube->graphic.mlx);
 	}
+	free(cube);
 	exit(0);
 }

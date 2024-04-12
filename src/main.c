@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3D.h"
+#include <string.h> // For bzero // Later use ft_bzero
+
+#include "cub3D.h" // Maybe use Rrealtive path, since Makefile 
 
 void	setup_textures(t_cube *cube)
 {
@@ -43,22 +45,29 @@ void	setup_properties(t_cube *cube)
 
 void	setup(t_cube *cube)
 {
-	setup_properties(cube);
+	bzero(cube, sizeof(t_cube));
+	// setup_properties(cube); // Avoid this in ONE LINE :OMG! :D
 	setup_textures(cube);
-	setup_rgb(cube);
+	// setup_rgb(cube); // Avoid this also in one line OMG! for the norm :D
 }
 
 int	main(int argc, char **argv)
 {
-	static t_cube	cube;
+	t_cube	*cube; // WTF?
 
-	setup(&cube);
-	check_file(argc, argv, &cube);
-	read_scene_file(&cube);
-	print_content(cube, 1);
-	check_content(&cube);
-	init_mlx(&cube);
-	mlx_hook(cube.graphic.win, 2, 1L << 0, key_press, &cube);
-	mlx_hook(cube.graphic.win, 17, 0, (void *)exit_game, &cube);
-	mlx_loop(cube.graphic.mlx);
+	cube = calloc(sizeof(t_cube), 1);
+	if (!cube)
+		return (-1);
+
+	setup(cube);
+	check_file(argc, argv, cube);
+	read_scene_file(cube);
+	print_content(*cube, 1);
+	check_content(cube);
+	init_mlx(cube);
+	mlx_hook(cube->graphic.win, 2, 1L << 0, key_press, cube); // Bug when turning and can't implement other appplications like updates not depending on keys (animations enemies; etc)
+	mlx_hook(cube->graphic.win, 17, 0, (void *)exit_game, cube);
+	// mlx
+	mlx_loop(cube->graphic.mlx);
+	// free(cube)
 }

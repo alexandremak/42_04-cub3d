@@ -37,5 +37,9 @@ void	init_mlx(t_cube *cube)
 	load_textures(cube);
 	cube->graphic.win = mlx_new_window(cube->graphic.mlx, SCREEN_WIDTH,
 			SCREEN_HEIGHT, "Cub3d - 3D Map");
+	cube->rays = (t_ray *)malloc(sizeof(t_ray) * SCREEN_WIDTH);
+	if (!cube->rays)
+		exit_error("Couldn't allocate for rays", cube);
+	cube->redline = 349;
 	render_scene(cube);
 }

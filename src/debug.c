@@ -49,9 +49,9 @@ void	print_map(t_cube cube)
 	printf("\n\n");
 }
 
-void	print_content(t_cube cube, int bool)
+void	print_content(t_cube cube, int debug)
 {
-	if (bool)
+	if (debug)
 	{
 		printf("\n\n>>> DATA EXTRACTED VALUES: <<<\n\n");
 		print_textures(cube);
